@@ -12,7 +12,6 @@ import {
   incrementItemQty,
   removeCartItem,
 } from "../ReduxFeatures/cartSlice/cartSlice";
-import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import { useNavigate, NavLink } from "react-router-dom";
 import Progress from "../Progress/Progress";
 
@@ -23,7 +22,6 @@ export default function OrderSummary() {
   const [success, setSuccess] = useState(false);
   const timer = useRef();
   const [empty, setEmpty] = useState()
-  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -35,12 +33,10 @@ export default function OrderSummary() {
 
   const handleIncrementItem = (id) => {
     auth && dispatch(incrementItemQty(id));
-    auth === false && setOpen(true);
   };
 
   const handleDecrementItem = (id) => {
     auth && dispatch(decrementItemQty(id));
-    auth === false && setOpen(true);
   };
 
   const handleRemoveCartItem = (id) => {
@@ -64,9 +60,8 @@ export default function OrderSummary() {
     let itemsArray = JSON.parse(localStorage.getItem("confirmedOrders")) || [];
     auth && itemsArray.push(order);
     auth && localStorage.setItem("confirmedOrders", JSON.stringify(itemsArray));
-    auth === false && setOpen(true);
     auth && handleProgress();
-    auth && emptySummary();
+    emptySummary()
   };
 
   const handleProgress = () => {
@@ -82,19 +77,19 @@ export default function OrderSummary() {
 
   const emptySummary = () => {
     setTimeout(() => {
+        navigate("/Orders")
         auth && dispatch(emptyCart())
-        setEmpty(true)
-    }, 6000);
+    }, 4000);
   }
 
   return (
     <>
-      <h1 className="text-center text-2xl md:text-4xl my-8 font-semibold">
+      <h1 className="text-center text-2xl md:text-4xl my-10 font-semibold">
         Order Summary
       </h1>
-      {cart.cartItems.length === 0 && empty ? (
-        <div className="h-screen w-screen flex flex-col items-center justify-center md:text-2xl bg-red-500 mt-20 px-4">
-          <p className="text-white text-center"> Your Cart is Empty🥲.</p>
+      {!auth || cart.cartItems.length === 0 ? (
+        <div className="h-screen w-screen flex flex-col items-center justify-center md:text-2xl bg-red-500 mt-0 md:mt-20 px-4">
+          <p className="text-white text-center">Either, Your Cart is Empty🥲 or you are not logged In.</p>
           <NavLink to="/">
             <button className="bg-sky-600 hover:bg-sky-700 rounded-xl p-2 text-white mt-4 text-base">
               GO SHOP😊
@@ -130,7 +125,7 @@ export default function OrderSummary() {
                     <img
                       src={item.thumbnail}
                       alt={item.title}
-                      className="w-12 md:w-20 h-12 md:h-20 object-cover"
+                      className="w-12 md:w-20 h-12 md:h-20 object-cover rounded-xl"
                       onClick={() => handleProduct(item.id)}
                     />
                   </TableCell>
@@ -200,7 +195,6 @@ export default function OrderSummary() {
           </div>
         </div>
       )}
-      <CustomSnackbar open={open} setOpen={setOpen} />
     </>
   );
 }

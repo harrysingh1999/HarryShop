@@ -56,11 +56,11 @@ export default function Home() {
                 className="relative w-screen object-cover"
               />
             </div>
-            <div className="absolute top-36 ms-5 md:ms-16 hover:shadow-lg hover:shadow-sky-500 p-2 rounded-xl">
+            <div className="absolute top-36 md:top-40 ms-8 md:ms-16 hover:shadow-lg hover:shadow-sky-500 p-2 rounded-xl">
               <p className="text-xl md:text-5xl ps-2 text-white">
                 {product.title}
               </p>
-              <p className="md:mt-2 mb-5 md:font-semibold text-sm md:text-lg text-sky-600 ps-2">
+              <p className="md:mt-2 mb-5 font-semibold text-sm md:text-lg text-sky-600 ps-2">
                 Rs. {(product.price * 84).toLocaleString("en-IN")}
               </p>
               <div onClick={() => handleProduct(product.id)}>

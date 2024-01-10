@@ -16,14 +16,15 @@ import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import CustomSnackbar from "../Snackbar/CustomSnackbar";
 
 export default function Products() {
-  let location = useLocation();
-  let productCategory = location.state;
-
-  const [category, setCategories] = useState(null);
-
+  const [isHovering, setIsHovering] = useState(false);
+  const [hoveredId, setHoveredID] = useState(null);
   const [open, setOpen] = useState(false);
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [error, setError] = useState(null);
+  const [category, setCategories] = useState(null);
+
+  let location = useLocation();
+  let productCategory = location.state;
 
   useEffect(() => {
     const fetchedCategory = async () => {
@@ -40,6 +41,7 @@ export default function Products() {
   }, [productCategory]);
 
   let navigate = useNavigate();
+  
   const handleProduct = (id) => {
     navigate("/Product", { state: id });
   };
@@ -58,13 +60,13 @@ export default function Products() {
     setWishlistOpen(true);
   };
 
-  const [isHovering, setIsHovering] = useState(false);
-  const [hoveredId, setHoveredID] = useState(null);
-
   const handleMouseEnter = (myId) => {
     setIsHovering(true);
     setHoveredID(myId);
   };
+
+  let snackbarMessage = "Product is added to Cart!"
+  let snackbarMessage2 = "Product is added to Wishlist!"
 
   return (
     <div>
@@ -81,7 +83,7 @@ export default function Products() {
         category && 
           category.map((product) => {
             return (
-              <div key={crypto.randomUUID()} className="">
+              <div key={crypto.randomUUID()}>
                 <Card
                   style={{ minHeight: "430px", maxHeight: "430px" }}
                   className="max-w-min w-64 md:w-72 !mx-4 xl:!ms-6 xl:!me-3 my-4 !rounded-t-3xl !rounded-b-3xl 
@@ -139,6 +141,8 @@ export default function Products() {
           wishlistOpen={wishlistOpen}
           setOpen={setOpen}
           setWishlistOpen={setWishlistOpen}
+          snackbarMessage={snackbarMessage}
+          snackbarMessage2={snackbarMessage2}
         />
       </div>
     </div>

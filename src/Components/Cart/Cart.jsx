@@ -18,31 +18,29 @@ export default function Cart() {
   const { cartItems, totalCartAmount, totalCartQuantity } = useSelector(
     (state) => state.cart
   );
-
-  const auth = useSelector((state) => state.auth.isAuthenticated);
-
-  let dispatch = useDispatch();
-
   const [open, setOpen] = useState(false);
+  const auth = useSelector((state) => state.auth.isAuthenticated);
+ 
+  let dispatch = useDispatch();
 
   const handleRemoveCartItem = (id) => {
     auth && dispatch(removeCartItem(id));
-    auth === false && setOpen(true);
+    setOpen(true);
   };
 
   const handleDecrementItem = (id) => {
     auth && dispatch(decrementItemQty(id));
-    auth === false && setOpen(true);
+    setOpen(true);
   };
 
   const handleIncrementItem = (id) => {
     auth && dispatch(incrementItemQty(id));
-    auth === false && setOpen(true);
+    setOpen(true);
   };
 
   const handleClearCart = () => {
     auth && dispatch(emptyCart());
-    auth === false && setOpen(true);
+    setOpen(true);
   };
 
   useEffect(() => {
@@ -57,17 +55,20 @@ export default function Cart() {
 
   const handleProceed = () => {
     auth && navigate("/OrderSummary");
-    auth === false && setOpen(true);
+    setOpen(true);
   };
+
+  let snackbarMessage = "Item removed Successfully!"
 
   return (
     <div>
-      <h1 className="text-3xl mx-14 mt-8 mb-6 text-black font-normal md:font-semibold">
+      <h1 className="text-3xl mx-14 mt-10 mb-6 text-black font-normal md:font-semibold">
         Shopping Cart
       </h1>
 
       {!auth || cartItems.length === 0 ? (
-        <div className="h-screen w-screen flex flex-col items-center justify-center md:text-2xl bg-red-500 mt-20 px-4">
+        <div className="h-screen w-screen flex flex-col items-center justify-center md:text-2xl
+         bg-red-500 mt-0 md:mt-20 px-4">
           <p className="text-white text-center">
             Either Your Cart is Empty🥲 or you are not logged In.
           </p>
@@ -151,7 +152,7 @@ export default function Cart() {
           </div>
         </div>
       )}
-      <CustomSnackbar open={open} setOpen={setOpen} />
+      <CustomSnackbar open={open} setOpen={setOpen} snackbarMessage={snackbarMessage} />
     </div>
   );
 }

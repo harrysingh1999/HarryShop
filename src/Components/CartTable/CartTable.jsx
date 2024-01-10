@@ -35,7 +35,7 @@ export default function CartTable({
               <img
                 src={item.thumbnail}
                 alt={item.title}
-                className="w-12 md:w-20 h-12 md:h-20 object-cover"
+                className="w-12 md:w-20 h-12 md:h-20 object-cover rounded-xl"
                 onClick={() => handleProduct(item.id)}
               />
             </TableCell>

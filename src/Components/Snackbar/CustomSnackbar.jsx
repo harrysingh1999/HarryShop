@@ -7,7 +7,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function CustomSnackbar({ open, wishlistOpen, setOpen, setWishlistOpen,}) {
+export default function CustomSnackbar({ open, wishlistOpen, setOpen, setWishlistOpen, snackbarMessage, snackbarMessage2}) {
   const auth = useSelector((state) => state.auth.isAuthenticated);
 
   const handleClose = (event, reason) => {
@@ -31,8 +31,8 @@ export default function CustomSnackbar({ open, wishlistOpen, setOpen, setWishlis
             severity="success"
             sx={{ width: "100%" }}
           >
-            {open && `Product is added to Cart`}
-            {wishlistOpen && `Product is added to Wishlist`}
+            {open && snackbarMessage}
+            {wishlistOpen && snackbarMessage2}
           </Alert>
         ) : (
           <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>

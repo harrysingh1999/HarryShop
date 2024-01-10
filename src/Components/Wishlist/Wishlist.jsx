@@ -18,23 +18,23 @@ import {
 import CustomSnackbar from "../Snackbar/CustomSnackbar";
 
 export default function Wishlist() {
+  const [open, setOpen] = useState(false);
+  const [wishlistOpen, setWishlistOpen] = useState(false);
   const { wishlistItems } = useSelector((state) => state.cart);
   const auth = useSelector((state) => state.auth.isAuthenticated);
-
+  let snackbarMessage = "Product is added to Cart!"
+  let snackbarMessage2 = "Item removed Successfully!"
   let dispatch = useDispatch();
 
   const handleRemoveCartItem = (id) => {
     auth && dispatch(removeWishlistItem(id));
-    setOpen(true);
+    setWishlistOpen(true);
   };
 
   let navigate = useNavigate();
   const handleProduct = (id) => {
     navigate("/Product", { state: id });
   };
-
-  const [open, setOpen] = useState(false);
-  const [wishlistOpen, setWishlistOpen] = useState(false);
 
   const handleAddtoCart = (product, id) => {
     setOpen(true);
@@ -51,16 +51,18 @@ export default function Wishlist() {
       <h1 className="text-3xl mx-8 md:mx-16 mt-8 mb-6 text-black font-semibold">
         Wishlist
       </h1>
-      {wishlistItems.length === 0 ? (
+      {!auth || wishlistItems.length === 0 ? (
         <div className="h-screen w-screen flex flex-col items-center justify-center md:text-2xl bg-red-500 mt-20 px-4">
           <CustomSnackbar
             open={open}
             wishlistOpen={wishlistOpen}
             setOpen={setOpen}
             setWishlistOpen={setWishlistOpen}
+            snackbarMessage={snackbarMessage}
+            snackbarMessage2={snackbarMessage2}
           />
           <p className="text-white text-center">
-            No products added to Wishlist🥲.
+            Either, no products added to Wishlist🥲 or you are not Logged In.
           </p>
           <NavLink to="/">
             <button className="bg-sky-600 hover:bg-sky-700 rounded-xl p-2 text-white mt-4 text-base">
@@ -113,6 +115,8 @@ export default function Wishlist() {
             wishlistOpen={wishlistOpen}
             setOpen={setOpen}
             setWishlistOpen={setWishlistOpen}
+            snackbarMessage={snackbarMessage}
+            snackbarMessage2={snackbarMessage2}
           />
         </div>
       )}

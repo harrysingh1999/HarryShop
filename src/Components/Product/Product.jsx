@@ -12,15 +12,14 @@ import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import ProductCarousel from "../ProductCarousel/ProductCarousel";
 
 export default function Product() {
-  let location = useLocation();
-  let productId = location.state;
-
-  const auth = useSelector((state) => state.auth.isAuthenticated);
-
   const [open, setOpen] = React.useState(false);
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [error, setError] = useState(null);
   const [product, setProduct] = useState(null);
+  let location = useLocation();
+  let productId = location.state;
+
+  const auth = useSelector((state) => state.auth.isAuthenticated);
 
   let dispatch = useDispatch();
   const handleAddtoCart = (product) => {
@@ -32,6 +31,9 @@ export default function Product() {
     auth && dispatch(addWishlistItem(product));
     setWishlistOpen(true);
   };
+
+  let snackbarMessage = "Product is added to Cart!"
+  let snackbarMessage2 = "Product is added to Wishlist!"
 
   useEffect(() => {
     const fetchedProduct = async () => {
@@ -103,6 +105,8 @@ export default function Product() {
               wishlistOpen={wishlistOpen}
               setOpen={setOpen}
               setWishlistOpen={setWishlistOpen}
+              snackbarMessage={snackbarMessage}
+              snackbarMessage2={snackbarMessage2}
             />
           </div>
         </>

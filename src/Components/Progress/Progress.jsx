@@ -1,69 +1,47 @@
 import CheckIcon from "@mui/icons-material/Check";
 import CircularProgress from "@mui/material/CircularProgress";
 import { green } from "@mui/material/colors";
-import Fab from "@mui/material/Fab";
-import Box from "@mui/material/Box";
 import { Icon } from "@iconify/react";
 import React from "react";
-import { NavLink } from "react-router-dom";
 
-export default function Progress({success, loading, handleOrder}) {
-
-    const buttonSx = {
-        ...(success && {
-          bgcolor: green[500],
-          "&:hover": {
-            bgcolor: green[700],
-          },
-        }),
-      };
+export default function Progress({ success, loading, handleOrder }) {
 
   return (
-    <Box sx={{ marginTop: 1, position: "relative" }}>
+    <div
+      className="relative mt-4 border border-white py-2 rounded-xl
+    bg-sky-600 flex justify-center items-center"
+    >
       {success ? (
-        <p className="text-black inline-block">Ordered Successfully!</p>
+        <p className="text-white inline-block">Ordered Successfully!</p>
       ) : (
-        <p className=" text-black inline-block">Order Now:</p>
+        <p className="inline-block text-white ">Order Now:</p>
       )}
-      <Fab
-        className="!ms-4 !mb-2"
-        aria-label="save"
-        color="primary"
-        sx={buttonSx}
-      >
+   
+      <div style={{ backgroundColor: success && "#50C878" }}
+        className="inline-block ms-2 text-white border rounded-full p-1 hover:bg-white hover:text-sky-700">
         {success ? (
           <div className="flex items-center">
             <CheckIcon />
           </div>
         ) : (
-          <div className="flex items-center" 
-          onClick={handleOrder}>
-            <Icon icon="icons8:buy" width="40" className="!" />
+          <div className="flex items-center" onClick={handleOrder}>
+            <Icon icon="icons8:buy" width="34" />
           </div>
         )}
-      </Fab>
-
-      {success && (
-        <NavLink to="/Orders">
-          <div
-            className="bg-sky-600 hover:bg-sky-500 p-2 text-white text-center rounded-xl mt-4" >
-            Go to Orders
-          </div>
-        </NavLink>
-      )}
+      </div>
 
       {loading && (
         <CircularProgress
-          size={68}
-          sx={{
-            color: green[500],
+          size={54}
+          style={{
+            color: green[800],
             position: "absolute",
-            top: -6,
-            left: 92,
+            top: -2,
+            left: 145,
             zIndex: 1,
           }}
         />
       )}
-    </Box>
+    </div>
   );
 }

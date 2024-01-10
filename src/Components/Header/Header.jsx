@@ -144,7 +144,7 @@ export default function Header() {
           <>
             <NavLink to="/Orders">
               <div
-                className="ms-2 border border-gray-300 rounded-xl ps-1 py-1 bg-gradient-to-r
+                className="ms-0 border border-gray-300 rounded-xl ps-1 py-1 bg-gradient-to-r
                    hover:from-sky-500 hover:to-blue-500 hover:text-white"
               >
                 <img
@@ -253,7 +253,7 @@ export default function Header() {
               <>
                 <NavLink to="/Orders">
                   <div
-                    className="mx-2 border border-gray-300 rounded-xl px-2 py-1 bg-gradient-to-r
+                    className="mx-2 border border-gray-300 rounded-2xl px-2 py-1 bg-gradient-to-r
                    hover:from-sky-500 hover:to-blue-500"
                   >
                     <img

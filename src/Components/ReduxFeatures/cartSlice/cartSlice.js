@@ -13,7 +13,6 @@ export const cartSlice = createSlice({
   initialState: cartState,
   reducers: {
     addCartItem: (state, action) => {
-      // const temp = JSON.parse(localStorage.getItem("cartItems")) || [];
       const dispatchedItemIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
@@ -23,7 +22,6 @@ export const cartSlice = createSlice({
       } else {
         const dispatchedItem = { ...action.payload, qty: 1 };
         state.cartItems = [...state.cartItems, dispatchedItem];
-        // state.cartItems = [...temp, dispatchedItem];
       }
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
