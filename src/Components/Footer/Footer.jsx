@@ -10,7 +10,7 @@ export default function Footer() {
       <footer className="w-full bg-gray-900 body-font">
         <div className="container flex flex-col flex-wrap px-5 pt-14 pb-2 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap">
           <div className="flex-shrink-0 w-64 mx-auto text-center text-sky-300 hover:text-sky-400 mb-8">
-            <NavLink to="/">ShopOnline</NavLink>
+            <NavLink to="/">HarryShop</NavLink>
             <p className="text-xs text-sky-300">Explore, Shop and Repeat</p>
             <div className="mt-2">
               <span className="inline-flex justify-center mb-2 sm:ml-auto sm:mt-0 sm:justify-start">
@@ -125,7 +125,7 @@ export default function Footer() {
         <div className="bg-gray-700">
           <div className="container px-5 py-4 mx-auto">
             <p className="text-sm text-white capitalize text-center">
-              ShopOnline © 2024 All rights reserved
+              HarryShop © 2024 All rights reserved
             </p>
           </div>
         </div>

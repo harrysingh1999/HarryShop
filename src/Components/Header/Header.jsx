@@ -202,7 +202,7 @@ export default function Header() {
                   className="!inline-block"
                   width="40"
                 />
-                ShopOnline
+                HarryShop
               </p>
             </NavLink>
           </div>
