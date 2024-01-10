@@ -84,11 +84,11 @@ export default function OrderSummary() {
 
   return (
     <>
-      <h1 className="text-center text-2xl md:text-4xl my-10 font-semibold">
+      <h1 className="text-center text-2xl md:text-4xl mt-20 md:mt-28 font-semibold">
         Order Summary
       </h1>
       {!auth || cart.cartItems.length === 0 ? (
-        <div className="h-screen w-screen flex flex-col items-center justify-center md:text-2xl bg-red-500 mt-0 md:mt-20 px-4">
+        <div className="h-screen w-screen flex flex-col items-center justify-center md:text-2xl bg-red-500 mt-0 md:mt-10 px-4">
           <p className="text-white text-center">Either, Your Cart is Empty🥲 or you are not logged In.</p>
           <NavLink to="/">
             <button className="bg-sky-600 hover:bg-sky-700 rounded-xl p-2 text-white mt-4 text-base">

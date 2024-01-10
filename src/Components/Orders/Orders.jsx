@@ -16,7 +16,7 @@ export default function Orders() {
 
   return (
     <div>
-      <h1 className="text-3xl font-semibold md:font-bold md:ms-24 mt-10 text-center md:text-start">My Orders</h1>
+      <h1 className="text-3xl font-semibold md:font-bold md:ms-24 mt-20 md:mt-28 text-center md:text-start">My Orders</h1>
       {confirmedOrders && auth ? (
         confirmedOrders.map((order) => (
           <div key={nanoid()}>
@@ -103,7 +103,7 @@ export default function Orders() {
           </div>
         ))
       ) : (
-        <div className="h-screen w-screen flex flex-col items-center justify-center md:text-2xl bg-red-500 mt-20 px-4">
+        <div className="h-screen w-screen flex flex-col items-center justify-center md:text-2xl bg-red-500 mt-10 px-4">
           <p className="text-white text-center"> Either you are not Logged In or you haven't purchased any products yet.</p>
           <NavLink to="/">
             <button className="bg-sky-600 hover:bg-sky-700 rounded-xl p-2 text-white mt-4 text-base">

@@ -16,6 +16,7 @@ export default function Product() {
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const [error, setError] = useState(null);
   const [product, setProduct] = useState(null);
+
   let location = useLocation();
   let productId = location.state;
 
@@ -61,7 +62,7 @@ export default function Product() {
         ):
        product && (
         <>
-          <h1 className="text-xl md:text-3xl mt-10 ms-10 md:ms-16 text-black font-semibold">
+          <h1 className="text-xl md:text-3xl mt-20 md:mt-28 ms-10 md:ms-16 text-black font-semibold">
             {product.title}
           </h1>
 
@@ -79,7 +80,7 @@ export default function Product() {
               />
               <p>Brand: {product.brand} </p>
               <p>Units Left: {product.stock} </p>
-              <p className="text-sky-700 font-semibold text-lg">
+              <p className="text-sky-700 font-semibold md:text-lg">
                 Price: Rs. {(product.price * 84).toLocaleString("en-IN")}
               </p>
               <p className="mb-6 mt-1">Description: {product.description}.</p>

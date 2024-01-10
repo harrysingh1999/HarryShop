@@ -14,10 +14,13 @@ import {
   bannerDetails,
   bannerSlider,
 } from "../Javascript/projectJavascript";
+import { Skeleton } from "@mui/material";
+import { nanoid } from "@reduxjs/toolkit";
 
 export default function Home() {
   const [categories, setCategories] = useState(null);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchedCategories = async () => {
@@ -26,8 +29,10 @@ export default function Home() {
           "https://dummyjson.com/products/categories"
         );
         setCategories(response.data);
+        setIsLoading(false);
       } catch (error) {
         setError(error);
+        setIsLoading(false)
       }
     };
     fetchedCategories();
@@ -48,7 +53,7 @@ export default function Home() {
       <Slider {...bannerSlider}>
         {bannerDetails.map((product) => (
           <div key={crypto.randomUUID()}>
-            <div>
+            <div className="mt-10 md:mt-16">
               <img
                 src={product.url}
                 alt={product.title}
@@ -56,8 +61,8 @@ export default function Home() {
                 className="relative w-screen object-cover"
               />
             </div>
-            <div className="absolute top-36 md:top-40 ms-8 md:ms-16 hover:shadow-lg hover:shadow-sky-500 p-2 rounded-xl">
-              <p className="text-xl md:text-5xl ps-2 text-white">
+            <div className="absolute top-40 md:top-56 ms-6 md:ms-16 hover:shadow-lg hover:shadow-sky-500 p-2 rounded-xl">
+              <p className="text-xl md:text-4xl ps-2 text-white font-semibold">
                 {product.title}
               </p>
               <p className="md:mt-2 mb-5 font-semibold text-sm md:text-lg text-sky-600 ps-2">
@@ -76,7 +81,20 @@ export default function Home() {
       </h2>
 
       <div className="flex flex-wrap justify-center md:mx-20">
-        {error ? (
+        {isLoading ? (
+          Array.from({ length: 19 }).map(() => (
+            <Card
+              key={nanoid()}
+              className="max-w-min !rounded-t-3xl !rounded-b-3xl mb-6 md:mb-8 mx-2 !transition ease-in-out !delay-25 
+              hover:-translate-y-1 hover:scale-110 !duration-300 !bg-gray-300 hover:!shadow-lg hover:!shadow-sky-500 !border-b border-black cursor-pointer"
+            >
+              <Skeleton variant="rectangular" width={176} height={200} />
+              <CardContent className="!pt-2 !pb-1">
+                <Skeleton />
+              </CardContent>
+            </Card>
+          ))
+        ) : error ? (
           <div className="h-screen w-screen flex flex-col justify-center items-center mx-4 md:mx-0 bg-red-600">
             <p className=" text-white text-2xl">
               Oops, API error: {error.response.data.message}.
@@ -90,9 +108,8 @@ export default function Home() {
               category !== "motorcycle" && (
                 <Card
                   key={crypto.randomUUID()}
-                  className="max-w-min !rounded-t-3xl !rounded-b-3xl mb-6 md:mb-8 mx-2 !transition ease-in-out !delay-25
-                       hover:-translate-y-1 hover:scale-110 !duration-300 !bg-gray-300 
-                       hover:!shadow-lg hover:!shadow-sky-500 !border-b border-black cursor-pointer"
+                  className="max-w-min !rounded-t-3xl !rounded-b-3xl mb-6 md:mb-8 mx-2 !transition ease-in-out
+                   !delay-25 hover:-translate-y-1 hover:scale-110 !duration-300 !bg-gray-300 hover:!shadow-lg hover:!shadow-sky-500 !border-b border-black cursor-pointer"
                 >
                   <CardMedia
                     className="h-40 w-44"

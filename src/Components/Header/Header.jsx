@@ -192,7 +192,7 @@ export default function Header() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar className="">
           <div className="text-base md:block hidden ms-6 xl:ms-12">
             <NavLink to="/">
@@ -272,9 +272,9 @@ export default function Header() {
             ) : (
               <div
                 className="flex items-center hover:scale-105 bg-gradient-to-r rounded-xl py-1 px-2
-               hover:from-sky-500 hover:to-blue-500 border"
+               hover:from-sky-500 hover:to-blue-500 border ms-2"
               >
-                <p className="me-0">Sign in with</p>
+                <p className="me-1">Sign in with</p>
                 <GoogleLogin
                   type="icon"
                   shape="pill"

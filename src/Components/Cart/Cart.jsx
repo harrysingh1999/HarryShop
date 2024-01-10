@@ -62,13 +62,13 @@ export default function Cart() {
 
   return (
     <div>
-      <h1 className="text-3xl mx-14 mt-10 mb-6 text-black font-normal md:font-semibold">
+      <h1 className="text-3xl mx-14 mt-20 md:mt-28 mb-6 text-black font-normal md:font-semibold">
         Shopping Cart
       </h1>
 
       {!auth || cartItems.length === 0 ? (
         <div className="h-screen w-screen flex flex-col items-center justify-center md:text-2xl
-         bg-red-500 mt-0 md:mt-20 px-4">
+         bg-red-500 mt-0 md:mt-10 px-4">
           <p className="text-white text-center">
             Either Your Cart is Empty🥲 or you are not logged In.
           </p>
