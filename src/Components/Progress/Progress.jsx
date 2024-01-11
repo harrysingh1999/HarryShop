@@ -36,7 +36,7 @@ export default function Progress({ success, loading, handleOrder }) {
           style={{
             color: green[800],
             position: "absolute",
-            top: -8,
+            top: -4,
             left: 145,
             zIndex: 1,
           }}
