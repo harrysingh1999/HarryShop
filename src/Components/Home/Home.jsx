@@ -27,7 +27,7 @@ export default function Home() {
       try {
         let response = await axios.get(
           "https://dummyjson.com/products/categories"
-        );
+        );   
         setCategories(response.data);
         setIsLoading(false);
       } catch (error) {

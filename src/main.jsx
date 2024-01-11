@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
@@ -12,13 +12,15 @@ import {
 import Home from "./Components/Home/Home.jsx";
 import Product from "./Components/Product/Product.jsx";
 import Cart from "./Components/Cart/Cart.jsx";
-import Wishlist from "./Components/Wishlist/Wishlist.jsx";
+// import Wishlist from "./Components/Wishlist/Wishlist.jsx";
 import { Provider } from "react-redux";
 import { store } from "./Components/ReduxFeatures/Store/store.js";
 import OrderSummary from "./Components/OrderSummary/OrderSummary.jsx";
 import Orders from "./Components/Orders/Orders.jsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import NotfoundPage from "./Components/404/NotFoundPage.jsx";
+
+const Wishlist = lazy( () => import("./Components/Wishlist/Wishlist.jsx") )
 
 const router = createBrowserRouter(
   createRoutesFromElements(
