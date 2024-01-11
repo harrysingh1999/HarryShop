@@ -106,10 +106,10 @@ export default function Products() {
             return (
               <div key={crypto.randomUUID()}>
                 <Card
-                  style={{ minHeight: "430px", maxHeight: "430px" }}
+                  style={{ minHeight: "420px", maxHeight: "420px" }}
                   className="max-w-min w-64 md:w-72 !mx-4 xl:!ms-6 xl:!me-3 my-4 !rounded-t-3xl !rounded-b-3xl 
                  pb-2 !transition !ease-in-out !delay-25 hover:-translate-y-1 hover:scale-105 !duration-300 
-                 !bg-gray-300 hover:!shadow-lg hover:!shadow-sky-500 !border-b border-black cursor-pointer"
+                 !bg-gray-300 hover:!shadow-lg hover:!shadow-sky-500 !border-b border-black cursor-pointer "
                 >
                   <CardMedia
                     className=" h-60 w-72"
@@ -117,14 +117,14 @@ export default function Products() {
                     title={product.title}
                     onClick={() => handleProduct(product.id)}
                   />
-                  <CardContent className="!pb-1 !pt-2 ">
+                  <CardContent className="!pb-1 !pt-2">
                     <p className="text-base font-semibold">{product.title}</p>
                     <p className=" mt-1 text-base">
                       Rs. {(product.price * 84).toLocaleString("en-IN")}
                     </p>
 
                     <span
-                      className=" my-2 inline-block"
+                      className=" my-1 inline-block"
                       onMouseEnter={() => handleMouseEnter(product.id)}
                       onMouseOut={() => setIsHovering(false)}
                     >
@@ -138,7 +138,7 @@ export default function Products() {
                   </CardContent>
                   <CardActions className="!pt-0">
                     <button
-                      className="hover:bg-gray-100 px-2 py-1 rounded-lg ms-2 inline-block border border-black"
+                      className="hover:bg-gray-100 px-2 py-1 rounded-lg ms-1 md:ms-2 inline-block border border-black"
                       onClick={() => handleAddtoCart(product)}
                     >
                       Add to Cart <AddShoppingCartIcon />

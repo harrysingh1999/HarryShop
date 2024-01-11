@@ -61,7 +61,7 @@ export default function Home() {
                 className="relative w-screen object-cover"
               />
             </div>
-            <div className="absolute top-40 md:top-56 ms-6 md:ms-16 hover:shadow-lg hover:shadow-sky-500 p-2 rounded-xl">
+            <div className="absolute top-56 ms-6 md:ms-16 hover:shadow-lg hover:shadow-sky-500 p-2 rounded-xl">
               <p className="text-xl md:text-4xl ps-2 text-white font-semibold">
                 {product.title}
               </p>

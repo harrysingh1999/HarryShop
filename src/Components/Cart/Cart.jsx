@@ -30,17 +30,14 @@ export default function Cart() {
 
   const handleDecrementItem = (id) => {
     auth && dispatch(decrementItemQty(id));
-    setOpen(true);
   };
 
   const handleIncrementItem = (id) => {
     auth && dispatch(incrementItemQty(id));
-    setOpen(true);
   };
 
   const handleClearCart = () => {
     auth && dispatch(emptyCart());
-    setOpen(true);
   };
 
   useEffect(() => {
@@ -55,7 +52,6 @@ export default function Cart() {
 
   const handleProceed = () => {
     auth && navigate("/OrderSummary");
-    setOpen(true);
   };
 
   let snackbarMessage = "Item removed Successfully!"

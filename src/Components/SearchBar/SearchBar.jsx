@@ -7,6 +7,7 @@ import {
   SearchIconWrapper,
   StyledInputBase,
 } from "../Javascript/projectJavascript";
+import { Html } from "@mui/icons-material";
 
 export default function SearchBar({ SearchClickFunc }) {
   const [userSearch, setUserSearch] = useState("");
