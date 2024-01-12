@@ -8,9 +8,9 @@ export default function App() {
   return (
     <>
       <Header />
-       <Suspense>
+      <Suspense fallback={<div>Loading........</div>}>
          <Outlet />
-       </Suspense>
+      </Suspense>
       <Footer />
     </>
   );

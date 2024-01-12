@@ -2,7 +2,6 @@ import React, { lazy } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-import Products from "./Components/Products/Products.jsx";
 import {
   RouterProvider,
   Route,
@@ -10,17 +9,25 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import Home from "./Components/Home/Home.jsx";
-import Product from "./Components/Product/Product.jsx";
-import Cart from "./Components/Cart/Cart.jsx";
-// import Wishlist from "./Components/Wishlist/Wishlist.jsx";
 import { Provider } from "react-redux";
 import { store } from "./Components/ReduxFeatures/Store/store.js";
-import OrderSummary from "./Components/OrderSummary/OrderSummary.jsx";
-import Orders from "./Components/Orders/Orders.jsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
-import NotfoundPage from "./Components/404/NotFoundPage.jsx";
 
-const Wishlist = lazy( () => import("./Components/Wishlist/Wishlist.jsx") )
+// import Products from "./Components/Products/Products.jsx";
+// import NotfoundPage from "./Components/404/NotFoundPage.jsx";
+// import Product from "./Components/Product/Product.jsx";
+// import Cart from "./Components/Cart/Cart.jsx";
+// import Wishlist from "./Components/Wishlist/Wishlist.jsx";
+// import OrderSummary from "./Components/OrderSummary/OrderSummary.jsx";
+// import Orders from "./Components/Orders/Orders.jsx";
+
+const Wishlist = lazy(() => import("./Components/Wishlist/Wishlist.jsx"))
+const OrderSummary = lazy(() => import("./Components/OrderSummary/OrderSummary.jsx"))
+const Cart = lazy(() => import("./Components/Cart/Cart.jsx"))
+const Orders = lazy(() => import("./Components/Orders/Orders.jsx"))
+const Products = lazy(() => import("./Components/Products/Products.jsx"))
+const Product = lazy(() => import("./Components/Product/Product.jsx"))
+const NotfoundPage = lazy(() => import("./Components/404/NotFoundPage.jsx"))
 
 const router = createBrowserRouter(
   createRoutesFromElements(
