@@ -5,7 +5,7 @@ import { nanoid } from "@reduxjs/toolkit";
 
 export default function Orders() {
   const auth = useSelector((state) => state.auth.isAuthenticated);
-  const { totalCartAmount } = useSelector((state) => state.cart);
+  // const { totalCartAmount } = useSelector((state) => state.cart);
   const confirmedOrders = JSON.parse(localStorage.getItem("confirmedOrders"));
   const googleUser = JSON.parse(localStorage.getItem('googleUser'))
 
@@ -77,7 +77,7 @@ export default function Orders() {
                 <div className="border-t border-gray-200 pt-3 pb-5 md:py-6 px-4 sm:px-6">
                   <div className="flex justify-between my-2 text-base font-medium text-gray-900">
                     <p>Subtotal</p>
-                    <p>Rs. {totalCartAmount.toLocaleString("en-IN")}</p>
+                    <p>Rs. {order.totalOrderAmount.toLocaleString("en-IN")}</p>
                   </div>
                   <div className="flex justify-between my-2 text-base font-medium text-gray-900">
                     <p>Total Items in Cart</p>

@@ -13,14 +13,6 @@ import { Provider } from "react-redux";
 import { store } from "./Components/ReduxFeatures/Store/store.js";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
-// import Products from "./Components/Products/Products.jsx";
-// import NotfoundPage from "./Components/404/NotFoundPage.jsx";
-// import Product from "./Components/Product/Product.jsx";
-// import Cart from "./Components/Cart/Cart.jsx";
-// import Wishlist from "./Components/Wishlist/Wishlist.jsx";
-// import OrderSummary from "./Components/OrderSummary/OrderSummary.jsx";
-// import Orders from "./Components/Orders/Orders.jsx";
-
 const Wishlist = lazy(() => import("./Components/Wishlist/Wishlist.jsx"))
 const OrderSummary = lazy(() => import("./Components/OrderSummary/OrderSummary.jsx"))
 const Cart = lazy(() => import("./Components/Cart/Cart.jsx"))

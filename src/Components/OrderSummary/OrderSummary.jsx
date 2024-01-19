@@ -21,7 +21,6 @@ export default function OrderSummary() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const timer = useRef();
-  const [empty, setEmpty] = useState()
 
   useEffect(() => {
     return () => {
@@ -54,6 +53,7 @@ export default function OrderSummary() {
     paymentMethod: "COD",
     date: Date(),
     totalOrderedQty: cart.totalCartQuantity,
+    totalOrderAmount: cart.totalCartAmount
   };
 
   const handleOrder = () => {
