@@ -32,11 +32,11 @@ export default function Progress({ success, loading, handleOrder }) {
 
       {loading && (
         <CircularProgress
-          size={54}
+          size={52}
           style={{
             color: green[800],
             position: "absolute",
-            top: -2,
+            top: 0,
             left: 145,
             zIndex: 1,
           }}
