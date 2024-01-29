@@ -5,7 +5,6 @@ import { nanoid } from "@reduxjs/toolkit";
 
 export default function Orders() {
   const auth = useSelector((state) => state.auth.isAuthenticated);
-  // const { totalCartAmount } = useSelector((state) => state.cart);
   const confirmedOrders = JSON.parse(localStorage.getItem("confirmedOrders"));
   const googleUser = JSON.parse(localStorage.getItem('googleUser'))
 
@@ -84,7 +83,7 @@ export default function Orders() {
                     <p> {order.totalOrderedQty} items</p>
                   </div>
                   <p className="mt-0.5 text-sm text-gray-500">
-                    Order # {nanoid()}
+                    Order Id: #{nanoid()}
                   </p>
                   <p> Payment Mode: {order.paymentMethod} </p>
 
