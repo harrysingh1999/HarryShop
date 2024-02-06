@@ -85,8 +85,8 @@ export default function Products() {
             <div key={nanoid()} className="mx-4">
               <Card
                 style={{ minHeight: "400px", maxHeight: "400px" }}
-                className="max-w-min w-64 md:w-72 pb-2 rounded-t-3xl rounded-b-3xl transition ease-in-out delay-25
-                 hover:-translate-y-1 hover:scale-105 duration-300 bg-gray-300 hover:shadow-lg hover:shadow-sky-500 border-b border-black cursor-pointer"
+                className="max-w-min w-64 md:w-72 pb-2 rounded-t-3xl rounded-b-3xl !transition ease-in-out delay-25
+                 hover:-translate-y-1 hover:scale-105 duration-300 bg-gray-300 hover:shadow-lg hover:shadow-sky-500 cursor-pointer"
               >
                 <Skeleton
                   variant="rectangular" animation="wave" width={360} height={430}
@@ -110,7 +110,7 @@ export default function Products() {
                   // style={{ minHeight: "420px", maxHeight: "420px" }}
                   className="md:max-h-custom md:min-h-custom w-60 md:w-72 !mx-4 xl:!ms-6 xl:!me-3 my-4 !rounded-t-3xl 
                   !rounded-b-3xl pb-2 !transition !ease-in-out !delay-25 hover:-translate-y-1 hover:scale-105 !duration-300 
-                 !bg-gray-300 hover:!shadow-lg hover:!shadow-sky-500 !border-b border-black cursor-pointer"
+                 !bg-gray-300 hover:!shadow-lg hover:!shadow-sky-500 cursor-pointer"
                 >
                   <CardMedia
                     className="h-44 w-64 md:h-60 md:w-72"

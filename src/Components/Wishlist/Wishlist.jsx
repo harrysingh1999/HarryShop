@@ -76,7 +76,7 @@ export default function Wishlist() {
               style={{ minHeight: "280px", maxHeight: "280px" }}
               className="w-64 md:w-72 md:!mx-3 my-4 !rounded-t-3xl !rounded-b-3xl 
               !transition ease-in-out !delay-25 hover:-translate-y-1 hover:scale-105 !duration-300
-              !bg-gray-300 hover:!shadow-lg hover:!shadow-sky-500 !border-b border-black cursor-pointer"
+              !bg-gray-300 hover:!shadow-lg hover:!shadow-sky-500 cursor-pointer"
             >
               <CardMedia
                 sx={{ height: 140 }}

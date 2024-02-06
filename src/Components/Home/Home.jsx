@@ -86,11 +86,12 @@ export default function Home() {
             <Card
               key={nanoid()}
               className="max-w-min !rounded-t-3xl !rounded-b-3xl mb-6 md:mb-8 mx-2 !transition ease-in-out !delay-25 
-              hover:-translate-y-1 hover:scale-110 !duration-300 !bg-gray-300 hover:!shadow-lg hover:!shadow-sky-500 !border-b border-black cursor-pointer"
+              hover:-translate-y-1 hover:scale-110 !duration-300 !bg-gray-300 hover:!shadow-lg hover:!shadow-sky-500 
+              cursor-pointer"
             >
               <Skeleton variant="rectangular" width={176} height={200} />
               <CardContent className="!pt-2 !pb-1">
-                <Skeleton />
+                <Skeleton />  
               </CardContent>
             </Card>
           ))
@@ -109,7 +110,8 @@ export default function Home() {
                 <Card
                   key={crypto.randomUUID()}
                   className="max-w-min !rounded-t-3xl !rounded-b-3xl mb-6 md:mb-8 mx-2 !transition ease-in-out
-                   !delay-25 hover:-translate-y-1 hover:scale-110 !duration-300 !bg-gray-300 hover:!shadow-lg hover:!shadow-sky-500 !border-b border-black cursor-pointer"
+                   !delay-25 hover:-translate-y-1 hover:scale-110 !duration-300 !bg-gray-300 hover:!shadow-lg
+                    hover:!shadow-sky-500 cursor-pointer"
                 >
                   <CardMedia
                     className="h-40 w-44"

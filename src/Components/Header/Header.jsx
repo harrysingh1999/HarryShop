@@ -22,6 +22,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import { Icon } from "@iconify/react";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
+import Container from '@mui/material/Container';
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -191,8 +192,8 @@ export default function Header() {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed">
+  <AppBar position="fixed">
+     <Box sx={{ flexGrow: 1 }}>
         <Toolbar className="">
           <div className="text-base md:block hidden ms-6 xl:ms-12">
             <NavLink to="/">
@@ -303,9 +304,9 @@ export default function Header() {
             </IconButton>
           </Box>
         </Toolbar>
-      </AppBar>
       {renderMobileMenu}
       {renderMenu}
     </Box>
+      </AppBar>
   );
 }
