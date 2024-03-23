@@ -134,7 +134,7 @@ export default function Cart() {
             </button>
             <button
               className="bg-sky-600 hover:bg-sky-500 text-white px-2 py-2 rounded-lg
-             mt-2 ms-0 lg:ms-0 mb-5 me-4"
+             mt-2 ms-0 lg:ms-2 mb-5 me-4"
             >
               <NavLink to="/">
                 Continue
