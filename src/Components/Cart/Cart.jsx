@@ -99,7 +99,7 @@ export default function Cart() {
             })}
           </div>
 
-          <div className="mt-4 md:ms-4 pt-4 ps-4 pe-2 border border-black md:w-[700px]">
+          <div className="mt-4 md:ms-4 pt-4 ps-4 pe-2 border border-black md:w-[550px]">
             <p className="text-2xl mb-4"> Cart Calculation </p>
             <p className="text-sky-700 text-lg font-semibold border-t  border-b border-black py-3">
               Subtotal: Rs. {totalCartAmount.toLocaleString("en-IN")}
@@ -134,7 +134,7 @@ export default function Cart() {
             </button>
             <button
               className="bg-sky-600 hover:bg-sky-500 text-white px-2 py-2 rounded-lg
-             mt-2 ms-0 lg:ms-1 mb-5 me-4"
+             mt-2 ms-0 md:ms-2 mb-5 me-4"
             >
               <NavLink to="/">
                 Continue
