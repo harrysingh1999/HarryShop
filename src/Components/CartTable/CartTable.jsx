@@ -69,12 +69,12 @@ export default function CartTable({
             </TableCell>
             <TableCell align="center" className="xl:!text-base"
              >
-              Rs. {(item.price * 83).toLocaleString("en-IN")}
+              Rs. {(item.price * 84).toLocaleString("en-IN")}
             </TableCell>
 
             <TableCell align="center" className="!text-sky-700 xl !text-base !font-semibold" 
            >
-              Rs. {(item.qty * item.price * 83).toLocaleString("en-IN")}
+              Rs. {(item.qty * item.price * 84).toLocaleString("en-IN")}
             </TableCell>
 
             <TableCell align="center">
