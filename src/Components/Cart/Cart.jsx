@@ -99,7 +99,7 @@ export default function Cart() {
             })}
           </div>
 
-          <div className="mt-4 md:ms-4 pt-4 ps-4 pe-2 border border-black md:w-[500px]">
+          <div className="mt-4 md:ms-4 pt-4 ps-4 pe-2 border border-black md:w-[700px]">
             <p className="text-2xl mb-4"> Cart Calculation </p>
             <p className="text-sky-700 text-lg font-semibold border-t  border-b border-black py-3">
               Subtotal: Rs. {totalCartAmount.toLocaleString("en-IN")}
