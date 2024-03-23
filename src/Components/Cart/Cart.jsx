@@ -137,7 +137,7 @@ export default function Cart() {
              mt-2 ms-0 lg:ms-2 mb-5 me-4"
             >
               <NavLink to="/">
-                Continue
+                Continuewe
                 <Icon
                   icon="mdi:shopping-outline"
                   width="28"
