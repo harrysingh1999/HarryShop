@@ -21,7 +21,8 @@ export const cartSlice = createSlice({
         state.cartItems[dispatchedItemIndex].qty += 1;
       } else {
         const dispatchedItem = { ...action.payload, qty: 1 };
-        state.cartItems = [...state.cartItems, dispatchedItem];
+        // state.cartItems = [...state.cartItems, dispatchedItem];
+        state.cartItems.push(dispatchedItem);
       }
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
@@ -32,9 +33,11 @@ export const cartSlice = createSlice({
       );
 
       if (dispatchedItemIndex >= 0) {
-        state.wishlistItems = [...state.wishlistItems];
+        // state.wishlistItems = [...state.wishlistItems];
+        state.wishlistItems;
       } else {
-        state.wishlistItems = [...state.wishlistItems, action.payload];
+        // state.wishlistItems = [...state.wishlistItems, action.payload];
+        state.wishlistItems.push(action.payload);
       }
 
       localStorage.setItem(
