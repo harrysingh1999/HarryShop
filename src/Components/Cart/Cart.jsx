@@ -99,7 +99,7 @@ export default function Cart() {
             })}
           </div>
 
-          <div className="mt-4 md:ms-4 pt-4 px-4 border border-black">
+          <div className="mt-4 md:ms-4 pt-4 ps-4 pe-2 border border-black">
             <p className="text-2xl mb-4"> Cart Calculation </p>
             <p className="text-sky-700 text-lg font-semibold border-t  border-b border-black py-3">
               Subtotal: Rs. {totalCartAmount.toLocaleString("en-IN")}
@@ -137,7 +137,7 @@ export default function Cart() {
              mt-2 ms-0 lg:ms-2 mb-5 me-4"
             >
               <NavLink to="/">
-                Continuewe
+                Continue
                 <Icon
                   icon="mdi:shopping-outline"
                   width="28"
