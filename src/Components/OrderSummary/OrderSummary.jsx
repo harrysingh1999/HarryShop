@@ -159,7 +159,7 @@ export default function OrderSummary() {
                   </TableCell>
 
                   <TableCell align="center" className="!text-xs lg:!text-base !px-1 !font-semibold">
-                    Rs. {(item.price * 83).toLocaleString("en-IN") }
+                    Rs. {(item.qty * item.price * 84).toLocaleString("en-IN") }
                   </TableCell>
                 </TableRow>
               ))}
