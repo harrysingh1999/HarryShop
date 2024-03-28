@@ -7,7 +7,7 @@ import {
   getTotalQuantity,
   emptyCart,
 } from "../ReduxFeatures/cartSlice/cartSlice";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import CustomCard from "../customCard/CustomCard";
@@ -45,11 +45,6 @@ export default function Cart() {
   const handleClearCart = () => {
     auth && dispatch(emptyCart());
   };
-
-  // useEffect(() => {
-  //   dispatch(getTotal());
- 
-  // }, [cartItems]);
 
   let navigate = useNavigate();
   const handleProduct = (id) => {
