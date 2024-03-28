@@ -11,6 +11,7 @@ import {
   emptyCart,
   incrementItemQty,
   removeCartItem,
+  getTotal,
 } from "../ReduxFeatures/cartSlice/cartSlice";
 import { useNavigate, NavLink } from "react-router-dom";
 import Progress from "../Progress/Progress";
@@ -32,14 +33,17 @@ export default function OrderSummary() {
 
   const handleIncrementItem = (id) => {
     auth && dispatch(incrementItemQty(id));
+    auth && dispatch(getTotal());
   };
 
   const handleDecrementItem = (id) => {
     auth && dispatch(decrementItemQty(id));
+    auth && dispatch(getTotal());
   };
 
   const handleRemoveCartItem = (id) => {
     auth && dispatch(removeCartItem(id));
+    auth && dispatch(getTotal());
   };
 
   let navigate = useNavigate();
@@ -53,7 +57,7 @@ export default function OrderSummary() {
     paymentMethod: "COD",
     date: Date(),
     totalOrderedQty: cart.totalCartQuantity,
-    totalOrderAmount: cart.totalCartAmount
+    totalOrderAmount: cart.totalCartAmount,
   };
 
   const handleOrder = () => {
@@ -68,7 +72,7 @@ export default function OrderSummary() {
     if (!loading) {
       setSuccess(false);
       setLoading(true);
-      timer.current = window.setTimeout(() => {
+      timer.current = setTimeout(() => {
         setSuccess(true);
         setLoading(false);
       }, 2000);
