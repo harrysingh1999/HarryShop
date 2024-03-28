@@ -25,25 +25,31 @@ export default function Cart() {
 
   const handleRemoveCartItem = (id) => {
     auth && dispatch(removeCartItem(id));
+     auth && dispatch(getTotal());
+     auth && dispatch(getTotalQuantity());
     setOpen(true);
   };
 
   const handleDecrementItem = (id) => {
     auth && dispatch(decrementItemQty(id));
+     auth && dispatch(getTotal());
+     auth && dispatch(getTotalQuantity());
   };
 
   const handleIncrementItem = (id) => {
     auth && dispatch(incrementItemQty(id));
+    auth && dispatch(getTotal());
+     auth && dispatch(getTotalQuantity());
   };
 
   const handleClearCart = () => {
     auth && dispatch(emptyCart());
   };
 
-  useEffect(() => {
-    dispatch(getTotal());
-    dispatch(getTotalQuantity());
-  }, [cartItems]);
+  // useEffect(() => {
+  //   dispatch(getTotal());
+ 
+  // }, [cartItems]);
 
   let navigate = useNavigate();
   const handleProduct = (id) => {
