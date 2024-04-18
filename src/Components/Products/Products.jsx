@@ -31,7 +31,8 @@ export default function Products() {
 
   let location = useLocation();
   let productCategory = location.state;
-  const params = useParams(productCategory)
+  const params = useParams()
+  console.log(params)
 
   useEffect(() => {
     const fetchedCategory = async () => {
