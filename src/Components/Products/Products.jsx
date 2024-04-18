@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Ratings from "../Ratings/Ratings";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,9 +25,13 @@ export default function Products() {
   const [error, setError] = useState(null);
   const [category, setCategories] = useState(null);
   const [isloading, setIsLoading] = useState(true);
+    const auth = useSelector((state) => state.auth.isAuthenticated);
+    let dispatch = useDispatch();
+   let navigate = useNavigate();
 
   let location = useLocation();
   let productCategory = location.state;
+  const params = useParams(productCategory)
 
   useEffect(() => {
     const fetchedCategory = async () => {
@@ -45,15 +49,9 @@ export default function Products() {
     fetchedCategory();
   }, [productCategory]);
 
-  let navigate = useNavigate();
-
   const handleProduct = (id) => {
     navigate("/Product", { state: id });
   };
-
-  let dispatch = useDispatch();
-
-  const auth = useSelector((state) => state.auth.isAuthenticated);
 
   const handleAddtoCart = (product) => {
     auth && dispatch(addCartItem(product));
