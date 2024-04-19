@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Ratings from "../Ratings/Ratings";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +16,7 @@ import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import { Skeleton } from "@mui/material";
 import { nanoid } from "@reduxjs/toolkit";
+import { snackbarMessage, snackbarMessage2 } from "../../utils/constants";
 
 export default function Products() {
   const [isHovering, setIsHovering] = useState(false);
@@ -25,14 +26,12 @@ export default function Products() {
   const [error, setError] = useState(null);
   const [category, setCategories] = useState(null);
   const [isloading, setIsLoading] = useState(true);
-    const auth = useSelector((state) => state.auth.isAuthenticated);
-    let dispatch = useDispatch();
-   let navigate = useNavigate();
+  const auth = useSelector((state) => state.auth.isAuthenticated);
+  let dispatch = useDispatch();
+  let navigate = useNavigate();
 
   let location = useLocation();
   let productCategory = location.state;
-  const params = useParams()
-  console.log(params)
 
   useEffect(() => {
     const fetchedCategory = async () => {
@@ -50,8 +49,10 @@ export default function Products() {
     fetchedCategory();
   }, [productCategory]);
 
-  const handleProduct = (id) => {
-    navigate("/Product", { state: id });
+  const handleProduct = (title, id) => {
+    let arr = title.split(" ").join("-");
+    console.log(typeof arr);
+    navigate(`/products/${productCategory}/${arr}`, { state: id });
   };
 
   const handleAddtoCart = (product) => {
@@ -69,26 +70,24 @@ export default function Products() {
     setHoveredID(myId);
   };
 
-  let snackbarMessage = "Product is added to Cart!";
-  let snackbarMessage2 = "Product is added to Wishlist!";
-
   return (
     <div>
       <h1 className="text-3xl mx-10 md:mx-16 mt-20 md:mt-28 mb-2 text-black font-semibold ">
         {productCategory[0].toUpperCase() + productCategory.slice(1)}
       </h1>
       <div className="flex flex-wrap justify-center xl:justify-start md:ms-10 mx-2">
-
         {isloading ? (
           Array.from({ length: 5 }).map(() => (
             <div key={nanoid()} className="mx-4">
               <Card
-                style={{ minHeight: "400px", maxHeight: "400px" }}
-                className="max-w-min w-64 md:w-72 pb-2 rounded-t-3xl rounded-b-3xl !transition ease-in-out delay-25
+                className="max-w-min w-64 md:w-72 pb-2 rounded-t-3xl rounded-b-3xl !transition ease-in-out delay-25 min-h-[400px] max-h-[400px]
                  hover:-translate-y-1 hover:scale-105 duration-300 bg-gray-300 hover:shadow-lg hover:shadow-sky-500 cursor-pointer"
               >
                 <Skeleton
-                  variant="rectangular" animation="wave" width={360} height={430}
+                  variant="rectangular"
+                  animation="wave"
+                  width={360}
+                  height={430}
                 />
               </Card>
             </div>
@@ -98,7 +97,9 @@ export default function Products() {
             <p className=" text-white md:text-2xl text-center">
               Oops, API error: {error.message}.
             </p>
-            <p className=" text-white md:text-2xl text-center"> Please try after sometime.</p>
+            <p className=" text-white md:text-2xl text-center">
+              Please try after sometime.
+            </p>
           </div>
         ) : (
           category &&
@@ -115,7 +116,7 @@ export default function Products() {
                     className="h-44 w-64 md:h-60 md:w-72"
                     image={product.thumbnail}
                     title={product.title}
-                    onClick={() => handleProduct(product.id)}
+                    onClick={() => handleProduct(product.title, product.id)}
                   />
                   <CardContent className="!pb-1 !pt-2">
                     <p className="text-base font-semibold">{product.title}</p>

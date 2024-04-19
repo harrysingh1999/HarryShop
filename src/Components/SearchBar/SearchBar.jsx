@@ -6,8 +6,7 @@ import {
   Search,
   SearchIconWrapper,
   StyledInputBase,
-} from "../Javascript/projectJavascript";
-import { Html } from "@mui/icons-material";
+} from "../../utils/constants";
 
 export default function SearchBar({ SearchClickFunc }) {
   const [userSearch, setUserSearch] = useState("");
@@ -46,8 +45,10 @@ export default function SearchBar({ SearchClickFunc }) {
       />
 
       {error && userSearch ? (
-        <div className="absolute top-10 z-10 py-5 h-max w-full flex flex-col justify-center items-center 
-        mx-4 md:mx-0 bg-red-600 rounded-xl">
+        <div
+          className="absolute top-10 z-10 py-5 h-max w-full flex flex-col justify-center items-center 
+        mx-4 md:mx-0 bg-red-600 rounded-xl"
+        >
           <p className=" text-white text-base">
             Oops, API error: {error.message}.
           </p>
@@ -59,8 +60,6 @@ export default function SearchBar({ SearchClickFunc }) {
           <div className="absolute top-10 w-full z-10">
             {fetchedSearchData.map((data) => {
               return (
-                // data.title.includes(userSearch) &&
-                // (data.description.includes(userSearch) && (
                 <p
                   className="border border-black first-of-type:rounded-t-3xl last-of-type:rounded-b-3xl px-4 py-1
                    bg-sky-700 bg-gradient-to-r hover:from-blue-600 hover:to-sky-500"
@@ -68,7 +67,6 @@ export default function SearchBar({ SearchClickFunc }) {
                 >
                   <a onClick={() => SearchClickFunc(data.id)}> {data.title} </a>
                 </p>
-                // ))
               );
             })}
           </div>

@@ -52,7 +52,8 @@ export const categoryImages = {
   fragrances: "https://cdn.dummyjson.com/product-images/11/thumbnail.jpg",
   skincare: "https://cdn.dummyjson.com/product-images/16/thumbnail.jpg",
   groceries: "https://cdn.dummyjson.com/product-images/21/thumbnail.png",
-  "home-decoration": "https://cdn.dummyjson.com/product-images/26/thumbnail.jpg",
+  "home-decoration":
+    "https://cdn.dummyjson.com/product-images/26/thumbnail.jpg",
   furniture: "https://cdn.dummyjson.com/product-images/32/thumbnail.jpg",
   tops: "https://cdn.dummyjson.com/product-images/36/2.webp",
   "womens-dresses": "https://cdn.dummyjson.com/product-images/42/thumbnail.jpg",
@@ -62,7 +63,8 @@ export const categoryImages = {
   "mens-watches": "https://cdn.dummyjson.com/product-images/61/thumbnail.jpg",
   "womens-watches": "https://cdn.dummyjson.com/product-images/66/thumbnail.jpg",
   "womens-bags": "https://cdn.dummyjson.com/product-images/71/thumbnail.jpg",
-  "womens-jewellery": "https://cdn.dummyjson.com/product-images/76/thumbnail.jpg",
+  "womens-jewellery":
+    "https://cdn.dummyjson.com/product-images/76/thumbnail.jpg",
   sunglasses: "https://cdn.dummyjson.com/product-images/82/thumbnail.jpg",
   automotive: "https://cdn.dummyjson.com/product-images/86/thumbnail.jpg",
   lighting: "https://cdn.dummyjson.com/product-images/98/thumbnail.jpg",
@@ -74,18 +76,21 @@ export const bannerDetails = [
     id: 2,
     title: "iPhone X",
     price: 899,
+    category: "smartphones",
   },
   {
     url: MicrosoftSurface4,
     id: 8,
     title: "Microsoft Surface Laptop 4",
     price: 1499,
+    category: "laptops",
   },
   {
     url: MacbookPro,
     id: 6,
     title: "MacBook Pro",
     price: 1749,
+    category: "laptops",
   },
 ];
 
@@ -100,20 +105,7 @@ export const bannerSlider = {
   autoplay: true,
 };
 
-//Login.jsx......
-export const registerOptions = {
-  email: {
-    required: "Email cannot be blank",
-    pattern: {
-      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-      message: "Please enter a valid email address",
-    },
-  },
-  password: {
-    required: "Password is required",
-    minLength: {
-      value: 10,
-      message: "Password must be at least 10 characters",
-    },
-  },
-};
+// Product and Products.jsx.............
+
+export let snackbarMessage = "Product is added to Cart!";
+export let snackbarMessage2 = "Product is added to Wishlist!";

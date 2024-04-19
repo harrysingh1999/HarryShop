@@ -10,10 +10,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import MyButton from "../Button/MyButton";
 import {
-  categoryImages,
   bannerDetails,
   bannerSlider,
-} from "../Javascript/projectJavascript";
+  categoryImages,
+} from "../../utils/constants";
 import { Skeleton } from "@mui/material";
 import { nanoid } from "@reduxjs/toolkit";
 
@@ -21,31 +21,32 @@ export default function Home() {
   const [categories, setCategories] = useState(null);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  let navigate = useNavigate();
+  categoryImages;
 
   useEffect(() => {
     const fetchedCategories = async () => {
       try {
         let response = await axios.get(
           "https://dummyjson.com/products/categories"
-        );   
+        );
         setCategories(response.data);
         setIsLoading(false);
       } catch (error) {
         setError(error);
-        setIsLoading(false)
+        setIsLoading(false);
       }
     };
     fetchedCategories();
   }, []);
 
-  let navigate = useNavigate();
-
   const handleCategory = (product) => {
-    navigate("/Products", { state: product });
+    navigate(`products/${product}`, { state: product });
   };
 
-  const handleProduct = (id) => {
-    navigate("/Product", { state: id });
+  const handleProduct = (category, title, id) => {
+    let arr = title.split(" ").join("-");
+    navigate(`/products/${category}/${arr}`, { state: id });
   };
 
   return (
@@ -57,8 +58,7 @@ export default function Home() {
               <img
                 src={product.url}
                 alt={product.title}
-                style={{ height: "70vh" }}
-                className="relative w-screen object-cover"
+                className="relative w-screen object-cover h-[70vh]"
               />
             </div>
             <div className="absolute top-56 ms-6 md:ms-16 hover:shadow-lg hover:shadow-sky-500 p-2 rounded-xl">
@@ -68,7 +68,11 @@ export default function Home() {
               <p className="md:mt-2 mb-5 font-semibold text-sm md:text-lg text-sky-600 ps-2">
                 Rs. {(product.price * 84).toLocaleString("en-IN")}
               </p>
-              <div onClick={() => handleProduct(product.id)}>
+              <div
+                onClick={() =>
+                  handleProduct(product.category, product.title, product.id)
+                }
+              >
                 <MyButton value="Shop Now" bg="#6CB4EE" />
               </div>
             </div>
@@ -91,14 +95,14 @@ export default function Home() {
             >
               <Skeleton variant="rectangular" width={176} height={200} />
               <CardContent className="!pt-2 !pb-1">
-                <Skeleton />  
+                <Skeleton />
               </CardContent>
             </Card>
           ))
         ) : error ? (
           <div className="h-screen w-screen flex flex-col justify-center items-center mx-4 md:mx-0 bg-red-600">
             <p className=" text-white text-2xl">
-              Oops, API error: {error.response.data.message}.
+              Oops, API error: {error?.response?.data?.message}.
             </p>
             <p className=" text-white text-2xl"> Please try after sometime.</p>
           </div>

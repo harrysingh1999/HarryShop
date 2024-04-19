@@ -13,25 +13,30 @@ import { Provider } from "react-redux";
 import { store } from "./Components/ReduxFeatures/Store/store.js";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 
-const Wishlist = lazy(() => import("./Components/Wishlist/Wishlist.jsx"))
-const OrderSummary = lazy(() => import("./Components/OrderSummary/OrderSummary.jsx"))
-const Cart = lazy(() => import("./Components/Cart/Cart.jsx"))
-const Orders = lazy(() => import("./Components/Orders/Orders.jsx"))
-const Products = lazy(() => import("./Components/Products/Products.jsx"))
-const Product = lazy(() => import("./Components/Product/Product.jsx"))
-const NotfoundPage = lazy(() => import("./Components/404/NotFoundPage.jsx"))
+const Wishlist = lazy(() => import("./Components/Wishlist/Wishlist.jsx"));
+const OrderSummary = lazy(() =>
+  import("./Components/OrderSummary/OrderSummary.jsx")
+);
+const Cart = lazy(() => import("./Components/Cart/Cart.jsx"));
+const Orders = lazy(() => import("./Components/Orders/Orders.jsx"));
+const Products = lazy(() => import("./Components/Products/Products.jsx"));
+const Product = lazy(() => import("./Components/Product/Product.jsx"));
+const NotfoundPage = lazy(() => import("./Components/404/NotFoundPage.jsx"));
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route path="/" element={<Home />} />
-      <Route path="/:Products" element={<Products />} />
-      <Route path="/Product" element={<Product />} />
+      <Route path="/products/:products_param" element={<Products />} />
+      <Route
+        path="/products/:products_param/:product_param"
+        element={<Product />}
+      />
       <Route path="/Cart" element={<Cart />} />
       <Route path="/Wishlist" element={<Wishlist />} />
       <Route path="/OrderSummary" element={<OrderSummary />} />
       <Route path="/Orders" element={<Orders />} />
-      <Route path="*" element={<NotfoundPage/>} />      
+      <Route path="*" element={<NotfoundPage />} />
     </Route>
   )
 );

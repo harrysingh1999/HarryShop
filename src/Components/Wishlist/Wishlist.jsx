@@ -20,8 +20,8 @@ export default function Wishlist() {
   const [wishlistOpen, setWishlistOpen] = useState(false);
   const { wishlistItems } = useSelector((state) => state.cart);
   const auth = useSelector((state) => state.auth.isAuthenticated);
-  let snackbarMessage = "Product is added to Cart!"
-  let snackbarMessage2 = "Item removed Successfully!"
+  let snackbarMessage = "Product is added to Cart!";
+  let snackbarMessage2 = "Item removed Successfully!";
   let dispatch = useDispatch();
 
   const handleRemoveCartItem = (id) => {
