@@ -3,7 +3,7 @@ import InputBase from "@mui/material/InputBase";
 import iPhoneX from "./Images/iPhoneX.jpg";
 import MacbookPro from "./Images/MacbookPro.webp";
 import MicrosoftSurface4 from "./Images/MicrosoftSurface4.webp";
-import beautyImg from "../utils/Images/beauty.png";
+import beautyImg from "../utils/Images/Beauty.png";
 import fragranceImg from "../utils/Images/Fragrance.png";
 import furnitureImg from "../utils/Images/furniture.png";
 import groceryImg from "../utils/Images/grocery.png";
