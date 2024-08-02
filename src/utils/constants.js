@@ -3,6 +3,30 @@ import InputBase from "@mui/material/InputBase";
 import iPhoneX from "./Images/iPhoneX.jpg";
 import MacbookPro from "./Images/MacbookPro.webp";
 import MicrosoftSurface4 from "./Images/MicrosoftSurface4.webp";
+import beautyImg from "../utils/Images/beauty.png";
+import fragranceImg from "../utils/Images/Fragrance.png";
+import furnitureImg from "../utils/Images/furniture.png";
+import groceryImg from "../utils/Images/grocery.png";
+import homeDecorationImg from "../utils/Images/homeDecoration.png";
+import kitchenAccessoriesImg from "../utils/Images/kitchenAccessories.png";
+import laptopImg from "../utils/Images/laptop.png";
+import menShirtImg from "../utils/Images/menShirt.png";
+import menShoeImg from "../utils/Images/menShoe.png";
+import menWatchImg from "../utils/Images/menWatch.png";
+import mobileAccessoriesImg from "../utils/Images/mobileAccessories.png";
+import motorcycleImg from "../utils/Images/motorcycle.png";
+import skinCareImg from "../utils/Images/skinCare.png";
+import SmartphonesImg from "../utils/Images/smartphone.png";
+import sportAccessoriesImg from "../utils/Images/sportAccessories.png";
+import SunglassesImg from "../utils/Images/sunglass.png";
+import tabletImg from "../utils/Images/tablet.png";
+import topImg from "../utils/Images/top.png";
+import vehicleImg from "../utils/Images/vehicle.png";
+import womenBagImg from "../utils/Images/womenBag.png";
+import womenDressImg from "../utils/Images/womenDress.png";
+import womenJewelleryImg from "../utils/Images/womenJewellery.png";
+import womenShoeImg from "../utils/Images/womenShoe.png";
+import womenWatchImg from "../utils/Images/womenWatch.png";
 
 export const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -47,27 +71,30 @@ export const StyledInputBase = styled(InputBase)(({ theme }) => ({
 //Home.jsx.................
 
 export const categoryImages = {
-  smartphones: "https://cdn.dummyjson.com/product-images/2/thumbnail.jpg",
-  laptops: "https://cdn.dummyjson.com/product-images/6/thumbnail.png",
-  fragrances: "https://cdn.dummyjson.com/product-images/11/thumbnail.jpg",
-  skincare: "https://cdn.dummyjson.com/product-images/16/thumbnail.jpg",
-  groceries: "https://cdn.dummyjson.com/product-images/21/thumbnail.png",
-  "home-decoration":
-    "https://cdn.dummyjson.com/product-images/26/thumbnail.jpg",
-  furniture: "https://cdn.dummyjson.com/product-images/32/thumbnail.jpg",
-  tops: "https://cdn.dummyjson.com/product-images/36/2.webp",
-  "womens-dresses": "https://cdn.dummyjson.com/product-images/42/thumbnail.jpg",
-  "womens-shoes": "https://cdn.dummyjson.com/product-images/46/thumbnail.jpg",
-  "mens-shirts": "https://cdn.dummyjson.com/product-images/51/thumbnail.jpg",
-  "mens-shoes": "https://cdn.dummyjson.com/product-images/56/thumbnail.jpg",
-  "mens-watches": "https://cdn.dummyjson.com/product-images/61/thumbnail.jpg",
-  "womens-watches": "https://cdn.dummyjson.com/product-images/66/thumbnail.jpg",
-  "womens-bags": "https://cdn.dummyjson.com/product-images/71/thumbnail.jpg",
-  "womens-jewellery":
-    "https://cdn.dummyjson.com/product-images/76/thumbnail.jpg",
-  sunglasses: "https://cdn.dummyjson.com/product-images/82/thumbnail.jpg",
-  automotive: "https://cdn.dummyjson.com/product-images/86/thumbnail.jpg",
-  lighting: "https://cdn.dummyjson.com/product-images/98/thumbnail.jpg",
+  Beauty: beautyImg,
+  Fragrances: fragranceImg,
+  Furniture: furnitureImg,
+  Groceries: groceryImg,
+  "Home Decoration": homeDecorationImg,
+  "Kitchen Accessories": kitchenAccessoriesImg,
+  Laptops: laptopImg,
+  "Mobile Accessories": mobileAccessoriesImg,
+  Motorcycle: motorcycleImg,
+  Smartphones: SmartphonesImg,
+  Tablets: tabletImg,
+  Tops: topImg,
+  Vehicle: vehicleImg,
+  "Womens Dresses": womenDressImg,
+  "Womens Shoes": womenShoeImg,
+  "Womens Bags": womenBagImg,
+  "Mens Shirts": menShirtImg,
+  "Mens Shoes": menShoeImg,
+  "Mens Watches": menWatchImg,
+  "Sports Accessories": sportAccessoriesImg,
+  "Skin Care": skinCareImg,
+  "Womens Watches": womenWatchImg,
+  "Womens Jewellery": womenJewelleryImg,
+  Sunglasses: SunglassesImg,
 };
 
 export const bannerDetails = [

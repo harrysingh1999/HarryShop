@@ -30,6 +30,8 @@ export default function Home() {
         let response = await axios.get(
           "https://dummyjson.com/products/categories"
         );
+        console.log(response.data);
+
         setCategories(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -110,31 +112,22 @@ export default function Home() {
           categories &&
           categories.map((category) => {
             return (
-              category !== "motorcycle" && (
-                <Card
-                  key={crypto.randomUUID()}
-                  className="max-w-min !rounded-t-3xl !rounded-b-3xl mb-6 md:mb-8 mx-2 !transition ease-in-out
-                   !delay-25 hover:-translate-y-1 hover:scale-110 !duration-300 !bg-gray-300 hover:!shadow-lg
-                    hover:!shadow-sky-500 cursor-pointer"
-                >
-                  <CardMedia
-                    className="h-40 w-44"
-                    image={categoryImages[category]}
-                    title={category.title}
-                    onClick={() => handleCategory(category)}
-                  />
-                  <CardContent className="!pt-2 !pb-1">
-                    <Typography
-                      gutterBottom
-                      component="div"
-                      className="text-black"
-                    >
-                      {category !== "motorcycle" &&
-                        category[0].toUpperCase() + category.slice(1)}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              )
+              <div
+                key={crypto.randomUUID()}
+                className="text-center rounded-t-3xl rounded-b-3xl mb-6 md:mb-8 mx-2 transition ease-in-out
+                    delay-25 hover:-translate-y-1 hover:scale-110 duration-300 bg-gray-300 hover:shadow-lg
+                     hover:shadow-sky-500 cursor-pointer"
+              >
+                <img
+                  src={categoryImages[category.name]}
+                  alt={category.name}
+                  onClick={() => handleCategory(category.name)}
+                  className="h-40 w-44"
+                />
+                <p className="text-black">
+                  {category.name[0].toUpperCase() + category.name.slice(1)}
+                </p>
+              </div>
             );
           })
         )}
