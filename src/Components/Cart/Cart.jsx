@@ -7,12 +7,12 @@ import {
   getTotalQuantity,
   emptyCart,
 } from "../ReduxFeatures/cartSlice/cartSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import CustomCard from "../customCard/CustomCard";
 import CustomSnackbar from "../Snackbar/CustomSnackbar";
-import CartTable from "../CartTable/CartTable";
+import CartTable from "./CartTable";
 
 export default function Cart() {
   const { cartItems, totalCartAmount, totalCartQuantity } = useSelector(
@@ -20,26 +20,30 @@ export default function Cart() {
   );
   const [open, setOpen] = useState(false);
   const auth = useSelector((state) => state.auth.isAuthenticated);
- 
+
   let dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTotal());
+  }, []);
 
   const handleRemoveCartItem = (id) => {
     auth && dispatch(removeCartItem(id));
-     auth && dispatch(getTotal());
-     auth && dispatch(getTotalQuantity());
+    auth && dispatch(getTotal());
+    auth && dispatch(getTotalQuantity());
     setOpen(true);
   };
 
   const handleDecrementItem = (id) => {
     auth && dispatch(decrementItemQty(id));
-     auth && dispatch(getTotal());
-     auth && dispatch(getTotalQuantity());
+    auth && dispatch(getTotal());
+    auth && dispatch(getTotalQuantity());
   };
 
   const handleIncrementItem = (id) => {
     auth && dispatch(incrementItemQty(id));
     auth && dispatch(getTotal());
-     auth && dispatch(getTotalQuantity());
+    auth && dispatch(getTotalQuantity());
   };
 
   const handleClearCart = () => {
@@ -55,7 +59,7 @@ export default function Cart() {
     auth && navigate("/OrderSummary");
   };
 
-  let snackbarMessage = "Item removed Successfully!"
+  let snackbarMessage = "Item removed Successfully!";
 
   return (
     <div>
@@ -64,8 +68,10 @@ export default function Cart() {
       </h1>
 
       {!auth || cartItems.length === 0 ? (
-        <div className="h-screen w-screen flex flex-col items-center justify-center md:text-2xl
-         bg-red-500 mt-0 md:mt-10 px-4">
+        <div
+          className="h-screen w-screen flex flex-col items-center justify-center md:text-2xl
+         bg-red-500 mt-0 md:mt-10 px-4"
+        >
           <p className="text-white text-center">
             Either Your Cart is Empty🥲 or you are not logged In.
           </p>
@@ -149,7 +155,11 @@ export default function Cart() {
           </div>
         </div>
       )}
-      <CustomSnackbar open={open} setOpen={setOpen} snackbarMessage={snackbarMessage} />
+      <CustomSnackbar
+        open={open}
+        setOpen={setOpen}
+        snackbarMessage={snackbarMessage}
+      />
     </div>
   );
 }

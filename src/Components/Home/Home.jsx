@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -30,7 +28,6 @@ export default function Home() {
         let response = await axios.get(
           "https://dummyjson.com/products/categories"
         );
-        console.log(response.data);
 
         setCategories(response.data);
         setIsLoading(false);
@@ -121,7 +118,7 @@ export default function Home() {
                 <img
                   src={categoryImages[category.name]}
                   alt={category.name}
-                  onClick={() => handleCategory(category.name)}
+                  onClick={() => handleCategory(category.slug)}
                   className="h-40 w-44"
                 />
                 <p className="text-black">

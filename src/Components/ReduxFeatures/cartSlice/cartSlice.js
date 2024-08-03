@@ -65,7 +65,6 @@ export const cartSlice = createSlice({
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
 
-
     incrementItemQty: (state, action) => {
       state.cartItems.map((item) => item.id === action.payload && item.qty++);
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));

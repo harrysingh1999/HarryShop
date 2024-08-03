@@ -39,6 +39,7 @@ export default function Products() {
         let response = await axios.get(
           `https://dummyjson.com/products/category/${productCategory}`
         );
+
         setCategories(response.data.products);
         setIsLoading(false);
       } catch (error) {
@@ -51,7 +52,6 @@ export default function Products() {
 
   const handleProduct = (title, id) => {
     let arr = title.split(" ").join("-");
-    console.log(typeof arr);
     navigate(`/products/${productCategory}/${arr}`, { state: id });
   };
 
@@ -78,7 +78,8 @@ export default function Products() {
       <div className="flex flex-wrap justify-center xl:justify-start md:ms-10 mx-2">
         {isloading ? (
           Array.from({ length: 5 }).map(() => (
-            <div key={nanoid()} className="mx-4">
+            <div key={nanoid()} className="mx-4 max-w-min w-64 md:w-72 pb-2 rounded-t-3xl rounded-b-3xl !transition ease-in-out delay-25 min-h-[400px] max-h-[400px]
+                 hover:-translate-y-1 hover:scale-105 duration-300 bg-gray-300 hover:shadow-lg hover:shadow-sky-500 cursor-pointer">
               <Card
                 className="max-w-min w-64 md:w-72 pb-2 rounded-t-3xl rounded-b-3xl !transition ease-in-out delay-25 min-h-[400px] max-h-[400px]
                  hover:-translate-y-1 hover:scale-105 duration-300 bg-gray-300 hover:shadow-lg hover:shadow-sky-500 cursor-pointer"
