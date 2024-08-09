@@ -113,9 +113,10 @@ export default function Home() {
                 key={crypto.randomUUID()}
                 className="text-center rounded-t-3xl rounded-b-3xl mb-6 md:mb-8 mx-2 transition ease-in-out
                     delay-25 hover:-translate-y-1 hover:scale-110 duration-300 bg-gray-300 hover:shadow-lg
-                     hover:shadow-sky-500 cursor-pointer"
+                     hover:shadow-sky-500 cursor-pointer py-2"
               >
                 <img
+                  fetchprority="high"
                   src={categoryImages[category.name]}
                   alt={category.name}
                   onClick={() => handleCategory(category.slug)}

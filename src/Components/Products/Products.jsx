@@ -78,8 +78,11 @@ export default function Products() {
       <div className="flex flex-wrap justify-center xl:justify-start md:ms-10 mx-2">
         {isloading ? (
           Array.from({ length: 5 }).map(() => (
-            <div key={nanoid()} className="mx-4 max-w-min w-64 md:w-72 pb-2 rounded-t-3xl rounded-b-3xl !transition ease-in-out delay-25 min-h-[400px] max-h-[400px]
-                 hover:-translate-y-1 hover:scale-105 duration-300 bg-gray-300 hover:shadow-lg hover:shadow-sky-500 cursor-pointer">
+            <div
+              key={nanoid()}
+              className="mx-4 max-w-min w-64 md:w-72 pb-2 rounded-t-3xl rounded-b-3xl !transition ease-in-out delay-25 min-h-[400px] max-h-[400px]
+                 hover:-translate-y-1 hover:scale-105 duration-300 bg-gray-300 hover:shadow-lg hover:shadow-sky-500 cursor-pointer"
+            >
               <Card
                 className="max-w-min w-64 md:w-72 pb-2 rounded-t-3xl rounded-b-3xl !transition ease-in-out delay-25 min-h-[400px] max-h-[400px]
                  hover:-translate-y-1 hover:scale-105 duration-300 bg-gray-300 hover:shadow-lg hover:shadow-sky-500 cursor-pointer"
@@ -133,7 +136,7 @@ export default function Products() {
                       <Ratings rating={product.rating} />
                     </span>
                     {isHovering && hoveredId === product.id && (
-                      <span className="bg-yellow-500 text-center">
+                      <span className="bg-gray-500 text-center text-white p-1">
                         {product.rating}
                       </span>
                     )}

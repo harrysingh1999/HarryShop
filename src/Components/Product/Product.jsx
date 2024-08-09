@@ -70,12 +70,12 @@ export default function Product() {
                 <ProductCarousel product={product} setImageFunc={setImage} />
               </div>
 
-              <div className="m-4 md:mx-10 md:mt-8 w-10/12 md:w-full order-1 md:order-2">
+              <div className="m-4 md:mx-10 md:mt-8 order-1 md:order-2">
                 <img
                   src={image ? image : product.thumbnail}
                   alt={product.title}
                   className="mb-4 rounded-3xl transition ease-in-out delay-25 hover:-translate-y-1 hover:scale-105
-                border-b border-black duration-300 hover:shadow-lg hover:shadow-sky-500 cursor-pointer"
+                duration-300 hover:shadow-lg hover:shadow-sky-500 cursor-pointer"
                 />
                 <p>Brand: {product.brand} </p>
                 <p>Units Left: {product.stock} </p>
