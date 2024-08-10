@@ -6,9 +6,9 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 
 export default function Footer() {
   return (
-    <div className="flex items-end w-full min-h-screen mt-12 md:mt-0">
-      <footer className="w-full bg-gray-900 body-font">
-        <div className="container flex flex-col flex-wrap px-5 pt-14 pb-2 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap">
+    <div className="flex items-end w-full mt-12 md:mt-6">
+      <footer className="w-full bg-gray-900">
+        <div className="flex flex-col flex-wrap px-5 pt-14 pb-2 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap">
           <div className="flex-shrink-0 w-64 mx-auto text-center text-sky-300 hover:text-sky-400 mb-8">
             <NavLink to="/">HarryShop</NavLink>
             <p className="text-xs text-sky-300">Explore, Shop and Repeat</p>

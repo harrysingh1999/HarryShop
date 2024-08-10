@@ -61,42 +61,54 @@ export default function Product() {
       ) : (
         product && (
           <>
-            <h1 className="text-xl md:text-3xl mt-20 md:mt-28 ms-10 md:ms-16 text-black font-semibold">
+            <h1 className="text-xl md:text-3xl mt-20 md:mt-28 me-2 ms-6 md:ms-16 text-black font-semibold">
               {product.title}
             </h1>
 
-            <div className="flex flex-col md:flex-row items-center md:items-start mx-4 md:mx-8">
-              <div className=" order-2 md:order-1">
+            <div className="flex flex-col md:flex-row items-center justify-center md:items-start mx-4 md:mx-8">
+              <div className="order-1 md:order-2">
                 <ProductCarousel product={product} setImageFunc={setImage} />
               </div>
 
-              <div className="m-4 md:mx-10 md:mt-8 order-1 md:order-2">
+              <div
+                className="mt-0 mx-2 md:mx-10 md:mt-8 px-4 pb-4 md:px-10 md:pb-10 rounded-lg flex flex-col items-center order-2 
+                w-[100%] md:w-[40%]"
+                style={{
+                  boxShadow: `rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px`,
+                }}
+              >
                 <img
                   src={image ? image : product.thumbnail}
                   alt={product.title}
-                  className="mb-4 rounded-3xl transition ease-in-out delay-25 hover:-translate-y-1 hover:scale-105
+                  className="w-[70%] md:w-[62%] rounded-3xl transition ease-in-out delay-25 hover:-translate-y-1 hover:scale-105
                 duration-300 hover:shadow-lg hover:shadow-sky-500 cursor-pointer"
                 />
-                <p>Brand: {product.brand} </p>
-                <p>Units Left: {product.stock} </p>
-                <p className="text-sky-700 font-semibold md:text-lg">
-                  Price: Rs. {(product.price * 84).toLocaleString("en-IN")}
-                </p>
-                <p className="mb-6 mt-1">Description: {product.description}.</p>
-                <div>
-                  <button
-                    className="bg-sky-600 hover:bg-sky-500 text-white px-2 py-2 rounded-lg inline-block"
-                    onClick={() => handleAddtoCart(product)}
-                  >
-                    Add to Cart <AddShoppingCartIcon />
-                  </button>
+                <div className="text-sm md:text-base">
+                  <p>Brand: {product.brand} </p>
+                  <p>Units Left: {product.stock} </p>
+                  <p className="text-sky-700 font-semibold md:text-lg">
+                    Price: Rs. {(product.price * 84).toLocaleString("en-IN")}
+                  </p>
+                  <p className="mb-6 mt-1">
+                    Description: {product.description}.
+                  </p>
+                  <div className="flex flex-col md:flex-row ">
+                    <button
+                      className="bg-sky-600 hover:bg-sky-500 text-white w-[100%] md:w-[50%] text-sm md:text-lg p-1.5 md:p-2 rounded-lg
+                       inline-block"
+                      onClick={() => handleAddtoCart(product)}
+                    >
+                      Add to Cart <AddShoppingCartIcon />
+                    </button>
 
-                  <button
-                    className="bg-sky-600 hover:bg-sky-500 text-white p-2 rounded-lg !ms-4"
-                    onClick={() => handleAddtoWishlist(product)}
-                  >
-                    Add to <FavoriteOutlinedIcon />
-                  </button>
+                    <button
+                      className="bg-sky-600 hover:bg-sky-500 text-white w-[100%] md:w-[50%] text-sm md:text-lg p-1.5 md:p-2
+                       rounded-lg mt-2 ml-0 md:mt-0 md:ml-2"
+                      onClick={() => handleAddtoWishlist(product)}
+                    >
+                      Add to <FavoriteOutlinedIcon />
+                    </button>
+                  </div>
                 </div>
               </div>
 

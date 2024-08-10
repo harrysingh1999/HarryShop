@@ -28,6 +28,7 @@ import womenJewelleryImg from "../utils/Images/womenJewellery.png";
 import womenShoeImg from "../utils/Images/womenShoe.png";
 import womenWatchImg from "../utils/Images/womenWatch.png";
 
+
 export const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -136,3 +137,5 @@ export const bannerSlider = {
 
 export let snackbarMessage = "Product is added to Cart!";
 export let snackbarMessage2 = "Product is added to Wishlist!";
+
+
