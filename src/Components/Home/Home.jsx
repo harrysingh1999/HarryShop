@@ -40,12 +40,12 @@ export default function Home() {
   }, []);
 
   const handleCategory = (product) => {
-    navigate(`products/${product}`, { state: product });
+    navigate(`/${product}`, { state: product });
   };
 
   const handleProduct = (category, title, id) => {
-    let arr = title.split(" ").join("-");
-    navigate(`/products/${category}/${arr}`, { state: id });
+    let urlEndpoint = title.split(" ").join("-");
+    navigate(`/${category}/${urlEndpoint}`, { state: id });
   };
 
   return (

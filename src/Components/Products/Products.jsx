@@ -51,8 +51,8 @@ export default function Products() {
   }, [productCategory]);
 
   const handleProduct = (title, id) => {
-    let arr = title.split(" ").join("-");
-    navigate(`/products/${productCategory}/${arr}`, { state: id });
+    let urlEndpoint = title.split(" ").join("-");
+    navigate(`/${productCategory}/${urlEndpoint}`, { state: id });
   };
 
   const handleAddtoCart = (product) => {

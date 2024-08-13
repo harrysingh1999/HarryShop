@@ -59,13 +59,22 @@ export default function SearchBar({ SearchClickFunc }) {
         userSearch && (
           <div className="absolute top-10 w-full z-10">
             {fetchedSearchData.map((data) => {
+              console.log(data);
+
               return (
                 <p
                   className="border border-black first-of-type:rounded-t-3xl last-of-type:rounded-b-3xl px-4 py-1
                    bg-sky-700 bg-gradient-to-r hover:from-blue-600 hover:to-sky-500"
                   key={crypto.randomUUID()}
                 >
-                  <a onClick={() => SearchClickFunc(data.id)}> {data.title} </a>
+                  <a
+                    onClick={() =>
+                      SearchClickFunc(data.category, data.title, data.id)
+                    }
+                  >
+                    {" "}
+                    {data.title}{" "}
+                  </a>
                 </p>
               );
             })}

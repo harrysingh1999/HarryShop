@@ -22,7 +22,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import { Icon } from "@iconify/react";
 import { GoogleLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
-import Container from '@mui/material/Container';
+import Container from "@mui/material/Container";
 
 export default function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -108,8 +108,9 @@ export default function Header() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem
-       className="bg-gradient-to-r !rounded-xl !py-1 !px-2 !mx-2
-       hover:from-sky-500 hover:to-blue-500 hover:text-white">
+        className="bg-gradient-to-r !rounded-xl !py-1 !px-2 !mx-2
+       hover:from-sky-500 hover:to-blue-500 hover:text-white"
+      >
         <IconButton
           size="large"
           aria-label={`show ${cart.totalwishlistQuantity}`}
@@ -124,8 +125,9 @@ export default function Header() {
         </NavLink>
       </MenuItem>
       <MenuItem
-      className="bg-gradient-to-r !rounded-xl !py-1 !px-1 !mx-2
-      hover:from-sky-500 hover:to-blue-500 hover:text-white">
+        className="bg-gradient-to-r !rounded-xl !py-1 !px-1 !mx-2
+      hover:from-sky-500 hover:to-blue-500 hover:text-white"
+      >
         <IconButton
           size="large"
           aria-label={`show ${cart.totalCartQuantity}`}
@@ -136,7 +138,7 @@ export default function Header() {
           </Badge>
         </IconButton>
         <NavLink to="/Cart">
-          <p >Shopping Cart</p>
+          <p>Shopping Cart</p>
         </NavLink>
       </MenuItem>
 
@@ -187,13 +189,14 @@ export default function Header() {
 
   let navigate = useNavigate();
 
-  const handleSearchClick = (id) => {
-    navigate("/Product", { state: id });
+  const handleSearchClick = (category, title, id) => {
+    let urlEndpoint = title.split(" ").join("-");
+    navigate(`/${category}/${urlEndpoint}`, { state: id });
   };
 
   return (
-  <AppBar position="fixed">
-     <Box sx={{ flexGrow: 1 }}>
+    <AppBar position="fixed">
+      <Box sx={{ flexGrow: 1 }}>
         <Toolbar className="">
           <div className="text-base md:block hidden ms-6 xl:ms-12">
             <NavLink to="/">
@@ -304,9 +307,9 @@ export default function Header() {
             </IconButton>
           </Box>
         </Toolbar>
-      {renderMobileMenu}
-      {renderMenu}
-    </Box>
-      </AppBar>
+        {renderMobileMenu}
+        {renderMenu}
+      </Box>
+    </AppBar>
   );
 }
