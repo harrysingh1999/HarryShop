@@ -7,13 +7,10 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import MyButton from "../Button/MyButton";
-import {
-  bannerDetails,
-  bannerSlider,
-  categoryImages,
-} from "../../utils/constants";
+import { categoryImages } from "../../utils/constants";
 import { Skeleton } from "@mui/material";
 import { nanoid } from "@reduxjs/toolkit";
+import Banner from "./Banner";
 
 export default function Home() {
   const [categories, setCategories] = useState(null);
@@ -23,7 +20,7 @@ export default function Home() {
   categoryImages;
 
   useEffect(() => {
-    const fetchedCategories = async () => {
+    const fetchCategories = async () => {
       try {
         let response = await axios.get(
           "https://dummyjson.com/products/categories"
@@ -36,7 +33,7 @@ export default function Home() {
         setIsLoading(false);
       }
     };
-    fetchedCategories();
+    fetchCategories();
   }, []);
 
   const handleCategory = (product) => {
@@ -50,7 +47,8 @@ export default function Home() {
 
   return (
     <div>
-      <Slider {...bannerSlider}>
+      <Banner data={["laptops", "mens-shoes"]} />
+      {/* <Slider {...bannerSlider}>
         {bannerDetails.map((product) => (
           <div key={crypto.randomUUID()}>
             <div className="mt-10 md:mt-16">
@@ -77,7 +75,7 @@ export default function Home() {
             </div>
           </div>
         ))}
-      </Slider>
+      </Slider> */}
 
       <h2 className="text-2xl md:text-3xl text-center mt-10 mb-6 text-black font-semibold">
         Explore Categories

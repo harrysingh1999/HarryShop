@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
-import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
 import CloseIcon from "@mui/icons-material/Close";
-import {
-  Search,
-  SearchIconWrapper,
-  StyledInputBase,
-} from "../../utils/constants";
+import { IoIosSearch } from "react-icons/io";
 
-export default function SearchBar({ SearchClickFunc }) {
+export default function SearchBar({ handleSearchClick }) {
   const [userSearch, setUserSearch] = useState("");
   const [fetchedSearchData, setfetchedSearchData] = useState(null);
   const [error, setError] = useState(null);
@@ -31,19 +26,20 @@ export default function SearchBar({ SearchClickFunc }) {
   }, [userSearch]);
 
   return (
-    <Search
-      className="!rounded-3xl flex flex-col xl:!w-96 !border border-gray-600"
-      onChange={(e) => setUserSearch(e.target.value)}
-      value={userSearch}
-    >
-      <SearchIconWrapper>
-        <SearchIcon />
-      </SearchIconWrapper>
-      <StyledInputBase
-        placeholder="Search…"
-        inputProps={{ "aria-label": "search" }}
+    <>
+      <IoIosSearch />
+      <input
+        type="text"
+        placeholder="Search"
+        value={userSearch}
+        onChange={(e) => setUserSearch(e.target.value)}
+        className="w-[210px] md:w-[400px] pl-2 py-0.5 bg-transparent focus:outline-none"
       />
-
+      {userSearch && (
+        <span onClick={() => setUserSearch("")}>
+          <CloseIcon className="absolute right-4 top-2" />
+        </span>
+      )}
       {error && userSearch ? (
         <div
           className="absolute top-10 z-10 py-5 h-max w-full flex flex-col justify-center items-center 
@@ -57,19 +53,19 @@ export default function SearchBar({ SearchClickFunc }) {
       ) : (
         fetchedSearchData &&
         userSearch && (
-          <div className="absolute top-10 w-full z-10">
+          <div className="absolute text-black left-0 top-9 h-[80vh] w-full z-10 overflow-y-scroll">
             {fetchedSearchData.map((data) => {
               console.log(data);
 
               return (
                 <p
-                  className="border border-black first-of-type:rounded-t-3xl last-of-type:rounded-b-3xl px-4 py-1
-                   bg-sky-700 bg-gradient-to-r hover:from-blue-600 hover:to-sky-500"
-                  key={crypto.randomUUID()}
+                  className="border-b border-black/30 bg-gray-200 first-of-type:rounded-t-md 
+                  last-of-type:rounded-b-md px-4 py-1 hover:bg-gray-300"
+                  key={data.title}
                 >
                   <a
                     onClick={() =>
-                      SearchClickFunc(data.category, data.title, data.id)
+                      handleSearchClick(data.category, data.title, data.id)
                     }
                   >
                     {" "}
@@ -85,17 +81,12 @@ export default function SearchBar({ SearchClickFunc }) {
         fetchedSearchData.length === 0 &&
         userSearch !== "" && (
           <p
-            className="absolute top-9 bg-sky-700 border border-black rounded-xl w-full z-10 px-4 py-1 
-            bg-gradient-to-r hover:from-blue-600 hover:to-sky-500"
+            className="absolute left-0 top-9 text-black w-full bg-gray-200 first-of-type:rounded-t-md 
+                  last-of-type:rounded-b-md px-4 py-1 hover:bg-gray-300"
           >
             No item found
           </p>
         )}
-      {userSearch && (
-        <span onClick={() => setUserSearch("")}>
-          <CloseIcon className="absolute right-4 top-2" />
-        </span>
-      )}
-    </Search>
+    </>
   );
 }
