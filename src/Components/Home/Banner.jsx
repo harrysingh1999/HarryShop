@@ -10,6 +10,8 @@ export default function Banner({ data }) {
   const [bannerData, setBannerData] = useState([]);
   const [propData, setPropData] = useState(data[0]);
 
+
+
   useEffect(() => {
     const fetchBannerDetails = async () => {
       //   try {

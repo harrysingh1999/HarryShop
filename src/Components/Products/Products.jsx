@@ -111,7 +111,6 @@ export default function Products() {
             return (
               <div key={crypto.randomUUID()}>
                 <Card
-                  // style={{ minHeight: "420px", maxHeight: "420px" }}
                   className="md:max-h-custom md:min-h-custom w-60 md:w-72 !mx-4 xl:!ms-6 xl:!me-3 my-4 !rounded-t-3xl 
                   !rounded-b-3xl pb-2 !transition !ease-in-out !delay-25 hover:-translate-y-1 hover:scale-105 !duration-300 
                  !bg-gray-300 hover:!shadow-lg hover:!shadow-sky-500 cursor-pointer"

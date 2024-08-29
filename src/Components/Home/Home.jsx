@@ -7,7 +7,11 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import MyButton from "../Button/MyButton";
-import { categoryImages } from "../../utils/constants";
+import {
+  bannerDetails,
+  bannerSlider,
+  categoryImages,
+} from "../../utils/constants";
 import { Skeleton } from "@mui/material";
 import { nanoid } from "@reduxjs/toolkit";
 import Banner from "./Banner";
@@ -48,35 +52,6 @@ export default function Home() {
   return (
     <div>
       <Banner data={["laptops", "mens-shoes"]} />
-      {/* <Slider {...bannerSlider}>
-        {bannerDetails.map((product) => (
-          <div key={crypto.randomUUID()}>
-            <div className="mt-10 md:mt-16">
-              <img
-                src={product.url}
-                alt={product.title}
-                className="relative w-screen object-cover h-[70vh]"
-              />
-            </div>
-            <div className="absolute top-56 ms-6 md:ms-16 hover:shadow-lg hover:shadow-sky-500 p-2 rounded-xl">
-              <p className="text-xl md:text-4xl ps-2 text-white font-semibold">
-                {product.title}
-              </p>
-              <p className="md:mt-2 mb-5 font-semibold text-sm md:text-lg text-sky-600 ps-2">
-                Rs. {(product.price * 84).toLocaleString("en-IN")}
-              </p>
-              <div
-                onClick={() =>
-                  handleProduct(product.category, product.title, product.id)
-                }
-              >
-                <MyButton value="Shop Now" bg="#6CB4EE" />
-              </div>
-            </div>
-          </div>
-        ))}
-      </Slider> */}
-
       <h2 className="text-2xl md:text-3xl text-center mt-10 mb-6 text-black font-semibold">
         Explore Categories
       </h2>
@@ -110,8 +85,11 @@ export default function Home() {
               <div
                 key={crypto.randomUUID()}
                 className="text-center rounded-t-3xl rounded-b-3xl mb-6 md:mb-8 mx-2 transition ease-in-out
-                    delay-25 hover:-translate-y-1 hover:scale-110 duration-300 bg-gray-300 hover:shadow-lg
-                     hover:shadow-sky-500 cursor-pointer py-2"
+                    delay-25 hover:-translate-y-1 hover:scale-110 duration-300 
+                      cursor-pointer py-2"
+                style={{
+                  boxShadow: `rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px`,
+                }}
               >
                 <img
                   fetchprority="high"
