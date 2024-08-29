@@ -83,23 +83,23 @@ export default function Home() {
           categories.map((category) => {
             return (
               <div
-                key={crypto.randomUUID()}
+                key={category.name}
                 className="text-center rounded-t-3xl rounded-b-3xl mb-6 md:mb-8 mx-2 transition ease-in-out
                     delay-25 hover:-translate-y-1 hover:scale-110 duration-300 
                       cursor-pointer py-2"
                 style={{
                   boxShadow: `rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px`,
                 }}
+                onClick={() => handleCategory(category.slug)}
               >
                 <img
-                  fetchprority="high"
                   src={categoryImages[category.name]}
                   alt={category.name}
-                  onClick={() => handleCategory(category.slug)}
                   className="h-40 w-44"
                 />
                 <p className="text-black">
-                  {category.name[0].toUpperCase() + category.name.slice(1)}
+                  {/* {category.name[0].toUpperCase() + category.name.slice(1)} */}
+                  {category.name}
                 </p>
               </div>
             );

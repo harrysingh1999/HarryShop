@@ -13,6 +13,7 @@ import { Icon } from "@iconify/react";
 import CustomCard from "../customCard/CustomCard";
 import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import CartTable from "./CartTable";
+import ProductCard from "../Card/ProductCard";
 
 export default function Cart() {
   const { cartItems, totalCartAmount, totalCartQuantity } = useSelector(
@@ -46,13 +47,15 @@ export default function Cart() {
     auth && dispatch(getTotalQuantity());
   };
 
-  const handleClearCart = () => {
-    auth && dispatch(emptyCart());
+  let navigate = useNavigate();  
+ 
+  const handleProduct = (title, id, productCategory) => {
+    let urlEndpoint = title.split(" ").join("-");
+    navigate(`/${productCategory}/${urlEndpoint}`, { state: id });
   };
 
-  let navigate = useNavigate();
-  const handleProduct = (id) => {
-    navigate("/Product", { state: id });
+  const handleClearCart = () => {
+    auth && dispatch(emptyCart());
   };
 
   const handleProceed = () => {
@@ -95,8 +98,9 @@ export default function Cart() {
             {cartItems.map((product) => {
               return (
                 <div key={crypto.randomUUID()}>
-                  <CustomCard
-                    {...product}
+                  <ProductCard
+                    data={product}
+                    handleProduct={handleProduct}
                     removeFunc={handleRemoveCartItem}
                     decreFunc={handleDecrementItem}
                     increFunc={handleIncrementItem}

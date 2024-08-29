@@ -13,6 +13,7 @@ import { Provider } from "react-redux";
 import { store } from "./Components/ReduxFeatures/Store/store.js";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import ProductReview from "./Components/Product/ProductReview.jsx";
+import ProductCard from "./Components/Card/ProductCard.jsx";
 
 const Wishlist = lazy(() => import("./Components/Wishlist/Wishlist.jsx"));
 const OrderSummary = lazy(() =>
@@ -37,6 +38,7 @@ const router = createBrowserRouter(
       <Route path="/OrderSummary" element={<OrderSummary />} />
       <Route path="/Orders" element={<Orders />} />
       <Route path="/ProductReview" element={<ProductReview />} />
+      <Route path="/ProductCard" element={<ProductCard />} />
       <Route path="*" element={<NotfoundPage />} />
     </Route>
   )

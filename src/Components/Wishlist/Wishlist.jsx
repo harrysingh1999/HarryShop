@@ -14,6 +14,7 @@ import {
   addCartItem,
 } from "../ReduxFeatures/cartSlice/cartSlice";
 import CustomSnackbar from "../Snackbar/CustomSnackbar";
+import ProductCard from "../Card/ProductCard";
 
 export default function Wishlist() {
   const [open, setOpen] = useState(false);
@@ -30,8 +31,10 @@ export default function Wishlist() {
   };
 
   let navigate = useNavigate();
-  const handleProduct = (id) => {
-    navigate("/Product", { state: id });
+
+  const handleProduct = (title, id, productCategory) => {
+    let urlEndpoint = title.split(" ").join("-");
+    navigate(`/${productCategory}/${urlEndpoint}`, { state: id });
   };
 
   const handleAddtoCart = (product, id) => {
@@ -45,12 +48,12 @@ export default function Wishlist() {
   }, [wishlistItems]);
 
   return (
-    <div>
-      <h1 className="text-3xl mx-8 md:mx-16 mt-20 md:mt-28 mb-6 text-black font-semibold">
+    <div className="mx-6 md:mx-24">
+      <h1 className="text-2xl md:text-3xl mb-4 text-black text-center md:text-left mt-24 font-semibold">
         Wishlist
       </h1>
       {!auth || wishlistItems.length === 0 ? (
-        <div className="h-screen w-screen flex flex-col items-center justify-center md:text-2xl bg-red-500 mt-10 px-4">
+        <div className="h-screen flex flex-col items-center justify-center md:text-2xl bg-red-500 mt-10 px-4">
           <CustomSnackbar
             open={open}
             wishlistOpen={wishlistOpen}
@@ -69,44 +72,54 @@ export default function Wishlist() {
           </NavLink>
         </div>
       ) : (
-        <div className="flex flex-wrap justify-center md:justify-start mx-8 xl:mx-12">
-          {wishlistItems.map((item) => (
-            <Card
-              key={nanoid()}
-              style={{ minHeight: "280px", maxHeight: "280px" }}
-              className="w-64 md:w-72 md:!mx-3 my-4 !rounded-t-3xl !rounded-b-3xl 
-              !transition ease-in-out !delay-25 hover:-translate-y-1 hover:scale-105 !duration-300
-              !bg-gray-300 hover:!shadow-lg hover:!shadow-sky-500 cursor-pointer"
-            >
-              <CardMedia
-                sx={{ height: 140 }}
-                image={item.thumbnail}
-                title={item.title}
-                onClick={() => handleProduct(item.id)}
-              />
-              <CardContent className="!py-1">
-                <p className="text-base font-semibold ">{item.title}</p>
+        <div className="flex flex-wrap justify-center md:justify-start">
+          {wishlistItems.map((wishlist) => (
+            // <Card
+            //   key={nanoid()}
+            //   style={{ minHeight: "280px", maxHeight: "280px" }}
+            //   className="w-64 md:w-72 md:!mx-3 my-4 !rounded-t-3xl !rounded-b-3xl
+            //   !transition ease-in-out !delay-25 hover:-translate-y-1 hover:scale-105 !duration-300
+            //   !bg-gray-300 hover:!shadow-lg hover:!shadow-sky-500 cursor-pointer"
+            // >
+            //   <CardMedia
+            //     sx={{ height: 140 }}
+            //     image={item.thumbnail}
+            //     title={item.title}
+            //     onClick={() => handleProduct(item.id)}
+            //   />
+            //   <CardContent className="!py-1">
+            //     <p className="text-base font-semibold ">{item.title}</p>
 
-                <p className="mt-1 text-base">
-                  Rs. {(item.price * 84).toLocaleString("en-IN")}
-                </p>
-              </CardContent>
-              <CardActions className="!mb-1 !pt-1">
-                <button
-                  className=" hover:bg-gray-100 border border-black px-2 py-1 rounded-lg ms-2 inline-block"
-                  onClick={() => handleAddtoCart(item, item.id)}
-                >
-                  Move to Cart <AddShoppingCartIcon />
-                </button>
+            //     <p className="mt-1 text-base">
+            //       Rs. {(item.price * 84).toLocaleString("en-IN")}
+            //     </p>
+            //   </CardContent>
+            //   <CardActions className="!mb-1 !pt-1">
+            //     <button
+            //       className=" hover:bg-gray-100 border border-black px-2 py-1 rounded-lg ms-2 inline-block"
+            //       onClick={() => handleAddtoCart(item, item.id)}
+            //     >
+            //       Move to Cart <AddShoppingCartIcon />
+            //     </button>
 
-                <button
-                  className=" hover:bg-gray-100 border border-black px-2 py-1 rounded-lg !ms-4"
-                  onClick={() => handleRemoveCartItem(item.id)}
-                >
-                  Remove
-                </button>
-              </CardActions>
-            </Card>
+            //     <button
+            //       className=" hover:bg-gray-100 border border-black px-2 py-1 rounded-lg !ms-4"
+            //       onClick={() => handleRemoveCartItem(item.id)}
+            //     >
+            //       Remove
+            //     </button>
+            //   </CardActions>
+            // </Card>
+
+            <ProductCard
+              key={wishlist.title}
+              data={wishlist}
+              handleProduct={handleProduct}
+              handleAddtoCart={handleAddtoCart}
+              handleRemoveCartItem={handleRemoveCartItem}
+              btnText1="Move to Cart"
+              btnText2="Remove"
+            />
           ))}
           <CustomSnackbar
             open={open}
