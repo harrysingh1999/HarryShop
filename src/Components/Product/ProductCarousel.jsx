@@ -6,7 +6,7 @@ import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 
 export default function ProductCarousel({ product, setImageFunc }) {
   const CustomPrevArrow = (props) => (
-    <div className="absolute left-6 lg:left-12  -top-4" onClick={props.onClick}>
+    <div className="absolute left-6 lg:left-12 -top-4" onClick={props.onClick}>
       <FaChevronUp />
     </div>
   );

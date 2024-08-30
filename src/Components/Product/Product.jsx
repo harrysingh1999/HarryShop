@@ -54,7 +54,7 @@ export default function Product() {
   const [imageIdx, setImageIdx] = useState(0);
 
   return (
-    <div className="mx-4 md:mx-24 mt-20 lg:mt-8">
+    <div className="mx-5 md:mx-16 xl:mx-24 mt-24 lg:mt-20">
       {error ? (
         <div className="h-screen w-screen flex flex-col justify-center items-center mx-4 md:mx-0 bg-red-600">
           <p className=" text-white text-2xl">
@@ -69,11 +69,18 @@ export default function Product() {
             <div className="flex flex-col lg:grid grid-flow-col grid-cols-12 mb-6">
               <div className="col-span-12 md:col-span-8 flex items-center gap-4 md:gap-30">
                 <div>
-                  <ProductCarousel product={product} setImageFunc={setImageIdx} />
+                  <ProductCarousel
+                    product={product}
+                    setImageFunc={setImageIdx}
+                  />
                 </div>
                 <div className="flex justify-center">
                   <img
-                    src={product.images.length > 0 ? product.images[imageIdx] : product.thumbnail}
+                    src={
+                      product.images.length > 0
+                        ? product.images[imageIdx]
+                        : product.thumbnail
+                    }
                     alt={product.title}
                     className="w-[100%] md:w-[60%] lg:w-[70%] object-cover rounded-3xl transition ease-in-out delay-25 hover:-translate-y-1 hover:scale-105
                 duration-300 cursor-pointer "
@@ -84,7 +91,7 @@ export default function Product() {
               <div
                 // className="mt-0 mx-2 md:mx-10 md:mt-8 px-4 pb-4 md:px-10 md:pb-10 rounded-lg flex flex-col items-center order-2
                 // w-[100%] md:w-[40%]"
-                className="col-span-12 md:col-span-6 p-3 flex flex-col lg:mt-16"
+                className="col-span-12 md:col-span-6 p-3 flex flex-col mt-4 lg:mt-10"
                 // style={{
                 //   boxShadow: `rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px`,
                 // }}
@@ -97,21 +104,41 @@ export default function Product() {
                   className="rounded-3xl transition ease-in-out delay-25 hover:-translate-y-1 hover:scale-105
                 duration-300 cursor-pointer"
                 /> */}
-                <h1 className="text-xl md:text-3xl mb-2 text-black font-semibold">
+                <h1 className="text-xl md:text-2xl xl:text-3xl mb-2 text-black font-semibold">
                   {product.title}
                 </h1>
                 <div className="text-sm md:text-base">
                   <p>Brand: {product.brand} </p>
-                  <p>Units Left: {product.stock} </p>
-                  <p className="font-bold md:text-lg">
-                    Price: Rs. {(product.price * 84).toLocaleString("en-IN")}
+                  <p>
+                    Units Left:{" "}
+                    {product.stock > 0 ? product.stock : "Out of Stock"}{" "}
                   </p>
-                  <p className="mb-6 mt-1">
+                  <div className="flex gap-2">
+                    <span>Price: </span>
+                    <span className="font-bold">
+                      Rs. {(product.price * 84).toLocaleString("en-IN")}{" "}
+                    </span>
+                  </div>
+                  <div className="flex">
+                    <span className="line-through mr-1">
+                      Rs.{" "}
+                      {(
+                        product.price * 84 +
+                        (product.price * 84 * product.discountPercentage) / 100
+                      ).toLocaleString("en-IN")}
+                    </span>
+                    <span className="font-bold">
+                      {" "}
+                      ({product.discountPercentage}% off)
+                    </span>
+                  </div>
+                  <p>Miniumum Order Quantity: {product.minimumOrderQuantity}</p>
+                  <p className="mb-4 mt-1">
                     Description: {product.description}.
                   </p>
-                  <div className="flex flex-col md:flex-row ">
+                  <div className="flex flex-col md:flex-row font-semibold lg:font-bold">
                     <button
-                      className="border border-black/40 w-[100%] md:w-[50%] text-sm md:text-lg p-1.5 md:p-2 rounded-lg
+                      className="border border-black/40 w-[100%] md:w-[50%] xl:w-[50%] p-1.5 md:p-2 rounded-lg
                        inline-block"
                       onClick={() => handleAddtoCart(product)}
                     >
@@ -119,12 +146,34 @@ export default function Product() {
                     </button>
 
                     <button
-                      className="border border-black/40 w-[100%] md:w-[50%] text-sm md:text-lg p-1.5 md:p-2
+                      className="border border-black/40 w-[100%] md:w-[50%] xl:w-[50%] p-1.5 md:p-2
                        rounded-lg mt-2 ml-0 md:mt-0 md:ml-2"
                       onClick={() => handleAddtoWishlist(product)}
                     >
-                      Add to <FaRegHeart/>
+                      Add to Wishlist
                     </button>
+                  </div>
+                  <div className="mt-8">
+                    <h2 className="text-xl font-semibold">
+                      More Product Information:
+                    </h2>
+                    <div>
+                      <p>
+                        Category:{" "}
+                        {product.category[0].toUpperCase() +
+                          product.category.slice(1)}
+                      </p>
+                      <p>
+                        Dimensions: {product.dimensions.depth} depth,{" "}
+                        {product.dimensions.width} width,{" "}
+                        {product.dimensions.height} height{" "}
+                      </p>
+                      <p>Return Policy: {product.returnPolicy} </p>
+                      <p>Shipment: {product.shippingInformation} </p>
+                      <p>Warranty: {product.warrantyInformation} </p>
+                      <span>Scan to get more Details</span> <img src={product.meta.qrCode} alt="" />
+                      {/* <p>Weight: {product.weight} </p> */}
+                    </div>
                   </div>
                 </div>
               </div>
