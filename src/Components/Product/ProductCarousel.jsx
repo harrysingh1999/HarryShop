@@ -2,73 +2,50 @@ import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 
 export default function ProductCarousel({ product, setImageFunc }) {
   const CustomPrevArrow = (props) => (
-    <div
-      className="className"
-      onClick={props.onClick}
-      style={{ position: "relative", left: "95px" }}
-    >
-      <KeyboardArrowUpIcon />
+    <div className="absolute left-6 lg:left-12  -top-4" onClick={props.onClick}>
+      <FaChevronUp />
     </div>
   );
 
   const CustomNextArrow = (props) => (
-    <div
-      className="className"
-      onClick={props.onClick}
-      style={{ position: "relative", left: "95px" }}
-    >
-      <KeyboardArrowDownIcon />
+    <div className="absolute left-6 lg:left-12 -bottom-2" onClick={props.onClick}>
+      <FaChevronDown />
     </div>
   );
 
   const productCarousel = {
-    arrows: true,
     dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 3,
+    infinite: true,
+    speed: 1000,
+    slidesToShow:
+      product.images.length > 1
+        ? product.images.length - 1
+        : product.images.length,
     slidesToScroll: 1,
-    // vertical: true,
-    // verticalSwiping: true,
-    // prevArrow: <CustomPrevArrow />,
-    // nextArrow: <CustomNextArrow />,
-    responsive: [
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          infinite: false,
-          dots: false,
-          // vertical: false,
-          // prevArrow: false,
-          // nextArrow: false,
-        },
-      },
-    ],
+    arrows: true,
+    vertical: true,
+    verticalSwiping: true,
+    prevArrow: <CustomPrevArrow />,
+    nextArrow: <CustomNextArrow />,
   };
 
   return (
-    <div className="bg-black/20">
-      {/* <Slider {...productCarousel} className="w-52 m-6 md:m-10 "> */}
-      <Slider {...productCarousel} className=" ">
-        {product.images.map((img) => (
-          <div
-            key={crypto.randomUUID()}
-            // className="rounded-xl border border-black/40 p-1"
-            className=" p-1"
-          >
+    <div className="w-16 lg:w-28">
+      <Slider
+        {...productCarousel}
+        className="relative focus:outline-none cursor-pointer"
+      >
+        {product.images.map((img, index) => (
+          <div key={crypto.randomUUID()} className="">
             <img
-              // className="rounded-xl w-52 h-28 object-cover"
-              className="w-40 rounded-xl"
+              className="w-16 h-16 lg:w-28 lg:h-28 object-cover rounded-xl"
               src={img}
               alt={product.title}
-              onClick={() => setImageFunc(img)}
+              onClick={() => setImageFunc(index)}
             />
           </div>
         ))}
@@ -76,7 +53,3 @@ export default function ProductCarousel({ product, setImageFunc }) {
     </div>
   );
 }
-
-
-
-  

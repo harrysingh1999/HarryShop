@@ -12,6 +12,7 @@ import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import ProductCarousel from "./ProductCarousel";
 import { snackbarMessage, snackbarMessage2 } from "../../utils/constants";
 import ProductReview from "./ProductReview";
+import { FaRegHeart } from "react-icons/fa";
 
 export default function Product() {
   const [open, setOpen] = React.useState(false);
@@ -50,10 +51,10 @@ export default function Product() {
     fetchedProduct();
   }, [productId]);
 
-  const [image, setImage] = useState(null);
+  const [imageIdx, setImageIdx] = useState(0);
 
   return (
-    <div>
+    <div className="mx-4 md:mx-24 mt-20 lg:mt-8">
       {error ? (
         <div className="h-screen w-screen flex flex-col justify-center items-center mx-4 md:mx-0 bg-red-600">
           <p className=" text-white text-2xl">
@@ -63,29 +64,27 @@ export default function Product() {
         </div>
       ) : (
         product && (
-          <div className="mx-">
-            <h1 className="text-xl md:text-3xl mt-20 md:mt-28 me-2 ms-6 md:ms-16 text-black font-semibold">
-              {product.title}
-            </h1>
-
+          <div>
             {/* <div className="flex flex-col md:flex-row items-center justify-center md:items-start mx-4 md:mx-8"> */}
-            <div className="grid grid-flow-col grid-cols-12 gap-30">
-              <div className="order-1 md:order-2 col-span-6">
-                <img
-                  src={image ? image : product.thumbnail}
-                  alt={product.title}
-                  className="w-[70%] md:w-[68%] rounded-3xl transition ease-in-out delay-25 hover:-translate-y-1 hover:scale-105
-                duration-300 cursor-pointer"
-                />
-                {/* <div> */}
-                <ProductCarousel product={product} setImageFunc={setImage} />
-                {/* </div> */}
+            <div className="flex flex-col lg:grid grid-flow-col grid-cols-12 mb-6">
+              <div className="col-span-12 md:col-span-8 flex items-center gap-4 md:gap-30">
+                <div>
+                  <ProductCarousel product={product} setImageFunc={setImageIdx} />
+                </div>
+                <div className="flex justify-center">
+                  <img
+                    src={product.images.length > 0 ? product.images[imageIdx] : product.thumbnail}
+                    alt={product.title}
+                    className="w-[100%] md:w-[60%] lg:w-[70%] object-cover rounded-3xl transition ease-in-out delay-25 hover:-translate-y-1 hover:scale-105
+                duration-300 cursor-pointer "
+                  />
+                </div>
               </div>
 
               <div
                 // className="mt-0 mx-2 md:mx-10 md:mt-8 px-4 pb-4 md:px-10 md:pb-10 rounded-lg flex flex-col items-center order-2
                 // w-[100%] md:w-[40%]"
-                className="col-span-5 order-2 p-4 flex flex-col items-center"
+                className="col-span-12 md:col-span-6 p-3 flex flex-col lg:mt-16"
                 // style={{
                 //   boxShadow: `rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px`,
                 // }}
@@ -98,10 +97,13 @@ export default function Product() {
                   className="rounded-3xl transition ease-in-out delay-25 hover:-translate-y-1 hover:scale-105
                 duration-300 cursor-pointer"
                 /> */}
+                <h1 className="text-xl md:text-3xl mb-2 text-black font-semibold">
+                  {product.title}
+                </h1>
                 <div className="text-sm md:text-base">
                   <p>Brand: {product.brand} </p>
                   <p>Units Left: {product.stock} </p>
-                  <p className="text-sky-700 font-semibold md:text-lg">
+                  <p className="font-bold md:text-lg">
                     Price: Rs. {(product.price * 84).toLocaleString("en-IN")}
                   </p>
                   <p className="mb-6 mt-1">
@@ -109,19 +111,19 @@ export default function Product() {
                   </p>
                   <div className="flex flex-col md:flex-row ">
                     <button
-                      className="bg-sky-600 hover:bg-sky-500 text-white w-[100%] md:w-[50%] text-sm md:text-lg p-1.5 md:p-2 rounded-lg
+                      className="border border-black/40 w-[100%] md:w-[50%] text-sm md:text-lg p-1.5 md:p-2 rounded-lg
                        inline-block"
                       onClick={() => handleAddtoCart(product)}
                     >
-                      Add to Cart <AddShoppingCartIcon />
+                      Add to Cart
                     </button>
 
                     <button
-                      className="bg-sky-600 hover:bg-sky-500 text-white w-[100%] md:w-[50%] text-sm md:text-lg p-1.5 md:p-2
+                      className="border border-black/40 w-[100%] md:w-[50%] text-sm md:text-lg p-1.5 md:p-2
                        rounded-lg mt-2 ml-0 md:mt-0 md:ml-2"
                       onClick={() => handleAddtoWishlist(product)}
                     >
-                      Add to <FavoriteOutlinedIcon />
+                      Add to <FaRegHeart/>
                     </button>
                   </div>
                 </div>
@@ -143,4 +145,3 @@ export default function Product() {
     </div>
   );
 }
-

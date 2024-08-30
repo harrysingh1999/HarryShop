@@ -17,13 +17,11 @@ export default function ProductCard({
   increFunc,
   decreFunc,
 }) {
-  console.log(data);
-
   return (
     <div
       className="flex flex-col items-center rounded-xl mb-6 md:mb-8 mx-2 transition ease-in-out
         delay-25 hover:-translate-y-1 hover:scale-110 duration-300 
-          cursor-pointer py-4 px-2 w-[230px] md:w-auto"
+          cursor-pointer pt-2 pb-3 px-2 w-[230px] md:w-auto"
       style={{
         boxShadow: `rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px`,
       }}
@@ -36,7 +34,9 @@ export default function ProductCard({
       />
       <div className="text-center text-sm md:text-base">
         <p className="text-black">{data.title}</p>
-        <p className="mt-0">Rs. {(data.price * 84).toLocaleString("en-IN")}</p>
+        <p className="font-bold">
+          Rs. {(data.price * 84).toLocaleString("en-IN")}
+        </p>
         {handleMouseEnter && (
           <span
             className="mt-1 inline-block"
@@ -52,7 +52,7 @@ export default function ProductCard({
           </span>
         )}
         {removeFunc && (
-          <p className="inline-block">
+          <p className="inline-block font-bold">
             Total: Rs. {(data.qty * data.price * 84).toLocaleString("en-IN")}
           </p>
         )}
@@ -70,7 +70,7 @@ export default function ProductCard({
             </button>
             {data.qty}
             <button
-              className="border border-black/40  px-4 rounded-lg"
+              className="border border-black/40 px-4 rounded-lg"
               onClick={() => increFunc(data.id)}
             >
               +
@@ -79,7 +79,7 @@ export default function ProductCard({
         ) : (
           <div>
             <button
-              className="hover:bg-gray-100 px-2 py-1 rounded-lg ml-1 md:ml-2 mt-2 inline-block border border-black"
+              className="hover:bg-gray-100 px-2 py-1 rounded-lg mt-2 inline-block border border-black"
               onClick={() => handleAddtoCart(data, data.id)}
             >
               {btnText1}

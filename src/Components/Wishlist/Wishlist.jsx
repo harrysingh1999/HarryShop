@@ -1,13 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import React from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import { nanoid } from "@reduxjs/toolkit";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import {
   removeWishlistItem,
   getWishlistQuantity,
@@ -74,43 +68,6 @@ export default function Wishlist() {
       ) : (
         <div className="flex flex-wrap justify-center md:justify-start">
           {wishlistItems.map((wishlist) => (
-            // <Card
-            //   key={nanoid()}
-            //   style={{ minHeight: "280px", maxHeight: "280px" }}
-            //   className="w-64 md:w-72 md:!mx-3 my-4 !rounded-t-3xl !rounded-b-3xl
-            //   !transition ease-in-out !delay-25 hover:-translate-y-1 hover:scale-105 !duration-300
-            //   !bg-gray-300 hover:!shadow-lg hover:!shadow-sky-500 cursor-pointer"
-            // >
-            //   <CardMedia
-            //     sx={{ height: 140 }}
-            //     image={item.thumbnail}
-            //     title={item.title}
-            //     onClick={() => handleProduct(item.id)}
-            //   />
-            //   <CardContent className="!py-1">
-            //     <p className="text-base font-semibold ">{item.title}</p>
-
-            //     <p className="mt-1 text-base">
-            //       Rs. {(item.price * 84).toLocaleString("en-IN")}
-            //     </p>
-            //   </CardContent>
-            //   <CardActions className="!mb-1 !pt-1">
-            //     <button
-            //       className=" hover:bg-gray-100 border border-black px-2 py-1 rounded-lg ms-2 inline-block"
-            //       onClick={() => handleAddtoCart(item, item.id)}
-            //     >
-            //       Move to Cart <AddShoppingCartIcon />
-            //     </button>
-
-            //     <button
-            //       className=" hover:bg-gray-100 border border-black px-2 py-1 rounded-lg !ms-4"
-            //       onClick={() => handleRemoveCartItem(item.id)}
-            //     >
-            //       Remove
-            //     </button>
-            //   </CardActions>
-            // </Card>
-
             <ProductCard
               key={wishlist.title}
               data={wishlist}

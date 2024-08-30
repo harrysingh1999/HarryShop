@@ -10,7 +10,6 @@ import {
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Icon } from "@iconify/react";
-import CustomCard from "../customCard/CustomCard";
 import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import CartTable from "./CartTable";
 import ProductCard from "../Card/ProductCard";
@@ -47,8 +46,8 @@ export default function Cart() {
     auth && dispatch(getTotalQuantity());
   };
 
-  let navigate = useNavigate();  
- 
+  let navigate = useNavigate();
+
   const handleProduct = (title, id, productCategory) => {
     let urlEndpoint = title.split(" ").join("-");
     navigate(`/${productCategory}/${urlEndpoint}`, { state: id });
@@ -66,7 +65,7 @@ export default function Cart() {
 
   return (
     <div>
-      <h1 className="text-3xl mx-14 mt-20 md:mt-28 mb-6 text-black font-normal md:font-semibold">
+      <h1 className="text-2xl md:text-3xl mx-14 mt-20 md:mt-28 mb-4 text-center md:text-left font-semibold">
         Shopping Cart
       </h1>
 
@@ -110,7 +109,12 @@ export default function Cart() {
             })}
           </div>
 
-          <div className="mt-4 md:ms-4 pt-4 ps-4 pe-2 border border-black lg:w-[480px] xl:w-[500px]">
+          <div
+            className="rounded-lg md:ms-4 pt-4 ps-4 pe-2  lg:w-[480px] xl:w-[500px]"
+            style={{
+              boxShadow: `rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px`,
+            }}
+          >
             <p className="text-2xl mb-4"> Cart Calculation </p>
             <p className="text-sky-700 text-lg font-semibold border-t  border-b border-black py-3">
               Subtotal: Rs. {totalCartAmount.toLocaleString("en-IN")}
