@@ -4,17 +4,13 @@ import Slider from "react-slick";
 import { bannerSlider } from "../../utils/constants";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import MyButton from "../Button/MyButton";
 
-export default function Banner({ data }) {
+export default function Banner({ data, handleProduct }) {
   const [bannerData, setBannerData] = useState([]);
   const [propData, setPropData] = useState(data[0]);
 
-
-
   useEffect(() => {
     const fetchBannerDetails = async () => {
-      //   try {
       let response = await axios.get(
         `https://dummyjson.com/products/category/${propData}`
       );
@@ -28,11 +24,6 @@ export default function Banner({ data }) {
           return [...prevState, obj];
         });
       }
-
-      //   } catch (error) {
-      //     setError(error);
-      //     setIsLoading(false);
-      //   }
     };
     fetchBannerDetails();
   }, [propData]);
@@ -49,20 +40,24 @@ export default function Banner({ data }) {
                   alt={item.title}
                   className="w-screen h-screen object-cover"
                 />
-                <div className="absolute top-56 ms-6 md:ms-16 hover:shadow-lg hover:shadow-sky-500 p-2 rounded-xl text-white">
-                  <p className="text-xl md:text-4xl ps-2 font-semibold">
+                <div
+                  id="imageText"
+                  className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-white p-6 md:p-12"
+                >
+                  <p className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 md:mb-4">
                     {item.title}
                   </p>
-                  <p className="md:mt-2 mb-5 font-semibold text-sm md:text-lg text-sky-600 ps-2">
+                  <p className="font-semibold text-lg md:text-xl lg:text-2xl mb-4 md:mb-6">
                     Rs. {(item.price * 84).toLocaleString("en-IN")}
                   </p>
-                  <div
-                  // onClick={() =>
-                  //   handleProduct(product.category, product.title, product.id)
-                  // }
+                  <button
+                    className="border border-white bg-black hover:bg-white hover:text-black transition duration-300 ease-in-out px-6 py-3 md:px-8 md:py-3 rounded-lg font-bold"
+                    onClick={() =>
+                      handleProduct(item.title, item.id, item.category)
+                    }
                   >
-                    <MyButton value="Shop Now" bg="#6CB4EE" />
-                  </div>
+                    Shop Now
+                  </button>
                 </div>
               </div>
             );

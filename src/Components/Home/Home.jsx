@@ -3,13 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import MyButton from "../Button/MyButton";
 import {
-  bannerDetails,
-  bannerSlider,
   categoryImages,
 } from "../../utils/constants";
 import { Skeleton } from "@mui/material";
@@ -43,15 +37,16 @@ export default function Home() {
   const handleCategory = (product) => {
     navigate(`/${product}`, { state: product });
   };
-
-  const handleProduct = (category, title, id) => {
+  
+  const handleProduct = (title, id, productCategory) => {
     let urlEndpoint = title.split(" ").join("-");
-    navigate(`/${category}/${urlEndpoint}`, { state: id });
+    navigate(`/${productCategory}/${urlEndpoint}`, { state: id });
   };
+
 
   return (
     <div>
-      <Banner data={["laptops", "mens-shoes"]} />
+      <Banner data={["laptops", "mens-shoes"]} handleProduct={handleProduct} />
       <h2 className="text-2xl md:text-3xl text-center mt-10 mb-6 text-black font-semibold">
         Explore Categories
       </h2>

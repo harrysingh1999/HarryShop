@@ -1,18 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addCartItem,
   addWishlistItem,
 } from "../ReduxFeatures/cartSlice/cartSlice";
-import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import ProductCarousel from "./ProductCarousel";
 import { snackbarMessage, snackbarMessage2 } from "../../utils/constants";
 import ProductReview from "./ProductReview";
-import { FaRegHeart } from "react-icons/fa";
 
 export default function Product() {
   const [open, setOpen] = React.useState(false);
@@ -65,16 +62,15 @@ export default function Product() {
       ) : (
         product && (
           <div>
-            {/* <div className="flex flex-col md:flex-row items-center justify-center md:items-start mx-4 md:mx-8"> */}
             <div className="flex flex-col lg:grid grid-flow-col grid-cols-12 mb-6">
-              <div className="col-span-12 md:col-span-8 flex items-center gap-4 md:gap-30">
+              <div className="col-span-12 md:col-span-7 flex gap-4 md:gap-30 mt-4 lg:mt-14">
                 <div>
                   <ProductCarousel
                     product={product}
                     setImageFunc={setImageIdx}
                   />
                 </div>
-                <div className="flex justify-center">
+                <div className="flex items-baseline justify-center">
                   <img
                     src={
                       product.images.length > 0
@@ -88,27 +84,12 @@ export default function Product() {
                 </div>
               </div>
 
-              <div
-                // className="mt-0 mx-2 md:mx-10 md:mt-8 px-4 pb-4 md:px-10 md:pb-10 rounded-lg flex flex-col items-center order-2
-                // w-[100%] md:w-[40%]"
-                className="col-span-12 md:col-span-6 p-3 flex flex-col mt-4 lg:mt-10"
-                // style={{
-                //   boxShadow: `rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px`,
-                // }}
-              >
-                {/* <img
-                  src={image ? image : product.thumbnail}
-                  alt={product.title}
-                  //   className="w-[70%] md:w-[62%] rounded-3xl transition ease-in-out delay-25 hover:-translate-y-1 hover:scale-105
-                  // duration-300 hover:shadow-lg hover:shadow-sky-500 cursor-pointer"
-                  className="rounded-3xl transition ease-in-out delay-25 hover:-translate-y-1 hover:scale-105
-                duration-300 cursor-pointer"
-                /> */}
+              <div className="col-span-12 md:col-span-6 p-3 flex flex-col mt-2 lg:mt-6">
                 <h1 className="text-xl md:text-2xl xl:text-3xl mb-2 text-black font-semibold">
                   {product.title}
                 </h1>
                 <div className="text-sm md:text-base">
-                  <p>Brand: {product.brand} </p>
+                  <p>Brand: {product?.brand} </p>
                   <p>
                     Units Left:{" "}
                     {product.stock > 0 ? product.stock : "Out of Stock"}{" "}
@@ -133,31 +114,34 @@ export default function Product() {
                     </span>
                   </div>
                   <p>Miniumum Order Quantity: {product.minimumOrderQuantity}</p>
+                  <p>Rating: {product.rating}/5 </p>
                   <p className="mb-4 mt-1">
                     Description: {product.description}.
                   </p>
                   <div className="flex flex-col md:flex-row font-semibold lg:font-bold">
                     <button
-                      className="border border-black/40 w-[100%] md:w-[50%] xl:w-[50%] p-1.5 md:p-2 rounded-lg
-                       inline-block"
+                      className="border border-black/40 w-[100%] md:w-[50%] xl:w-[50%] p-1.5 md:p-2 rounded-lg hover:bg-black hover:text-white
+               transition duration-300 ease-in-out"
                       onClick={() => handleAddtoCart(product)}
                     >
                       Add to Cart
                     </button>
 
                     <button
-                      className="border border-black/40 w-[100%] md:w-[50%] xl:w-[50%] p-1.5 md:p-2
+                      className="border border-black/40 hover:bg-black hover:text-white transition
+                       duration-300 ease-in-out w-[100%] md:w-[50%] xl:w-[50%] p-1.5 md:p-2
                        rounded-lg mt-2 ml-0 md:mt-0 md:ml-2"
                       onClick={() => handleAddtoWishlist(product)}
                     >
                       Add to Wishlist
                     </button>
                   </div>
-                  <div className="mt-8">
-                    <h2 className="text-xl font-semibold">
-                      More Product Information:
-                    </h2>
-                    <div>
+
+                  <h2 className="text-xl font-semibold mt-8">
+                    More Product Information:
+                  </h2>
+                  <div className="flex justify-between gap-3 mt-4">
+                    <div className="text-sm md:text-base">
                       <p>
                         Category:{" "}
                         {product.category[0].toUpperCase() +
@@ -171,9 +155,12 @@ export default function Product() {
                       <p>Return Policy: {product.returnPolicy} </p>
                       <p>Shipment: {product.shippingInformation} </p>
                       <p>Warranty: {product.warrantyInformation} </p>
-                      <span>Scan to get more Details</span> <img src={product.meta.qrCode} alt="" />
-                      {/* <p>Weight: {product.weight} </p> */}
                     </div>
+                    <img
+                      src={product.meta.qrCode}
+                      alt="product-qrCode"
+                      className="w-24 md:w-36 object-contain"
+                    />
                   </div>
                 </div>
               </div>

@@ -19,8 +19,7 @@ export default function ProductCard({
 }) {
   return (
     <div
-      className="flex flex-col items-center rounded-xl mb-6 md:mb-8 mx-2 transition ease-in-out
-        delay-25 hover:-translate-y-1 hover:scale-110 duration-300 
+      className="flex flex-col items-center rounded-xl mb-6 md:mb-8 mx-2  
           cursor-pointer pt-2 pb-3 px-2 w-[230px] md:w-auto"
       style={{
         boxShadow: `rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px`,
@@ -79,14 +78,16 @@ export default function ProductCard({
         ) : (
           <div>
             <button
-              className="hover:bg-gray-100 px-2 py-1 rounded-lg mt-2 inline-block border border-black"
+              className="hover:bg-black hover:text-white transition
+                       duration-300 ease-in-out px-2 py-1 rounded-lg mt-2 inline-block border border-black"
               onClick={() => handleAddtoCart(data, data.id)}
             >
               {btnText1}
             </button>
 
             <button
-              className="hover:bg-gray-100 p-1 rounded-lg ml-4 border border-black"
+              className="hover:bg-black hover:text-white transition
+                       duration-300 ease-in-out p-1 rounded-lg ml-4 border border-black"
               onClick={() =>
                 handleAddtoWishlist
                   ? handleAddtoWishlist(data)

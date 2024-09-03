@@ -6,13 +6,13 @@ import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 
 export default function ProductCarousel({ product, setImageFunc }) {
   const CustomPrevArrow = (props) => (
-    <div className="absolute left-6 lg:left-12 -top-4" onClick={props.onClick}>
+    <div className="absolute left-6 lg:left-12 -top-5" onClick={props.onClick}>
       <FaChevronUp />
     </div>
   );
 
   const CustomNextArrow = (props) => (
-    <div className="absolute left-6 lg:left-12 -bottom-2" onClick={props.onClick}>
+    <div className="absolute left-6 lg:left-12 -bottom-4" onClick={props.onClick}>
       <FaChevronDown />
     </div>
   );
@@ -34,7 +34,7 @@ export default function ProductCarousel({ product, setImageFunc }) {
   };
 
   return (
-    <div className="w-16 lg:w-28">
+    <div className="w-16 lg:w-28 ">
       <Slider
         {...productCarousel}
         className="relative focus:outline-none cursor-pointer"
@@ -42,7 +42,7 @@ export default function ProductCarousel({ product, setImageFunc }) {
         {product.images.map((img, index) => (
           <div key={crypto.randomUUID()} className="">
             <img
-              className="w-16 h-16 lg:w-28 lg:h-28 object-cover rounded-xl"
+              className="w-16 h-16 lg:w-28 lg:h-28 object-cover rounded-xl border border-black/30"
               src={img}
               alt={product.title}
               onClick={() => setImageFunc(index)}
