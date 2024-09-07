@@ -1,12 +1,9 @@
 import React from "react";
 import Ratings from "../Ratings/Ratings";
+import CustomButton from "../CustomButton/CustomButton";
 
 export default function ProductCard({
   data,
-  isHovering,
-  setIsHovering,
-  hoveredId,
-  handleMouseEnter,
   handleProduct,
   handleAddtoCart,
   handleRemoveCartItem,
@@ -19,8 +16,8 @@ export default function ProductCard({
 }) {
   return (
     <div
-      className="flex flex-col items-center rounded-xl mb-6 md:mb-8 mx-2  
-          cursor-pointer pt-2 pb-3 px-2 w-[230px] md:w-auto"
+      className="flex flex-col items-center rounded-xl mb-6 md:mb-8 mx-2
+          cursor-pointer pt-2 pb-3 px-3 w-[230px] lg:w-[300px] min-h-[320px]"
       style={{
         boxShadow: `rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px`,
       }}
@@ -31,25 +28,18 @@ export default function ProductCard({
         className="w-44 h-auto"
         onClick={() => handleProduct(data.title, data.id, data.category)}
       />
-      <div className="text-center text-sm md:text-base">
+      <div className="text-center text-sm md:text-base w-full">
         <p className="text-black">{data.title}</p>
         <p className="font-bold">
           Rs. {(data.price * 84).toLocaleString("en-IN")}
         </p>
-        {handleMouseEnter && (
-          <span
-            className="mt-1 inline-block"
-            onMouseEnter={() => handleMouseEnter(data.id)}
-            onMouseOut={() => setIsHovering(false)}
-          >
-            <Ratings rating={data.rating} />
-          </span>
-        )}
-        {isHovering && hoveredId === data.id && (
-          <span className="bg-gray-500 text-center text-white p-1">
-            {data.rating}
-          </span>
-        )}
+
+        <span className="mt-1 inline-block">
+          <Ratings rating={data.rating} />
+        </span>
+
+        <span className="text-center p-1">{data.rating}</span>
+
         {removeFunc && (
           <p className="inline-block font-bold">
             Total: Rs. {(data.qty * data.price * 84).toLocaleString("en-IN")}
@@ -76,29 +66,67 @@ export default function ProductCard({
             </button>
           </div>
         ) : (
-          <div>
-            <button
-              className="hover:bg-black hover:text-white transition
-                       duration-300 ease-in-out px-2 py-1 rounded-lg mt-2 inline-block border border-black"
-              onClick={() => handleAddtoCart(data, data.id)}
-            >
-              {btnText1}
-            </button>
-
-            <button
-              className="hover:bg-black hover:text-white transition
-                       duration-300 ease-in-out p-1 rounded-lg ml-4 border border-black"
-              onClick={() =>
+          <div className="flex flex-col gap-2 md:flex-row font-semibold lg:font-bold">
+            <CustomButton
+              text={btnText1}
+              handleClick={() => handleAddtoCart(data, data.id)}
+            />
+            <CustomButton
+              text={btnText2}
+              handleClick={() =>
                 handleAddtoWishlist
                   ? handleAddtoWishlist(data)
                   : handleRemoveCartItem(data.id)
               }
-            >
-              {btnText2}
-            </button>
+            />
           </div>
         )}
       </div>
     </div>
   );
 }
+
+// import React from "react";
+// import Ratings from "../Ratings/Ratings";
+// import CustomButton from "../CustomButton/CustomButton";
+
+// export default function ProductCard({
+//   data,
+//   handleProduct,
+//   handleAddtoCart,
+//   handleAddtoWishlist,
+//   btnText1,
+//   btnText2,
+// }) {
+//   return (
+//     <div
+//       className="flex flex-col items-center rounded-xl mb-6 md:mb-8 mx-2 cursor-pointer pt-2 pb-3 px-3 w-[230px] lg:w-[300px] min-h-[320px]"
+//       style={{
+//         boxShadow: `rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px`,
+//       }}
+//       onClick={() => handleProduct(data.title, data.id)}
+//     >
+//       <img src={data.thumbnail} alt={data.title} className="w-44 h-auto" />
+//       <div className="text-center text-sm md:text-base font-semibold text-black mt-2 line-clamp-2">
+//         {data.title}
+//       </div>
+//       <Ratings rating={data.rating} />
+//       <p className="text-xl text-sky-800 mt-2 font-semibold">
+//         Rs. {Math.ceil(data.price * 84)}
+//       </p>
+
+//       <CustomButton
+//         onClick={() => handleAddtoCart(data)}
+//         className="w-full mt-2"
+//       >
+//         {btnText1}
+//       </CustomButton>
+//       <CustomButton
+//         onClick={() => handleAddtoWishlist(data)}
+//         className="w-full mt-2"
+//       >
+//         {btnText2}
+//       </CustomButton>
+//     </div>
+//   );
+// }

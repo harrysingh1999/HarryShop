@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import useScroll from "../../utils/customHooks/useScroll";
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
-import SearchBar from "../SearchBar/SearchBar";
+import SearchBar from "./SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getTotalQuantity,

@@ -10,6 +10,7 @@ import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import ProductCarousel from "./ProductCarousel";
 import { snackbarMessage, snackbarMessage2 } from "../../utils/constants";
 import ProductReview from "./ProductReview";
+import CustomButton from "../CustomButton/CustomButton";
 
 export default function Product() {
   const [open, setOpen] = React.useState(false);
@@ -118,23 +119,15 @@ export default function Product() {
                   <p className="mb-4 mt-1">
                     Description: {product.description}.
                   </p>
-                  <div className="flex flex-col md:flex-row font-semibold lg:font-bold">
-                    <button
-                      className="border border-black/40 w-[100%] md:w-[50%] xl:w-[50%] p-1.5 md:p-2 rounded-lg hover:bg-black hover:text-white
-               transition duration-300 ease-in-out"
-                      onClick={() => handleAddtoCart(product)}
-                    >
-                      Add to Cart
-                    </button>
-
-                    <button
-                      className="border border-black/40 hover:bg-black hover:text-white transition
-                       duration-300 ease-in-out w-[100%] md:w-[50%] xl:w-[50%] p-1.5 md:p-2
-                       rounded-lg mt-2 ml-0 md:mt-0 md:ml-2"
-                      onClick={() => handleAddtoWishlist(product)}
-                    >
-                      Add to Wishlist
-                    </button>
+                  <div className="flex flex-col gap-2 md:flex-row font-semibold lg:font-bold">
+                    <CustomButton
+                      text="Add to Cart"
+                      handleClick={() => handleAddtoCart(product)}
+                    />
+                    <CustomButton
+                      text="Add to Wishlist"
+                      handleClick={() => handleAddtoWishlist(product)}
+                    />
                   </div>
 
                   <h2 className="text-xl font-semibold mt-8">

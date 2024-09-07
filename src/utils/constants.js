@@ -137,6 +137,8 @@ export const bannerSlider = {
 export let snackbarMessage = "Product is added to Cart!";
 export let snackbarMessage2 = "Product is added to Wishlist!";
 
+export const ratingArr = [1, 2, 3, 4];
 
-
-
+export const sortingArr = [{ name: "lowToHigh", label: "Low to High" },
+  { name: "highToLow", label: "High to Low" }
+];
