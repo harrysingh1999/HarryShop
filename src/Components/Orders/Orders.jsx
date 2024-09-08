@@ -36,7 +36,7 @@ export default function Orders() {
                             <img
                               src={item.thumbnail}
                               alt={item.title}
-                              className="h-full w-full object-cover object-center"
+                              className="h-full w-full object-cover cursor-pointer object-center"
                               onClick={() => handleProduct(item.title, item.id, item.category)}
                             />
                           </div>

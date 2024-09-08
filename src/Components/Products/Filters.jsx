@@ -51,7 +51,7 @@ export default function Filters({
             className="w-full"
           />
           <p>
-            Rs.{priceRange[0]} - Rs.{priceRange[1]}
+            Rs. {priceRange[0].toFixed(1)} - Rs. {priceRange[1]}
           </p>
         </div>
 

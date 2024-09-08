@@ -58,17 +58,21 @@ export default function Products() {
   }, [productCategory]);
 
   useEffect(() => {
-    let filtered = products;
+    let filtered = [...products]; // Make a copy of the products array to avoid mutating the original
+
+    // Save filter states to local storage
     localStorage.setItem("priceRange", JSON.stringify(priceRange));
     localStorage.setItem("selectedRatings", JSON.stringify(selectedRatings));
     localStorage.setItem("sortOption", sortOption);
-   
+
+    // Filter by selected ratings
     if (selectedRatings.length > 0) {
       filtered = filtered.filter((product) =>
         selectedRatings.some((rating) => product.rating >= rating)
       );
     }
 
+    // Filter by price range
     if (priceRange[0] !== 0 || priceRange[1] !== 0) {
       filtered = filtered.filter(
         (product) =>
@@ -77,13 +81,14 @@ export default function Products() {
       );
     }
 
+    // Apply sorting logic correctly
     if (sortOption === "lowToHigh") {
-      filtered = filtered.sort((a, b) => a.price - b.price);
+      filtered.sort((a, b) => a.price - b.price); // Ascending order (Low to High)
     } else if (sortOption === "highToLow") {
-      filtered = filtered.sort((a, b) => b.price - a.price);
+      filtered.sort((a, b) => b.price - a.price); // Descending order (High to Low)
     }
 
-    setMyFiltered(filtered);
+    setMyFiltered(filtered); // Update the filtered products
   }, [selectedRatings, priceRange, sortOption, products]);
 
   const handleFilterChange = (e, rating) => {
