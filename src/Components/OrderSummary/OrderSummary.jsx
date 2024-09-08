@@ -48,10 +48,10 @@ export default function OrderSummary() {
 
   let navigate = useNavigate();
 
-  const handleProduct = (id) => {
-    navigate("/Product", { state: id });
+  const handleProduct = (title, id, productCategory) => {
+    let urlEndpoint = title.split(" ").join("-");
+    navigate(`/${productCategory}/${urlEndpoint}`, { state: id });
   };
-
   const order = {
     products: cart.cartItems.map((item) => item),
     paymentMethod: "COD",
@@ -65,7 +65,7 @@ export default function OrderSummary() {
     auth && itemsArray.push(order);
     auth && localStorage.setItem("confirmedOrders", JSON.stringify(itemsArray));
     auth && handleProgress();
-    emptySummary()
+    emptySummary();
   };
 
   const handleProgress = () => {
@@ -81,10 +81,10 @@ export default function OrderSummary() {
 
   const emptySummary = () => {
     setTimeout(() => {
-        navigate("/Orders")
-        auth && dispatch(emptyCart())
+      navigate("/Orders");
+      auth && dispatch(emptyCart());
     }, 4000);
-  }
+  };
 
   return (
     <>
@@ -93,7 +93,9 @@ export default function OrderSummary() {
       </h1>
       {!auth || cart.cartItems.length === 0 ? (
         <div className="h-screen w-screen flex flex-col items-center justify-center md:text-2xl bg-red-500 mt-0 md:mt-10 px-4">
-          <p className="text-white text-center">Either, Your Cart is Empty🥲 or you are not logged In.</p>
+          <p className="text-white text-center">
+            Either, Your Cart is Empty🥲 or you are not logged In.
+          </p>
           <NavLink to="/">
             <button className="bg-sky-600 hover:bg-sky-700 rounded-xl p-2 text-white mt-4 text-base">
               GO SHOP😊
@@ -129,19 +131,24 @@ export default function OrderSummary() {
                     <img
                       src={item.thumbnail}
                       alt={item.title}
-                      className="w-12 md:w-20 h-12 md:h-20 object-cover rounded-xl"
-                      onClick={() => handleProduct(item.id)}
+                      className="w-12 md:w-20 h-12 md:h-20 object-cover cursor-pointer rounded-xl"
+                      onClick={() =>
+                        handleProduct(item.title, item.id, item.category)
+                      }
                     />
                   </TableCell>
 
-                  <TableCell align="center" className="!text-xs lg:!text-base !px-1 !font-semibold">
+                  <TableCell
+                    align="center"
+                    className="!text-xs lg:!text-base !px-1 !font-semibold"
+                  >
                     {item.title}
                   </TableCell>
 
                   <TableCell align="center" className="">
                     <div className="flex justify-center">
                       <button
-                        className="bg-sky-600 hover:bg-sky-500 text-white px-2 md:px-3 me-1 rounded-lg"
+                        className="px-2 border border-black/40 md:px-3 me-1 rounded-lg"
                         onClick={
                           item.qty > 1
                             ? () => handleDecrementItem(item.id)
@@ -154,7 +161,7 @@ export default function OrderSummary() {
                       {item.qty}
 
                       <button
-                        className="bg-sky-600 hover:bg-sky-500 text-white px-2 md:px-3 ms-1 rounded-lg "
+                        className="px-2 border border-black/40 md:px-3 ms-1 rounded-lg "
                         onClick={() => handleIncrementItem(item.id)}
                       >
                         +
@@ -162,8 +169,11 @@ export default function OrderSummary() {
                     </div>
                   </TableCell>
 
-                  <TableCell align="center" className="!text-xs lg:!text-base !px-1 !font-semibold">
-                    Rs. {(item.qty * item.price * 84).toLocaleString("en-IN") }
+                  <TableCell
+                    align="center"
+                    className="!text-xs lg:!text-base !px-1 !font-semibold"
+                  >
+                    Rs. {(item.qty * item.price * 84).toLocaleString("en-IN")}
                   </TableCell>
                 </TableRow>
               ))}
@@ -189,13 +199,17 @@ export default function OrderSummary() {
                 inputProps={{ "aria-label": "checked" }}
               />
               Cash on Delivery (COD)
-              <p className="mb-2 border-t border-black pt-2 text-sky-700 text-base md:text-lg font-semibold">
+              <p className="mb-2 border-t border-black pt-2  text-base md:text-lg font-semibold">
                 Total Price: {cart.totalCartAmount.toLocaleString("en-IN")}
               </p>
               <p>Free Delivery!</p>
             </div>
 
-            <Progress success={success} loading={loading} handleOrder={handleOrder} />
+            <Progress
+              success={success}
+              loading={loading}
+              handleOrder={handleOrder}
+            />
           </div>
         </div>
       )}

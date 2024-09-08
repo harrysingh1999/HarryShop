@@ -124,7 +124,7 @@ export default function Products() {
   };
 
   return (
-    <div className="flex flex-col md:grid grid-flow-col gap-10 mx-5 md:mx-16 lg:mx-24 xl:mx-6 mt-28">
+    <div className="flex flex-col md:grid grid-flow-col gap-10 mx-6 mt-28">
       {/* Filters Section */}
       <div className="col-span-2">
         <Filters

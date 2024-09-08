@@ -9,8 +9,9 @@ export default function Orders() {
   const googleUser = JSON.parse(localStorage.getItem('googleUser'))
 
   let navigate = useNavigate();
-  const handleProduct = (id) => {
-    navigate("/Product", { state: id });
+  const handleProduct = (title, id, productCategory) => {
+    let urlEndpoint = title.split(" ").join("-");
+    navigate(`/${productCategory}/${urlEndpoint}`, { state: id });
   };
 
   return (
@@ -36,7 +37,7 @@ export default function Orders() {
                               src={item.thumbnail}
                               alt={item.title}
                               className="h-full w-full object-cover object-center"
-                              onClick={() => handleProduct(item.id)}
+                              onClick={() => handleProduct(item.title, item.id, item.category)}
                             />
                           </div>
 

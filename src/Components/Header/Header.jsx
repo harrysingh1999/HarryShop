@@ -99,7 +99,7 @@ export default function Header() {
             </div>
 
             <div
-              className={`flex flex-col justify-around h-[40%] lg:flex-row lg:justify-around ${
+              className={`flex flex-col justify-around h-[60%] lg:flex-row lg:justify-around ${
                 auth && user ? "lg:w-[390px]" : "lg:w-[300px]"
               } cursor-pointer ${
                 scrolled || menu === "block" ? "text-black" : "text-white"
@@ -165,7 +165,7 @@ export default function Header() {
                 </>
               ) : (
                 <div
-                  className={`flex items-center px-2 py-0 gap-1 rounded-lg border relative ${
+                  className={`flex items-center px-2 py-1.5 gap-1 rounded-lg border relative ${
                     scrolled ? "border-black/40" : "border-white"
                   } `}
                 >
