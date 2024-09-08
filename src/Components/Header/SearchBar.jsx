@@ -9,14 +9,13 @@ export default function SearchBar({ handleSearchClick }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!userSearch) return;
     const handleSearch = setTimeout(async () => {
       try {
-        let response =
-          userSearch &&
-          (await axios.get(
-            `https://dummyjson.com/products/search?q=${userSearch}`
-          ));
-        userSearch && setfetchedSearchData(response.data.products);
+        let response = await axios.get(
+          `https://dummyjson.com/products/search?q=${userSearch}`
+        );
+        setfetchedSearchData(response.data.products);
       } catch (error) {
         setError(error);
       }
@@ -55,8 +54,6 @@ export default function SearchBar({ handleSearchClick }) {
         userSearch && (
           <div className="absolute text-black left-0 top-9 h-[80vh] w-full z-10 overflow-y-scroll">
             {fetchedSearchData.map((data) => {
-              console.log(data);
-
               return (
                 <p
                   className="border-b border-black/30 bg-gray-200 first-of-type:rounded-t-md 

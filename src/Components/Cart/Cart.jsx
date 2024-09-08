@@ -9,10 +9,10 @@ import {
 } from "../ReduxFeatures/cartSlice/cartSlice";
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { Icon } from "@iconify/react";
 import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import CartTable from "./CartTable";
 import ProductCard from "../Card/ProductCard";
+import CustomButton from "../CustomButton/CustomButton";
 
 export default function Cart() {
   const { cartItems, totalCartAmount, totalCartQuantity } = useSelector(
@@ -110,56 +110,30 @@ export default function Cart() {
           </div>
 
           <div
-            className="rounded-lg md:ms-4 pt-4 ps-4 pe-2  lg:w-[480px] xl:w-[500px]"
+            className="rounded-lg md:ms-4 py-6 pl-4 pr-2 lg:w-[480px] xl:w-[500px]"
             style={{
               boxShadow: `rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px`,
             }}
           >
             <p className="text-2xl mb-4"> Cart Calculation </p>
-            <p className="text-sky-700 text-lg font-semibold border-t  border-b border-black py-3">
+            <p className="text-lg font-semibold border-t  border-b border-black py-3">
               Subtotal: Rs. {totalCartAmount.toLocaleString("en-IN")}
             </p>
-            <p className="mb-4 py-3 border-b border-black text-sky-700 font-semibold text-lg">
+            <p className="mb-4 py-3 border-b border-black font-semibold text-lg">
               Total Quantity: {totalCartQuantity}
             </p>
             <p className="mb-6 pb-4 border-b border-black">FREE Shipping </p>
 
-            <button
-              className="bg-sky-600 hover:bg-sky-500 text-white px-2 py-2 rounded-lg mb-2 inline-block"
-              onClick={() => handleProceed()}
-            >
-              Proceed to
-              <Icon
-                icon="material-symbols:shopping-cart-checkout"
-                className="inline-block"
-                width="30"
+            <div className="flex flex-col gap-2 font-bold">
+              <CustomButton
+                text="Proceed to Checkout"
+                handleClick={handleProceed}
               />
-            </button>
-
-            <button
-              className="bg-sky-600 hover:bg-sky-500 text-white px-2 py-2 rounded-lg ms-2"
-              onClick={handleClearCart}
-            >
-              Clear
-              <Icon
-                className="!inline-block ms-1"
-                icon="carbon:shopping-cart-clear"
-                width="28"
-              />
-            </button>
-            <button
-              className="bg-sky-600 hover:bg-sky-500 text-white px-2 py-2 rounded-lg
-             mt-2 ms-0 md:ms-2 mb-5 me-4"
-            >
+              <CustomButton text="Clear Cart" handleClick={handleClearCart} />
               <NavLink to="/">
-                Continue
-                <Icon
-                  icon="mdi:shopping-outline"
-                  width="28"
-                  className="inline-block"
-                />
+                <CustomButton text="Continue Shopping" />
               </NavLink>
-            </button>
+            </div>
           </div>
         </div>
       )}

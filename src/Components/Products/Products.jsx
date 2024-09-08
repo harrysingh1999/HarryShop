@@ -57,19 +57,18 @@ export default function Products() {
     fetchProducts();
   }, [productCategory]);
 
-    useEffect(() => {
+  useEffect(() => {
     let filtered = products;
     localStorage.setItem("priceRange", JSON.stringify(priceRange));
     localStorage.setItem("selectedRatings", JSON.stringify(selectedRatings));
     localStorage.setItem("sortOption", sortOption);
-    // Apply rating filter
+   
     if (selectedRatings.length > 0) {
       filtered = filtered.filter((product) =>
         selectedRatings.some((rating) => product.rating >= rating)
       );
     }
 
-    // Apply price range filter
     if (priceRange[0] !== 0 || priceRange[1] !== 0) {
       filtered = filtered.filter(
         (product) =>
@@ -78,7 +77,6 @@ export default function Products() {
       );
     }
 
-    // Apply sorting
     if (sortOption === "lowToHigh") {
       filtered = filtered.sort((a, b) => a.price - b.price);
     } else if (sortOption === "highToLow") {
@@ -126,25 +124,26 @@ export default function Products() {
   };
 
   return (
-    <div className="flex flex-col md:flex-row mx-6 md:mx-14 xl:mx-24 mt-24">
+    <div className="flex flex-col md:grid grid-flow-col gap-10 mx-5 md:mx-16 lg:mx-24 xl:mx-6 mt-28">
       {/* Filters Section */}
-      <Filters
-        products={products}
-        handleFilterChange={handleFilterChange}
-        handleSortChange={handleSortChange}
-        clearFilters={clearFilters}
-        handlePriceRangeChange={handlePriceRangeChange}
-        selectedRatings={selectedRatings}
-        sortOption={sortOption}
-      />
-
+      <div className="col-span-2">
+        <Filters
+          products={products}
+          handleFilterChange={handleFilterChange}
+          handleSortChange={handleSortChange}
+          clearFilters={clearFilters}
+          handlePriceRangeChange={handlePriceRangeChange}
+          selectedRatings={selectedRatings}
+          sortOption={sortOption}
+        />
+      </div>
       {/* Products Section */}
-      <div className="w-full md:w-3/4 pl-4">
+      <div className="col-span-10 pl-4">
         <h1 className="text-2xl md:text-3xl mb-4 text-black text-center md:text-left font-semibold">
           {productCategory[0].toUpperCase() + productCategory.slice(1)}
         </h1>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="flex flex-wrap justify-center md:justify-start">
           {isLoading ? (
             <p>Loading...</p>
           ) : error ? (

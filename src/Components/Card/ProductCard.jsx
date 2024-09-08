@@ -17,7 +17,7 @@ export default function ProductCard({
   return (
     <div
       className="flex flex-col items-center rounded-xl mb-6 md:mb-8 mx-2
-          cursor-pointer pt-2 pb-3 px-3 w-[230px] lg:w-[300px] min-h-[320px]"
+          cursor-pointer pt-2 pb-3 px-3 w-[230px] md:w-[250px] lg:w-[270px]"
       style={{
         boxShadow: `rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px`,
       }}
@@ -34,11 +34,14 @@ export default function ProductCard({
           Rs. {(data.price * 84).toLocaleString("en-IN")}
         </p>
 
-        <span className="mt-1 inline-block">
-          <Ratings rating={data.rating} />
-        </span>
-
-        <span className="text-center p-1">{data.rating}</span>
+        {btnText2 === "Add to Wishlist" && (
+          <div className="flex items-center justify-center">
+            <span>
+              <Ratings rating={data.rating} />
+            </span>
+            <span>{data.rating}</span>
+          </div>
+        )}
 
         {removeFunc && (
           <p className="inline-block font-bold">
@@ -66,7 +69,7 @@ export default function ProductCard({
             </button>
           </div>
         ) : (
-          <div className="flex flex-col gap-2 md:flex-row font-semibold lg:font-bold">
+          <div className="flex flex-col gap-2 md:flex-row font-semibold lg:font-bold mt-2">
             <CustomButton
               text={btnText1}
               handleClick={() => handleAddtoCart(data, data.id)}

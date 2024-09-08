@@ -24,7 +24,7 @@ export default function Filters({
   }, [products]);
 
   useEffect(() => {
-    setPriceRange([minPrice, maxPrice]); // Reset price range when cleared
+    setPriceRange([minPrice, maxPrice]);
   }, [minPrice, maxPrice]);
 
   const handlePriceRangeInputChange = (e) => {
@@ -35,7 +35,7 @@ export default function Filters({
   };
 
   return (
-    <div className="w-full md:w-1/4 mb-6 md:mb-0 pr-4">
+    <div className="">
       <div className="border-b pb-4 mb-4">
         <h2 className="text-xl font-semibold mb-2">Filters</h2>
 
