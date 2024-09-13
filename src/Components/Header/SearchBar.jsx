@@ -52,22 +52,23 @@ export default function SearchBar({ handleSearchClick }) {
       ) : (
         fetchedSearchData &&
         userSearch && (
-          <div className="absolute text-black left-0 top-9 h-[80vh] w-full z-10 overflow-y-scroll">
+          <div
+            className={`absolute text-black left-0 top-9 ${
+              fetchedSearchData.length >= 16 ? "h-[82vh]" : "h-auto"
+            }
+              w-full z-10 overflow-y-scroll`}
+          >
             {fetchedSearchData.map((data) => {
               return (
                 <p
                   className="border-b border-black/30 bg-gray-200 first-of-type:rounded-t-md 
                   last-of-type:rounded-b-md px-4 py-1 hover:bg-gray-300"
                   key={data.title}
+                  onClick={() =>
+                    handleSearchClick(data.category, data.title, data.id)
+                  }
                 >
-                  <a
-                    onClick={() =>
-                      handleSearchClick(data.category, data.title, data.id)
-                    }
-                  >
-                    {" "}
-                    {data.title}{" "}
-                  </a>
+                  {data.title}{" "}
                 </p>
               );
             })}
