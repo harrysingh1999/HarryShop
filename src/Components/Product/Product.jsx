@@ -47,7 +47,7 @@ export default function Product() {
       }
     };
     fetchedProduct();
-  }, [productId]);
+  }, []);
 
   const [imageIdx, setImageIdx] = useState(0);
 

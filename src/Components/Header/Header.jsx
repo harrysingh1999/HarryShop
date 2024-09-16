@@ -45,7 +45,9 @@ export default function Header() {
     dispatch(getWishlistQuantity());
   }, [cart]);
 
-  const handleSearchClick = (category, title, id) => {
+  const handleSearchClick = (category, title, id, setUserSearch, setfetchedSearchData) => {
+    setUserSearch(title)
+    setfetchedSearchData([])
     let urlEndpoint = title.split(" ").join("-");
     navigate(`/${category}/${urlEndpoint}`, { state: id });
   };

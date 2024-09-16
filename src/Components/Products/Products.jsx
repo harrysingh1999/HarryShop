@@ -15,10 +15,6 @@ export default function Products() {
   const [myFiltered, setMyFiltered] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [priceRange, setPriceRange] = useState(() => {
-    const savedPriceRange = JSON.parse(localStorage.getItem("priceRange"));
-    return savedPriceRange || [0, 0];
-  });
 
   const [selectedRatings, setSelectedRatings] = useState(() => {
     const savedRatings = JSON.parse(localStorage.getItem("selectedRatings"));
@@ -58,10 +54,8 @@ export default function Products() {
   }, [productCategory]);
 
   useEffect(() => {
-    let filtered = [...products]; // Make a copy of the products array to avoid mutating the original
-
+    let filtered = [...products];
     // Save filter states to local storage
-    localStorage.setItem("priceRange", JSON.stringify(priceRange));
     localStorage.setItem("selectedRatings", JSON.stringify(selectedRatings));
     localStorage.setItem("sortOption", sortOption);
 
@@ -72,24 +66,15 @@ export default function Products() {
       );
     }
 
-    // Filter by price range
-    if (priceRange[0] !== 0 || priceRange[1] !== 0) {
-      filtered = filtered.filter(
-        (product) =>
-          product.price * 84 >= priceRange[0] &&
-          product.price * 84 <= priceRange[1]
-      );
-    }
-
     // Apply sorting logic correctly
     if (sortOption === "lowToHigh") {
-      filtered.sort((a, b) => a.price - b.price); // Ascending order (Low to High)
+      filtered.sort((a, b) => a.price - b.price);
     } else if (sortOption === "highToLow") {
-      filtered.sort((a, b) => b.price - a.price); // Descending order (High to Low)
+      filtered.sort((a, b) => b.price - a.price);
     }
 
-    setMyFiltered(filtered); // Update the filtered products
-  }, [selectedRatings, priceRange, sortOption, products]);
+    setMyFiltered(filtered);
+  }, [selectedRatings, sortOption, products]);
 
   const handleFilterChange = (e, rating) => {
     const { value } = e.target;
@@ -100,15 +85,9 @@ export default function Products() {
     setSortOption(e.target.value);
   };
 
-  const handlePriceRangeChange = (range) => {
-    setPriceRange(range);
-  };
-
   const clearFilters = () => {
-    setPriceRange([0, 0]);
     setSelectedRatings([]);
     setSortOption("");
-    localStorage.removeItem("priceRange");
     localStorage.removeItem("selectedRatings");
     localStorage.removeItem("sortOption");
   };
@@ -133,11 +112,9 @@ export default function Products() {
       {/* Filters Section */}
       <div className="col-span-2">
         <Filters
-          products={products}
           handleFilterChange={handleFilterChange}
           handleSortChange={handleSortChange}
           clearFilters={clearFilters}
-          handlePriceRangeChange={handlePriceRangeChange}
           selectedRatings={selectedRatings}
           sortOption={sortOption}
         />
