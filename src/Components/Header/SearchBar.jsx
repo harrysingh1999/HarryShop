@@ -24,9 +24,6 @@ export default function SearchBar({ handleSearchClick }) {
     return () => clearTimeout(handleSearch);
   }, [userSearch]);
 
-  console.log(fetchedSearchData);
-  
-
   return (
     <>
       <IoIosSearch />
@@ -53,7 +50,8 @@ export default function SearchBar({ handleSearchClick }) {
           <p className=" text-white text-base"> Please try after sometime.</p>
         </div>
       ) : (
-        fetchedSearchData && fetchedSearchData.length !== 0 && (
+        fetchedSearchData &&
+        fetchedSearchData.length !== 0 && (
           <div
             className={`absolute text-black left-0 top-9 ${
               fetchedSearchData.length >= 16 ? "h-[82vh]" : "h-auto"

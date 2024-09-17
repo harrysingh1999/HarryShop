@@ -27,8 +27,6 @@ export default function Header() {
     JSON.parse(localStorage.getItem("googleUser")) || {}
   );
 
-  console.log("rendered");
-
   const cart = useSelector((state) => state.cart);
   const auth = useSelector((state) => state.auth.isAuthenticated);
 

@@ -26,6 +26,8 @@ const Products = lazy(() => import("./Components/Products/Products.jsx"));
 const Product = lazy(() => import("./Components/Product/Product.jsx"));
 const NotfoundPage = lazy(() => import("./Components/404/NotFoundPage.jsx"));
 
+
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>

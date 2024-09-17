@@ -1,3 +1,4 @@
+import { configureStore, createSlice } from "@reduxjs/toolkit";
 import beautyImg from "../utils/Images/Beauty.png";
 import fragranceImg from "../utils/Images/Fragrance.png";
 import furnitureImg from "../utils/Images/furniture.png";
@@ -52,30 +53,6 @@ export const categoryImages = {
   Sunglasses: SunglassesImg,
 };
 
-// export const bannerDetails = [
-//   {
-//     url: iPhoneX,
-//     id: 2,
-//     title: "iPhone X",
-//     price: 899,
-//     category: "smartphones",
-//   },
-//   {
-//     url: MicrosoftSurface4,
-//     id: 8,
-//     title: "Microsoft Surface Laptop 4",
-//     price: 1499,
-//     category: "laptops",
-//   },
-//   {
-//     url: MacbookPro,
-//     id: 6,
-//     title: "MacBook Pro",
-//     price: 1749,
-//     category: "laptops",
-//   },
-// ];
-
 export const bannerSlider = {
   dots: false,
   infinite: true,
@@ -99,3 +76,7 @@ export const sortingArr = [
   { name: "lowToHigh", label: "Low to High" },
   { name: "highToLow", label: "High to Low" },
 ];
+
+
+
+ 
