@@ -6,7 +6,7 @@ import {
   getTotal,
   getTotalQuantity,
   emptyCart,
-} from "../ReduxFeatures/cartSlice/cartSlice";
+} from "../../Reduxtoolkit/cartSlice/cartSlice";
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import CustomSnackbar from "../Snackbar/CustomSnackbar";

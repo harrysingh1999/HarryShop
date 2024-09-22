@@ -12,7 +12,7 @@ import {
   incrementItemQty,
   removeCartItem,
   getTotal,
-} from "../ReduxFeatures/cartSlice/cartSlice";
+} from "../../Reduxtoolkit/cartSlice/cartSlice";
 import { useNavigate, NavLink } from "react-router-dom";
 import Progress from "../Progress/Progress";
 

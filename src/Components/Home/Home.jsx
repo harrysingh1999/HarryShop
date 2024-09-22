@@ -1,48 +1,36 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
-import {
-  categoryImages,
-} from "../../utils/constants";
+import { categoryImages } from "../../utils/constants";
 import { Skeleton } from "@mui/material";
 import { nanoid } from "@reduxjs/toolkit";
 import Banner from "./Banner";
+import { useGetAllCategoriesQuery } from "../../Reduxtoolkit/apiSlice/apiSlice";
 
 export default function Home() {
   const [categories, setCategories] = useState(null);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
   let navigate = useNavigate();
   categoryImages;
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        let response = await axios.get(
-          "https://dummyjson.com/products/categories"
-        );
+  const {
+    data: fetchedCategories,
+    isLoading,
+    error,
+  } = useGetAllCategoriesQuery();
 
-        setCategories(response.data);
-        setIsLoading(false);
-      } catch (error) {
-        setError(error);
-        setIsLoading(false);
-      }
-    };
-    fetchCategories();
-  }, []);
+  useEffect(() => {
+    setCategories(fetchedCategories);
+  }, [fetchedCategories]);
 
   const handleCategory = (product) => {
     navigate(`/${product}`, { state: product });
   };
-  
+
   const handleProduct = (title, id, productCategory) => {
     let urlEndpoint = title.split(" ").join("-");
     navigate(`/${productCategory}/${urlEndpoint}`, { state: id });
   };
-
 
   return (
     <div>
@@ -69,9 +57,10 @@ export default function Home() {
         ) : error ? (
           <div className="h-screen w-screen flex flex-col justify-center items-center mx-4 md:mx-0 bg-red-600">
             <p className=" text-white text-2xl">
-              Oops, API error: {error?.response?.data?.message}.
+              {" "}
+              {error.error ? error.error : error.message}{" "}
             </p>
-            <p className=" text-white text-2xl"> Please try after sometime.</p>
+            <p className=" text-white text-2xl"> API error: Please try after sometime.</p>
           </div>
         ) : (
           categories &&
@@ -92,10 +81,7 @@ export default function Home() {
                   alt={category.name}
                   className="h-40 w-44"
                 />
-                <p className="text-black">
-                  {/* {category.name[0].toUpperCase() + category.name.slice(1)} */}
-                  {category.name}
-                </p>
+                <p className="text-black">{category.name}</p>
               </div>
             );
           })

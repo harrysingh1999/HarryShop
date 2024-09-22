@@ -6,7 +6,7 @@ import {
   removeWishlistItem,
   getWishlistQuantity,
   addCartItem,
-} from "../ReduxFeatures/cartSlice/cartSlice";
+} from "../../Reduxtoolkit/cartSlice/cartSlice";
 import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import ProductCard from "../Card/ProductCard";
 

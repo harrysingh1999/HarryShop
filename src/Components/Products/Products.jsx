@@ -1,20 +1,18 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addCartItem,
   addWishlistItem,
-} from "../ReduxFeatures/cartSlice/cartSlice";
+} from "../../Reduxtoolkit/cartSlice/cartSlice";
 import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import ProductCard from "../Card/ProductCard";
 import Filters from "./Filters";
+import { useGetCategoryProductsQuery } from "../../Reduxtoolkit/apiSlice/apiSlice";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
   const [myFiltered, setMyFiltered] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   const [selectedRatings, setSelectedRatings] = useState(() => {
     const savedRatings = JSON.parse(localStorage.getItem("selectedRatings"));
@@ -28,30 +26,21 @@ export default function Products() {
 
   const [open, setOpen] = useState(false);
   const [wishlistOpen, setWishlistOpen] = useState(false);
-
   const auth = useSelector((state) => state.auth.isAuthenticated);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const productCategory = location.state;
+  const {
+    data: fetchedCategoryProducts,
+    error,
+    isLoading,
+  } = useGetCategoryProductsQuery(productCategory);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get(
-          `https://dummyjson.com/products/category/${productCategory}`
-        );
-        const productsData = response.data.products;
-        setProducts(productsData);
-        setMyFiltered(productsData);
-        setIsLoading(false);
-      } catch (error) {
-        setError(error);
-        setIsLoading(false);
-      }
-    };
-    fetchProducts();
-  }, [productCategory]);
+    fetchedCategoryProducts && setProducts(fetchedCategoryProducts.products);
+    fetchedCategoryProducts && setMyFiltered(fetchedCategoryProducts?.products);
+  }, [fetchedCategoryProducts]);
 
   useEffect(() => {
     let filtered = [...products];
@@ -66,7 +55,7 @@ export default function Products() {
       );
     }
 
-    // Apply sorting logic correctly
+    // Apply sorting logic
     if (sortOption === "lowToHigh") {
       filtered.sort((a, b) => a.price - b.price);
     } else if (sortOption === "highToLow") {
@@ -131,10 +120,10 @@ export default function Products() {
           ) : error ? (
             <div className="h-screen w-screen flex flex-col justify-center items-center mx-0 md:mx-0 bg-red-600">
               <p className="text-white md:text-2xl text-center">
-                Oops, API error: {error.message}.
+                {error.error ? error.error : error.message}
               </p>
               <p className="text-white md:text-2xl text-center">
-                Please try again later.
+                API error: Please try again later.
               </p>
             </div>
           ) : myFiltered.length > 0 ? (

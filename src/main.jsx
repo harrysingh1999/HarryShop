@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 import Home from "./Components/Home/Home.jsx";
 import { Provider } from "react-redux";
-import { store } from "./Components/ReduxFeatures/Store/store.js";
+import { store } from "./ReduxToolkit/Store/store.js";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import ProductReview from "./Components/Product/ProductReview.jsx";
 import ProductCard from "./Components/Card/ProductCard.jsx";
@@ -25,8 +25,6 @@ const Orders = lazy(() => import("./Components/Orders/Orders.jsx"));
 const Products = lazy(() => import("./Components/Products/Products.jsx"));
 const Product = lazy(() => import("./Components/Product/Product.jsx"));
 const NotfoundPage = lazy(() => import("./Components/404/NotFoundPage.jsx"));
-
-
 
 const router = createBrowserRouter(
   createRoutesFromElements(

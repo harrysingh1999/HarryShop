@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { ratingArr, sortingArr } from "../../utils/constants";
 
 export default function Filters({

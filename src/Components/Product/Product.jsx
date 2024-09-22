@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   addCartItem,
   addWishlistItem,
-} from "../ReduxFeatures/cartSlice/cartSlice";
+} from "../../Reduxtoolkit/cartSlice/cartSlice";
 import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import ProductCarousel from "./ProductCarousel";
 import { snackbarMessage, snackbarMessage2 } from "../../utils/constants";

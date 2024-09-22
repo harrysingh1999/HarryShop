@@ -16,7 +16,6 @@ export const cartSlice = createSlice({
       const dispatchedItemIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
-
       if (dispatchedItemIndex >= 0) {
         state.cartItems[dispatchedItemIndex].qty += 1;
       } else {

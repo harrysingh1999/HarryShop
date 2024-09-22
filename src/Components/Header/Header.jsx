@@ -12,8 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getTotalQuantity,
   getWishlistQuantity,
-} from "../ReduxFeatures/cartSlice/cartSlice";
-import { userLogOut, userLogin } from "../ReduxFeatures/authSlice/authSlice";
+} from "../../Reduxtoolkit/cartSlice/cartSlice";
+import { userLogOut, userLogin } from "../../ReduxToolkit/authSlice/authSlice";
 import { jwtDecode } from "jwt-decode";
 
 export default function Header() {
@@ -31,7 +31,6 @@ export default function Header() {
   const auth = useSelector((state) => state.auth.isAuthenticated);
 
   const handleLogin = (userData) => {
-    console.log(userData);
     localStorage.setItem("googleUser", JSON.stringify(userData));
     const googleUser = JSON.parse(localStorage.getItem("googleUser"));
     setUser(googleUser);
@@ -43,9 +42,15 @@ export default function Header() {
     dispatch(getWishlistQuantity());
   }, [cart]);
 
-  const handleSearchClick = (category, title, id, setUserSearch, setfetchedSearchData) => {
-    setUserSearch(title)
-    setfetchedSearchData([])
+  const handleSearchClick = (
+    category,
+    title,
+    id,
+    setUserSearch,
+    setfetchedSearchData
+  ) => {
+    setUserSearch(title);
+    setfetchedSearchData([]);
     let urlEndpoint = title.split(" ").join("-");
     navigate(`/${category}/${urlEndpoint}`, { state: id });
   };
