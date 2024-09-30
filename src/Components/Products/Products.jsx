@@ -54,7 +54,6 @@ export default function Products() {
         selectedRatings.some((rating) => product.rating >= rating)
       );
     }
-
     // Apply sorting logic
     if (sortOption === "lowToHigh") {
       filtered.sort((a, b) => a.price - b.price);
@@ -97,7 +96,7 @@ export default function Products() {
   };
 
   return (
-    <div className="flex flex-col md:grid grid-flow-col gap-10 mx-6 mt-28">
+    <div className="flex flex-col md:grid grid-flow-col grid-cols-12 justify-items-center mx-6 mt-28">
       {/* Filters Section */}
       <div className="col-span-2">
         <Filters
@@ -114,7 +113,7 @@ export default function Products() {
           {productCategory[0].toUpperCase() + productCategory.slice(1)}
         </h1>
 
-        <div className="flex flex-wrap justify-center md:justify-start">
+        <div className="flex flex-wrap justify-center">
           {isLoading ? (
             <p>Loading...</p>
           ) : error ? (
