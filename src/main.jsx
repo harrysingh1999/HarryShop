@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 import Home from "./Components/Home/Home.jsx";
 import { Provider } from "react-redux";
-import { store } from "./ReduxToolkit/Store/store.js";
+import { store } from "./Reduxtoolkit/Store/store.js";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import ProductReview from "./Components/Product/ProductReview.jsx";
 import ProductCard from "./Components/Card/ProductCard.jsx";
