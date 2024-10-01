@@ -13,7 +13,7 @@ import {
   getTotalQuantity,
   getWishlistQuantity,
 } from "../../Reduxtoolkit/cartSlice/cartSlice";
-import { userLogOut, userLogin } from "../../ReduxToolkit/authSlice/authSlice";
+import { userLogOut, userLogin } from "../../Reduxtoolkit/authSlice/authSlice";
 import { jwtDecode } from "jwt-decode";
 
 export default function Header() {
