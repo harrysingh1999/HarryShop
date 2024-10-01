@@ -80,6 +80,7 @@ export default function Home() {
                   src={categoryImages[category.name]}
                   alt={category.name}
                   className="h-40 w-44"
+                  loading="eager"
                 />
                 <p className="text-black">{category.name}</p>
               </div>

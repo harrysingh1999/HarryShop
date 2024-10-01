@@ -26,6 +26,7 @@ export default function ProductCard({
         src={data.thumbnail}
         alt={data.title}
         className="w-44 h-auto"
+        loading="lazy"
         onClick={() => handleProduct(data.title, data.id, data.category)}
       />
       <div className="text-center text-sm md:text-base w-full">

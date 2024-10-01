@@ -79,6 +79,7 @@ export default function Product() {
                         : product.thumbnail
                     }
                     alt={product.title}
+                    loading='eager'
                     className="w-[100%] md:w-[60%] lg:w-[70%] object-cover rounded-3xl transition ease-in-out delay-25 hover:-translate-y-1 hover:scale-105
                 duration-300 cursor-pointer "
                   />

@@ -45,6 +45,7 @@ export default function ProductCarousel({ product, setImageFunc }) {
               className="w-16 h-16 lg:w-28 lg:h-28 object-cover rounded-xl border border-black/30"
               src={img}
               alt={product.title}
+              loading="eager"
               onClick={() => setImageFunc(index)}
             />
           </div>

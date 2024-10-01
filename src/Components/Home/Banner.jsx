@@ -38,6 +38,7 @@ export default function Banner({ data, handleProduct }) {
                 <img
                   src={item.images[0] || item.thumbnail}
                   alt={item.title}
+                  loading="eager"
                   className="w-screen h-screen object-cover"
                 />
                 <div
