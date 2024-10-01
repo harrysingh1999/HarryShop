@@ -96,9 +96,9 @@ export default function Products() {
   };
 
   return (
-    <div className="flex flex-col md:grid grid-flow-col grid-cols-12 justify-items-center mx-6 mt-28">
+    <div className="flex flex-col md:grid grid-flow-col grid-cols-12 gap-6 mx-6 mt-28">
       {/* Filters Section */}
-      <div className="col-span-2">
+      <div className="md:col-span-3 xl:col-span-3">
         <Filters
           handleFilterChange={handleFilterChange}
           handleSortChange={handleSortChange}
@@ -108,16 +108,16 @@ export default function Products() {
         />
       </div>
       {/* Products Section */}
-      <div className="col-span-10 pl-4">
-        <h1 className="text-2xl md:text-3xl mb-4 text-black text-center md:text-left font-semibold">
-          {productCategory[0].toUpperCase() + productCategory.slice(1)}
+      <div className="md:col-span-9 xl:col-span-9 pl-2">
+        <h1 className="text-2xl md:text-3xl mb-4 text-black text-center md:text-left font-semibold capitalize">
+          {productCategory}
         </h1>
 
-        <div className="flex flex-wrap justify-center">
+        <div className="grid md:grid-cols-2 xl:grid-cols-3 justify-items-center md:justify-items-start">
           {isLoading ? (
             <p>Loading...</p>
           ) : error ? (
-            <div className="h-screen w-screen flex flex-col justify-center items-center mx-0 md:mx-0 bg-red-600">
+            <div className="h-screen w-screen flex flex-col justify-center items-center bg-red-600">
               <p className="text-white md:text-2xl text-center">
                 {error.error ? error.error : error.message}
               </p>

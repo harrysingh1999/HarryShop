@@ -11,10 +11,9 @@ export default function Filters({
   return (
     <div className="">
       <div className="border-b pb-4 mb-4">
-        <h2 className="text-xl font-semibold mb-2">Filters</h2>
-
+        <h2 className="text-xl font-bold mb-4">Filters</h2>
         <div className="mb-4">
-          <h3 className="font-medium mb-2">Sort By</h3>
+          <h3 className="font-semibold mb-2">Sort By</h3>
           {sortingArr.map((sort) => (
             <label key={sort.name} className="block mb-2">
               <input
@@ -32,7 +31,7 @@ export default function Filters({
 
         {/* Ratings Filter */}
         <div className="mb-4">
-          <h3 className="font-medium mb-2">Ratings</h3>
+          <h3 className="font-semibold mb-2">Ratings</h3>
           {ratingArr.map((rating) => (
             <label key={rating} className="block mb-2">
               <input

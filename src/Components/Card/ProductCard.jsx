@@ -17,7 +17,7 @@ export default function ProductCard({
   return (
     <div
       className="flex flex-col items-center rounded-xl mb-6 md:mb-8 mx-2
-          cursor-pointer pt-2 pb-3 px-3 w-[230px] md:w-[250px] lg:w-[270px]"
+          cursor-pointer pt-2 pb-3 px-3 w-[230px] md:w-[250px] lg:w-[280px]"
       style={{
         boxShadow: `rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px`,
       }}
@@ -69,7 +69,7 @@ export default function ProductCard({
             </button>
           </div>
         ) : (
-          <div className="flex flex-col gap-2 md:flex-row font-semibold lg:font-bold mt-2">
+          <div className="flex flex-col gap-2 lg:flex-row font-semibold lg:font-bold mt-2">
             <CustomButton
               text={btnText1}
               handleClick={() => handleAddtoCart(data, data.id)}
