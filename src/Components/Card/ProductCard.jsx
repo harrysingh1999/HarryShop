@@ -1,4 +1,3 @@
-import React from "react";
 import Ratings from "../Ratings/Ratings";
 import CustomButton from "../CustomButton/CustomButton";
 

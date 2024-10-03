@@ -1,7 +1,5 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
-import { nanoid } from "@reduxjs/toolkit";
 
 export default function Orders() {
   const auth = useSelector((state) => state.auth.isAuthenticated);
@@ -21,7 +19,7 @@ export default function Orders() {
       </h1>
       {confirmedOrders && auth ? (
         confirmedOrders.map((order) => (
-          <div key={nanoid()}>
+          <div key={crypto.randomUUID()}>
             <div className="mx-3.5 md:mx-8 mt-8 bg-white max-w-7xl px-2 md:px-8 rounded-xl">
               <div className="border-t border-gray-200 py-3 md:py-4 px-2 sm:px-6">
                 <h1
@@ -90,7 +88,7 @@ export default function Orders() {
                   <p> {order.totalOrderedQty} items</p>
                 </div>
                 <p className="mt-0.5 text-sm text-gray-500">
-                  Order Id: #{nanoid()}
+                  Order Id: #{crypto.randomUUID()}
                 </p>
                 <p> Payment Mode: {order.paymentMethod} </p>
 

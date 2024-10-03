@@ -1,4 +1,3 @@
-import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -12,7 +11,10 @@ export default function ProductCarousel({ product, setImageFunc }) {
   );
 
   const CustomNextArrow = (props) => (
-    <div className="absolute left-6 lg:left-12 -bottom-4" onClick={props.onClick}>
+    <div
+      className="absolute left-6 lg:left-12 -bottom-4"
+      onClick={props.onClick}
+    >
       <FaChevronDown />
     </div>
   );
@@ -45,7 +47,7 @@ export default function ProductCarousel({ product, setImageFunc }) {
               className="w-16 h-16 lg:w-28 lg:h-28 object-cover rounded-xl border border-black/30"
               src={img}
               alt={product.title}
-              loading="eager"
+              loading="lazy"
               onClick={() => setImageFunc(index)}
             />
           </div>

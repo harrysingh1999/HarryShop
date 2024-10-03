@@ -7,7 +7,14 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function CustomSnackbar({ open, wishlistOpen, setOpen, setWishlistOpen, snackbarMessage, snackbarMessage2}) {
+export default function CustomSnackbar({
+  open,
+  wishlistOpen,
+  setOpen,
+  setWishlistOpen,
+  snackbarMessage,
+  snackbarMessage2,
+}) {
   const auth = useSelector((state) => state.auth.isAuthenticated);
 
   const handleClose = (event, reason) => {

@@ -1,32 +1,31 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { bannerSlider } from "../../utils/constants";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useGetBannerDetailsQuery } from "../../Reduxtoolkit/apiSlice/apiSlice";
 
 export default function Banner({ data, handleProduct }) {
   const [bannerData, setBannerData] = useState([]);
   const [propData, setPropData] = useState(data[0]);
 
-  useEffect(() => {
-    const fetchBannerDetails = async () => {
-      let response = await axios.get(
-        `https://dummyjson.com/products/category/${propData}`
-      );
+  const { data: fetchedBannerData } = useGetBannerDetailsQuery(propData);
 
-      if (bannerData.length === 0) {
-        setPropData(data[1]);
-        setBannerData(response.data.products.slice(0, 2));
-      } else if (bannerData.length > 0 && bannerData.length < 3) {
-        let obj = response.data.products[0];
-        setBannerData((prevState) => {
-          return [...prevState, obj];
-        });
-      }
-    };
-    fetchBannerDetails();
-  }, [propData]);
+  useEffect(() => {
+    if (fetchedBannerData && bannerData.length === 0) {
+      setPropData(data[1]);
+      setBannerData(fetchedBannerData.products.slice(0, 2));
+    } else if (
+      fetchedBannerData &&
+      bannerData.length > 0 &&
+      bannerData.length < 3
+    ) {
+      let obj = fetchedBannerData.products[0];
+      setBannerData((prevState) => {
+        return [...prevState, obj];
+      });
+    }
+  }, [fetchedBannerData]);
 
   return (
     <div className="bg-black focus:outline-none">
@@ -38,7 +37,6 @@ export default function Banner({ data, handleProduct }) {
                 <img
                   src={item.images[0] || item.thumbnail}
                   alt={item.title}
-                  loading="eager"
                   className="w-screen h-screen object-cover"
                 />
                 <div

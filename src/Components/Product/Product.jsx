@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,11 +10,11 @@ import ProductCarousel from "./ProductCarousel";
 import { snackbarMessage, snackbarMessage2 } from "../../utils/constants";
 import ProductReview from "./ProductReview";
 import CustomButton from "../CustomButton/CustomButton";
+import { useGetProductDetailsQuery } from "../../Reduxtoolkit/apiSlice/apiSlice";
 
 export default function Product() {
   const [open, setOpen] = React.useState(false);
   const [wishlistOpen, setWishlistOpen] = useState(false);
-  const [error, setError] = useState(null);
   const [product, setProduct] = useState(null);
   const auth = useSelector((state) => state.auth.isAuthenticated);
 
@@ -33,21 +32,12 @@ export default function Product() {
     setWishlistOpen(true);
   };
 
-  useEffect(() => {
-    const fetchedProduct = async () => {
-      try {
-        let response = await axios.get(
-          `https://dummyjson.com/products/${productId}`
-        );
-        console.log(response.data);
+  const { data: fetchedProductData, error } =
+    useGetProductDetailsQuery(productId);
 
-        setProduct(response.data);
-      } catch (error) {
-        setError(error);
-      }
-    };
-    fetchedProduct();
-  }, []);
+  useEffect(() => {
+    fetchedProductData && setProduct(fetchedProductData);
+  }, [fetchedProductData]);
 
   const [imageIdx, setImageIdx] = useState(0);
 
@@ -56,9 +46,13 @@ export default function Product() {
       {error ? (
         <div className="h-screen w-screen flex flex-col justify-center items-center mx-4 md:mx-0 bg-red-600">
           <p className=" text-white text-2xl">
-            Oops, API error: {error.message}.
+            {" "}
+            {error.error ? error.error : error.message}{" "}
           </p>
-          <p className=" text-white text-2xl"> Please try after sometime.</p>
+          <p className=" text-white text-2xl">
+            {" "}
+            API error: Please try after sometime.
+          </p>
         </div>
       ) : (
         product && (
@@ -78,8 +72,8 @@ export default function Product() {
                         ? product.images[imageIdx]
                         : product.thumbnail
                     }
+                    loading="lazy"
                     alt={product.title}
-                    loading='eager'
                     className="w-[100%] md:w-[60%] lg:w-[70%] object-cover rounded-3xl transition ease-in-out delay-25 hover:-translate-y-1 hover:scale-105
                 duration-300 cursor-pointer "
                   />

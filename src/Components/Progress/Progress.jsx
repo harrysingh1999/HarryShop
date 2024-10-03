@@ -2,10 +2,8 @@ import CheckIcon from "@mui/icons-material/Check";
 import CircularProgress from "@mui/material/CircularProgress";
 import { green } from "@mui/material/colors";
 import { Icon } from "@iconify/react";
-import React from "react";
 
 export default function Progress({ success, loading, handleOrder }) {
-
   return (
     <div
       className="relative mt-4 border border-black/40 py-2 rounded-xl
@@ -16,9 +14,11 @@ export default function Progress({ success, loading, handleOrder }) {
       ) : (
         <p className="inline-block  ">Order Now:</p>
       )}
-   
-      <div style={{ backgroundColor: success && "#50C878" }}
-        className="inline-block ms-2  border border-black rounded-full p-1 hover:bg-white hover:text-sky-700">
+
+      <div
+        style={{ backgroundColor: success && "#50C878" }}
+        className="inline-block ms-2  border border-black rounded-full p-1 hover:bg-white hover:text-sky-700"
+      >
         {success ? (
           <div className="flex items-center">
             <CheckIcon />

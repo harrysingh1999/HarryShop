@@ -4,7 +4,6 @@ import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
 import { categoryImages } from "../../utils/constants";
 import { Skeleton } from "@mui/material";
-import { nanoid } from "@reduxjs/toolkit";
 import Banner from "./Banner";
 import { useGetAllCategoriesQuery } from "../../Reduxtoolkit/apiSlice/apiSlice";
 
@@ -43,7 +42,7 @@ export default function Home() {
         {isLoading ? (
           Array.from({ length: 19 }).map(() => (
             <Card
-              key={nanoid()}
+              key={crypto.randomUUID()}
               className="max-w-min !rounded-t-3xl !rounded-b-3xl mb-6 md:mb-8 mx-2 !transition ease-in-out !delay-25 
               hover:-translate-y-1 hover:scale-110 !duration-300 !bg-gray-300 hover:!shadow-lg hover:!shadow-sky-500 
               cursor-pointer"
@@ -80,7 +79,7 @@ export default function Home() {
                   src={categoryImages[category.name]}
                   alt={category.name}
                   className="h-40 w-44"
-                  loading="eager"
+                  loading="lazy"
                 />
                 <p className="text-black">{category.name}</p>
               </div>

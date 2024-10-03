@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -37,9 +37,12 @@ export default function Products() {
     isLoading,
   } = useGetCategoryProductsQuery(productCategory);
 
+  console.log(fetchedCategoryProducts);
+  
+
   useEffect(() => {
     fetchedCategoryProducts && setProducts(fetchedCategoryProducts.products);
-    fetchedCategoryProducts && setMyFiltered(fetchedCategoryProducts?.products);
+    fetchedCategoryProducts && setMyFiltered(fetchedCategoryProducts.products);
   }, [fetchedCategoryProducts]);
 
   useEffect(() => {

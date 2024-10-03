@@ -3,7 +3,7 @@ import { FaBars } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { RiShoppingBag4Line } from "react-icons/ri";
 import { RxCross2 } from "react-icons/rx";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import useScroll from "../../utils/customHooks/useScroll";
 import { PiShoppingCartSimpleBold } from "react-icons/pi";
@@ -42,18 +42,15 @@ export default function Header() {
     dispatch(getWishlistQuantity());
   }, [cart]);
 
-  const handleSearchClick = (
-    category,
-    title,
-    id,
-    setUserSearch,
-    setfetchedSearchData
-  ) => {
-    setUserSearch(title);
-    setfetchedSearchData([]);
-    let urlEndpoint = title.split(" ").join("-");
-    navigate(`/${category}/${urlEndpoint}`, { state: id });
-  };
+  const handleSearchClick = useCallback(
+    (category, title, id, setUserSearch, setFetchedData) => {
+      setUserSearch(title);
+      setFetchedData([]);
+      let urlEndpoint = title.split(" ").join("-");
+      navigate(`/${category}/${urlEndpoint}`, { state: id });
+    },
+    []
+  );
 
   const handleLogout = () => {
     setUser(localStorage.removeItem("googleUser"));

@@ -1,4 +1,3 @@
-import React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -36,7 +35,9 @@ export default function CartTable({
                 src={item.thumbnail}
                 alt={item.title}
                 className="w-12 md:w-20 h-12 md:h-20 object-cover cursor-pointer rounded-xl"
-                onClick={() => handleProduct(item.title, item.id, item.category)}
+                onClick={() =>
+                  handleProduct(item.title, item.id, item.category)
+                }
               />
             </TableCell>
 
