@@ -43,9 +43,17 @@ export default function Header() {
   }, [cart]);
 
   const handleSearchClick = useCallback(
-    (category, title, id, setUserSearch, setFetchedData) => {
+    (
+      category,
+      title,
+      id,
+      setUserSearch,
+      setFetchedData,
+      setShowFetchedData
+    ) => {
       setUserSearch(title);
       setFetchedData([]);
+      setShowFetchedData(false);
       let urlEndpoint = title.split(" ").join("-");
       navigate(`/${category}/${urlEndpoint}`, { state: id });
     },

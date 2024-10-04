@@ -7,6 +7,7 @@ function SearchBar({ handleSearchClick }) {
   const [userSearch, setUserSearch] = useState("");
   const [delayedText, setDelayedText] = useState("");
   const [fetchedData, setFetchedData] = useState(null);
+  const [showFetchedData, setShowFetchedData] = useState(false);
 
   const {
     data: fetchedSearchedData,
@@ -18,6 +19,12 @@ function SearchBar({ handleSearchClick }) {
     setUserSearch(e.target.value);
   };
 
+  const handleClose = () => {
+    setUserSearch("");
+    setShowFetchedData(false);
+    setFetchedData([]);
+  };
+
   useEffect(() => {
     if (!userSearch) return;
     const timer = setTimeout(() => {
@@ -25,8 +32,17 @@ function SearchBar({ handleSearchClick }) {
     }, 300);
 
     setFetchedData(fetchedSearchedData?.products);
+    setShowFetchedData(true);
+    const handleShow = (e) => {
+      if (e.target.id !== "searchedItems" && e.target.id !== "input") {
+        setShowFetchedData(false);
+      }
+    };
+    document.body.addEventListener("click", handleShow);
+
     return () => {
       clearTimeout(timer);
+      document.body.removeEventListener("click", handleShow);
     };
   }, [userSearch, fetchedSearchedData]);
 
@@ -34,14 +50,16 @@ function SearchBar({ handleSearchClick }) {
     <>
       <IoIosSearch />
       <input
+        id="input"
         type="text"
         placeholder="Search"
         value={userSearch}
+        onFocus={() => setShowFetchedData(true)}
         onChange={(e) => handleSearch(e)}
-        className="w-[210px] md:w-[400px] pl-2 py-0.5 bg-transparent focus:outline-none"
+        className="w-[210px] md:w-[400px] pl-2 py-1 bg-transparent focus:outline-none"
       />
       {userSearch && (
-        <span onClick={() => setUserSearch("")}>
+        <span onClick={() => handleClose()}>
           <CloseIcon className="absolute right-4 top-2" />
         </span>
       )}
@@ -56,20 +74,21 @@ function SearchBar({ handleSearchClick }) {
           <p className=" text-white text-base"> Please try after sometime.</p>
         </div>
       ) : (
-        fetchedData?.length > 0 &&
+        showFetchedData &&
         fetchedData?.length !== 1 &&
-        userSearch && (
+        fetchedData?.length > 0 && (
           <div
-            className={`absolute text-black left-0 top-9 ${
-              fetchedData.length >= 16 ? "h-[82vh]" : "h-auto"
+            className={`absolute text-black left-0 top-10 ${
+              fetchedData.length >= 16 ? "h-[80vh]" : "h-auto"
             }
               w-full z-10 overflow-y-scroll`}
+            id="searchedItems"
           >
             {fetchedData.map((data) => {
               return (
                 <p
                   className="border-b border-black/30 bg-gray-200 first-of-type:rounded-t-md 
-                  last-of-type:rounded-b-md px-4 py-1 hover:bg-gray-300"
+                  last-of-type:rounded-b-md px-4 py-2 hover:bg-gray-300"
                   key={data.title}
                   onClick={() =>
                     handleSearchClick(
@@ -77,11 +96,12 @@ function SearchBar({ handleSearchClick }) {
                       data.title,
                       data.id,
                       setUserSearch,
-                      setFetchedData
+                      setFetchedData,
+                      setShowFetchedData
                     )
                   }
                 >
-                  {data.title}{" "}
+                  {data.title}
                 </p>
               );
             })}
