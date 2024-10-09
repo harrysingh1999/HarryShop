@@ -1,7 +1,7 @@
-import CheckIcon from "@mui/icons-material/Check";
 import CircularProgress from "@mui/material/CircularProgress";
 import { green } from "@mui/material/colors";
 import { Icon } from "@iconify/react";
+import { FaCheck } from "react-icons/fa";
 
 export default function Progress({ success, loading, handleOrder }) {
   return (
@@ -12,7 +12,7 @@ export default function Progress({ success, loading, handleOrder }) {
       {success ? (
         <p className=" inline-block">Ordered Successfully!</p>
       ) : (
-        <p className="inline-block  ">Order Now:</p>
+        <p className="inline-block">Order Now:</p>
       )}
 
       <div
@@ -21,7 +21,7 @@ export default function Progress({ success, loading, handleOrder }) {
       >
         {success ? (
           <div className="flex items-center">
-            <CheckIcon />
+            <FaCheck className="text-xl" />
           </div>
         ) : (
           <div className="flex items-center" onClick={handleOrder}>

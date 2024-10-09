@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import CloseIcon from "@mui/icons-material/Close";
 import { IoIosSearch } from "react-icons/io";
 import { useGetSearchDetailsQuery } from "../../Reduxtoolkit/apiSlice/apiSlice";
+import { IoCloseSharp } from "react-icons/io5";
 
 function SearchBar({ handleSearchClick }) {
   const [userSearch, setUserSearch] = useState("");
@@ -68,7 +68,7 @@ function SearchBar({ handleSearchClick }) {
       />
       {userSearch && (
         <span onClick={() => handleClose()}>
-          <CloseIcon className="absolute right-4 top-2" />
+          <IoCloseSharp className="absolute text-2xl right-4 top-2" />
         </span>
       )}
       {error ? (

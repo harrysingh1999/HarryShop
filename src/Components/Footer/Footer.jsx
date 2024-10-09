@@ -1,7 +1,5 @@
 import { NavLink } from "react-router-dom";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import InstagramIcon from "@mui/icons-material/Instagram";
+import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 export default function Footer() {
   return (
@@ -17,19 +15,19 @@ export default function Footer() {
                   href="https://github.com/harrysingh1999"
                   className="cursor-pointer"
                 >
-                  <GitHubIcon />
+                  <FaGithub className="text-xl" />
                 </a>
                 <a
                   href="https://www.linkedin.com/in/harvinder-singh-shahu-ab7b1b1a0/"
                   className="ml-3  cursor-pointer"
                 >
-                  <LinkedInIcon />
+                  <FaLinkedin className="text-xl" />
                 </a>
                 <a
                   href="https://www.instagram.com/harrysingh_1999/"
                   className="ml-3 cursor-pointer"
                 >
-                  <InstagramIcon />
+                  <FaInstagram className="text-xl" />
                 </a>
               </span>
             </div>

@@ -11,7 +11,6 @@ const CompressedImage = ({
 }) => {
   const [compressedImage, setCompressedImage] = useState(null);
 
-  // Compress image using the existing image URL without refetching it
   const compressImageFromUrl = async (url) => {
     try {
       const img = new Image();
@@ -27,16 +26,15 @@ const CompressedImage = ({
 
         canvas.toBlob(async (blob) => {
           const options = {
-            maxSizeMB: 0.5, // Adjust size as needed
+            maxSizeMB: 0.5, 
             maxWidthOrHeight: 1280,
             useWebWorker: true,
           };
 
-          // Compress the image Blob
           const compressedBlob = await imageCompression(blob, options);
           const compressedImageUrl = URL.createObjectURL(compressedBlob);
           setCompressedImage(compressedImageUrl);
-        }, "image/webp"); // You can also use 'image/webp' for further optimization
+        }, "image/webp"); 
       };
     } catch (error) {
       console.error("Error compressing the image:", error);
@@ -49,14 +47,11 @@ const CompressedImage = ({
 
   return (
     <img
-      src={compressedImage || thumbnail} // Use compressed image if available
-      alt={alt} // Provide default alt text
+      src={compressedImage || thumbnail}
+      alt={alt}
       onClick={onClickFunc}
-      loading={loading} // Lazy load the image
+      loading={loading}
       className={classes}
-      onError={(e) => {
-        e.target.src = imageUrl; // Fallback to original image if error occurs
-      }}
     />
   );
 };

@@ -3,7 +3,7 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import DeleteIcon from "@mui/icons-material/Delete";
+import { MdDelete } from "react-icons/md";
 
 export default function CartTable({
   cartItems,
@@ -34,6 +34,7 @@ export default function CartTable({
               <img
                 src={item.thumbnail}
                 alt={item.title}
+                loading="lazy"
                 className="w-12 md:w-20 h-12 md:h-20 object-cover cursor-pointer rounded-xl"
                 onClick={() =>
                   handleProduct(item.title, item.id, item.category)
@@ -79,7 +80,7 @@ export default function CartTable({
                 className="p-1 rounded-lg "
                 onClick={() => handleRemoveCartItem(item.id)}
               >
-                <DeleteIcon />
+                <MdDelete className="text-2xl" />
               </button>
             </TableCell>
           </TableRow>

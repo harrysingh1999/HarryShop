@@ -1,6 +1,5 @@
 import Ratings from "../Ratings/Ratings";
 import CustomButton from "../CustomButton/CustomButton";
-import CompressedImage from "../CompressedImage";
 
 export default function ProductCard({
   data,
