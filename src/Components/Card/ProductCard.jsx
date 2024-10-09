@@ -1,5 +1,6 @@
 import Ratings from "../Ratings/Ratings";
 import CustomButton from "../CustomButton/CustomButton";
+import CompressedImage from "../CompressedImage";
 
 export default function ProductCard({
   data,
@@ -28,6 +29,7 @@ export default function ProductCard({
         loading="lazy"
         onClick={() => handleProduct(data.title, data.id, data.category)}
       />
+      
       <div className="text-center text-sm md:text-base w-full">
         <p className="text-black">{data.title}</p>
         <p className="font-bold">

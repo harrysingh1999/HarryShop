@@ -37,9 +37,6 @@ export default function Products() {
     isLoading,
   } = useGetCategoryProductsQuery(productCategory);
 
-  console.log(fetchedCategoryProducts);
-  
-
   useEffect(() => {
     fetchedCategoryProducts && setProducts(fetchedCategoryProducts.products);
     fetchedCategoryProducts && setMyFiltered(fetchedCategoryProducts.products);

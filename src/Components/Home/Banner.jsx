@@ -4,6 +4,7 @@ import { bannerSlider } from "../../utils/constants";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useGetBannerDetailsQuery } from "../../Reduxtoolkit/apiSlice/apiSlice";
+import CompressedImage from "../CompressedImage";
 
 export default function Banner({ data, handleProduct }) {
   const [bannerData, setBannerData] = useState([]);
@@ -34,10 +35,16 @@ export default function Banner({ data, handleProduct }) {
           bannerData.map((item) => {
             return (
               <div key={item.title} className="relative">
-                <img
+                {/* <img
                   src={item.images[0] || item.thumbnail}
                   alt={item.title}
                   className="w-screen h-screen object-cover"
+                /> */}
+                <CompressedImage
+                  imageUrl={item.images[0] || item.thumbnail}
+                  thumbnail={item.thumbnail}
+                  alt={item.title}
+                  classes="w-screen h-screen object-cover"
                 />
                 <div
                   id="imageText"

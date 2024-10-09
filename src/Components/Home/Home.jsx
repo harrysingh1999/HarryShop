@@ -6,6 +6,7 @@ import { categoryImages } from "../../utils/constants";
 import { Skeleton } from "@mui/material";
 import Banner from "./Banner";
 import { useGetAllCategoriesQuery } from "../../Reduxtoolkit/apiSlice/apiSlice";
+import CompressedImage from "../CompressedImage";
 
 export default function Home() {
   const [categories, setCategories] = useState(null);
@@ -59,7 +60,10 @@ export default function Home() {
               {" "}
               {error.error ? error.error : error.message}{" "}
             </p>
-            <p className=" text-white text-2xl"> API error: Please try after sometime.</p>
+            <p className=" text-white text-2xl">
+              {" "}
+              API error: Please try after sometime.
+            </p>
           </div>
         ) : (
           categories &&
@@ -81,6 +85,12 @@ export default function Home() {
                   className="h-40 w-44"
                   loading="lazy"
                 />
+                {/* <CompressedImage
+                  alt={category.name}
+                  imageUrl={categoryImages[category.name]}
+                  classes="h-40 w-44"
+                  loading="lazy"
+                /> */}
                 <p className="text-black">{category.name}</p>
               </div>
             );

@@ -61,7 +61,7 @@ export const bannerSlider = {
   slidesToShow: 1,
   slidesToScroll: 1,
   arrows: false,
-  autoplay: true,
+  autoplay: false,
   pauseOnHover: false,
 };
 

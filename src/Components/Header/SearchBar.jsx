@@ -25,6 +25,22 @@ function SearchBar({ handleSearchClick }) {
     setFetchedData([]);
   };
 
+  const handleShowFetchedData = (e) => {
+    if (e.target.id !== "searchedItems" && e.target.id !== "input") {
+      console.log("eventListener added");
+      setShowFetchedData(false);
+    }
+  };
+
+  useEffect(() => {
+    showFetchedData &&
+      document.body.addEventListener("click", handleShowFetchedData);
+
+    return () => {
+      document.body.removeEventListener("click", handleShowFetchedData);
+    };
+  }, [showFetchedData]);
+
   useEffect(() => {
     if (!userSearch) return;
     const timer = setTimeout(() => {
@@ -32,17 +48,9 @@ function SearchBar({ handleSearchClick }) {
     }, 300);
 
     setFetchedData(fetchedSearchedData?.products);
-    setShowFetchedData(true);
-    const handleShow = (e) => {
-      if (e.target.id !== "searchedItems" && e.target.id !== "input") {
-        setShowFetchedData(false);
-      }
-    };
-    document.body.addEventListener("click", handleShow);
 
     return () => {
       clearTimeout(timer);
-      document.body.removeEventListener("click", handleShow);
     };
   }, [userSearch, fetchedSearchedData]);
 
@@ -68,14 +76,15 @@ function SearchBar({ handleSearchClick }) {
           className="absolute top-10 z-10 py-5 h-max w-full flex flex-col justify-center items-center 
         mx-4 md:mx-0 bg-red-600 rounded-xl"
         >
-          <p className=" text-white text-base">
+          <p className="text-white text-base">
             Oops, API error: {error.message}.
           </p>
-          <p className=" text-white text-base"> Please try after sometime.</p>
+          <p className="text-white text-base"> Please try after sometime.</p>
         </div>
       ) : (
         showFetchedData &&
         fetchedData?.length !== 1 &&
+        userSearch &&
         fetchedData?.length > 0 && (
           <div
             className={`absolute text-black left-0 top-10 ${

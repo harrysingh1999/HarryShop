@@ -11,6 +11,7 @@ import { snackbarMessage, snackbarMessage2 } from "../../utils/constants";
 import ProductReview from "./ProductReview";
 import CustomButton from "../CustomButton/CustomButton";
 import { useGetProductDetailsQuery } from "../../Reduxtoolkit/apiSlice/apiSlice";
+import CompressedImage from "../CompressedImage";
 
 export default function Product() {
   const [open, setOpen] = React.useState(false);
@@ -66,16 +67,29 @@ export default function Product() {
                   />
                 </div>
                 <div className="flex items-baseline justify-center">
-                  <img
-                    src={
+                  {/* <img
+                      src={
+                        product.images.length > 0
+                          ? product.images[imageIdx]
+                          : product.thumbnail
+                      }
+                      loading="lazy"
+                      alt={product.title}
+                      className="rounded-3xl transition ease-in-out delay-25 hover:-translate-y-1 hover:scale-105
+                duration-300 cursor-pointer "
+                    /> */}
+
+                  <CompressedImage
+                    imageUrl={
                       product.images.length > 0
                         ? product.images[imageIdx]
                         : product.thumbnail
                     }
-                    loading="lazy"
+                    thumbnail={product.thumbnail}
                     alt={product.title}
-                    className="w-[100%] md:w-[60%] lg:w-[70%] object-cover rounded-3xl transition ease-in-out delay-25 hover:-translate-y-1 hover:scale-105
-                duration-300 cursor-pointer "
+                    loading="lazy"
+                    classes="rounded-3xl transition ease-in-out delay-25 hover:-translate-y-1 
+                hover:scale-105 duration-300 cursor-pointer"
                   />
                 </div>
               </div>
@@ -85,17 +99,13 @@ export default function Product() {
                   {product.title}
                 </h1>
                 <div className="text-sm md:text-base">
-                  <p>Brand: {product?.brand} </p>
-                  <p>
-                    Units Left:{" "}
-                    {product.stock > 0 ? product.stock : "Out of Stock"}{" "}
-                  </p>
-                  <div className="flex gap-2">
-                    <span>Price: </span>
-                    <span className="font-bold">
-                      Rs. {(product.price * 84).toLocaleString("en-IN")}{" "}
-                    </span>
-                  </div>
+                  {product.brand && <p>Brand: {product.brand} </p>}
+                  {product.stock && (
+                    <p>
+                      Units Left:{" "}
+                      {product.stock > 0 ? product.stock : "Out of Stock"}{" "}
+                    </p>
+                  )}
                   <div className="flex">
                     <span className="line-through mr-1">
                       Rs.{" "}
@@ -109,11 +119,24 @@ export default function Product() {
                       ({product.discountPercentage}% off)
                     </span>
                   </div>
-                  <p>Miniumum Order Quantity: {product.minimumOrderQuantity}</p>
+                  <div className="flex gap-2">
+                    <span>Price: </span>
+                    <span className="font-bold">
+                      Rs. {(product.price * 84).toLocaleString("en-IN")}{" "}
+                    </span>
+                  </div>
+
+                  {product.minimumOrderQuantity > 1 && (
+                    <p>
+                      Miniumum Order Quantity: {product.minimumOrderQuantity}
+                    </p>
+                  )}
                   <p>Rating: {product.rating}/5 </p>
-                  <p className="mb-4 mt-1">
-                    Description: {product.description}.
-                  </p>
+                  {product.description && (
+                    <p className="mb-4 mt-1">
+                      Description: {product.description}.
+                    </p>
+                  )}
                   <div className="flex flex-col gap-2 md:flex-row font-semibold lg:font-bold">
                     <CustomButton
                       text="Add to Cart"

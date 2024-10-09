@@ -2,6 +2,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
+import CompressedImage from "../CompressedImage";
+import { useCallback } from "react";
 
 export default function ProductCarousel({ product, setImageFunc }) {
   const CustomPrevArrow = (props) => (
@@ -42,13 +44,23 @@ export default function ProductCarousel({ product, setImageFunc }) {
         className="relative focus:outline-none cursor-pointer"
       >
         {product.images.map((img, index) => (
-          <div key={crypto.randomUUID()} className="">
-            <img
-              className="w-16 h-16 lg:w-28 lg:h-28 object-cover rounded-xl border border-black/30"
-              src={img}
+          <div key={crypto.randomUUID()}>
+            {/* <img
+                className="w-16 h-16 lg:w-28 lg:h-28 object-cover rounded-xl border border-black/30"
+                src={img}
+                alt={product.title}
+                loading="lazy"
+                decoding="async"
+                onClick={() => setImageFunc(index)}
+              /> */}
+
+            <CompressedImage
+              thumbnail={product.thumbnail}
+              imageUrl={img}
               alt={product.title}
+              onClickFunc={useCallback(() => setImageFunc(index), [])}
+              classes="w-16 h-16 lg:w-28 lg:h-28 object-cover rounded-xl border border-black/30"
               loading="lazy"
-              onClick={() => setImageFunc(index)}
             />
           </div>
         ))}
