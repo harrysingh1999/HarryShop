@@ -140,10 +140,14 @@ export default function Product() {
                   <div className="flex flex-col gap-2 md:flex-row font-semibold lg:font-bold">
                     <CustomButton
                       text="Add to Cart"
+                      classes="border border-black/40 w-[100%] p-1.5 md:p-2 text-sm rounded-lg hover:bg-black hover:text-white
+            transition duration-300 ease-in-out"
                       handleClick={() => handleAddtoCart(product)}
                     />
                     <CustomButton
                       text="Add to Wishlist"
+                      classes="border border-black/40 w-[100%] p-1.5 md:p-2 text-sm rounded-lg hover:bg-black hover:text-white
+            transition duration-300 ease-in-out"
                       handleClick={() => handleAddtoWishlist(product)}
                     />
                   </div>

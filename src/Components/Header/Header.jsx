@@ -124,7 +124,7 @@ export default function Header() {
               </NavLink>
 
               <NavLink to="/Wishlist">
-                <div className="flex relative flex-row items-center gap-4 border-b border-black/30 pb-2 lg:border-none lg:pb-0 lg:gap-0 lg:flex-col lg:justify-center lg:items-center">
+                <div className="flex cursor-pointer relative flex-row items-center gap-4 border-b border-black/30 pb-2 lg:border-none lg:pb-0 lg:gap-0 lg:flex-col lg:justify-center lg:items-center">
                   {cart.totalwishlistQuantity > 0 && (
                     <sup className="absolute top-0 right-0 text-red-600 font-bold text-[15px]">
                       {cart.totalwishlistQuantity}
@@ -136,7 +136,7 @@ export default function Header() {
               </NavLink>
 
               <NavLink to="/Cart">
-                <div className="flex relative flex-row items-center gap-4 border-b border-black/30 pb-2 lg:border-none lg:pb-0 lg:gap-0 lg:flex-col lg:justify-center lg:items-center">
+                <div className="flex relative cursor-pointer flex-row items-center gap-4 border-b border-black/30 pb-2 lg:border-none lg:pb-0 lg:gap-0 lg:flex-col lg:justify-center lg:items-center">
                   {cart.totalCartQuantity > 0 && (
                     <sup className="absolute top-0 -right-2 text-red-600 font-bold text-[15px]">
                       {cart.totalCartQuantity}
@@ -150,7 +150,7 @@ export default function Header() {
                 <>
                   <NavLink to="/Orders">
                     <button
-                      className={`flex items-center px-2 py-1 rounded-lg border relative ${
+                      className={`flex items-center px-2 py-1 rounded-lg border cursor-pointer relative ${
                         scrolled ? "border-black/40" : "border-white"
                       } `}
                     >
@@ -166,7 +166,7 @@ export default function Header() {
                   </NavLink>
                   <button
                     onClick={handleLogout}
-                    className={`flex items-center px-3 py-0 rounded-lg border relative ${
+                    className={`flex items-center px-3 py-0 rounded-lg border cursor-pointer relative ${
                       scrolled ? "border-black/40" : "border-white"
                     } `}
                   >
@@ -175,7 +175,7 @@ export default function Header() {
                 </>
               ) : (
                 <div
-                  className={`flex items-center px-2 py-1.5 gap-1 rounded-lg border relative ${
+                  className={`flex items-center cursor-pointer px-2 py-1.5 gap-1 rounded-lg border relative ${
                     scrolled ? "border-black/40" : "border-white"
                   } `}
                 >

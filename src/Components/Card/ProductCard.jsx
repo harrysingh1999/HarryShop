@@ -29,7 +29,7 @@ export default function ProductCard({
         loading="lazy"
         onClick={() => handleProduct(data.title, data.id, data.category)}
       />
-      
+
       <div className="text-center text-sm md:text-base w-full">
         <p className="text-black">{data.title}</p>
         <p className="font-bold">
@@ -75,9 +75,13 @@ export default function ProductCard({
             <CustomButton
               text={btnText1}
               handleClick={() => handleAddtoCart(data, data.id)}
+              classes="border border-black/40 w-[100%] p-1.5 md:p-2 text-sm rounded-lg hover:bg-black hover:text-white
+            transition duration-300 ease-in-out"
             />
             <CustomButton
               text={btnText2}
+              classes="border border-black/40 w-[100%] p-1.5 md:p-2 text-sm rounded-lg hover:bg-black hover:text-white
+            transition duration-300 ease-in-out"
               handleClick={() =>
                 handleAddtoWishlist
                   ? handleAddtoWishlist(data)

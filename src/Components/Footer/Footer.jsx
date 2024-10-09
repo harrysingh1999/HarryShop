@@ -15,7 +15,7 @@ export default function Footer() {
               <span className="inline-flex justify-center mb-2 sm:ml-auto sm:mt-0 sm:justify-start">
                 <a
                   href="https://github.com/harrysingh1999"
-                  className=" cursor-pointer"
+                  className="cursor-pointer"
                 >
                   <GitHubIcon />
                 </a>
@@ -27,7 +27,7 @@ export default function Footer() {
                 </a>
                 <a
                   href="https://www.instagram.com/harrysingh_1999/"
-                  className="ml-3  cursor-pointer"
+                  className="ml-3 cursor-pointer"
                 >
                   <InstagramIcon />
                 </a>
@@ -40,15 +40,11 @@ export default function Footer() {
                 About
               </h2>
               <nav className="mb-10 list-none">
-                <li className="mt-3">
-                  <a className=" cursor-pointer">Company</a>
-                </li>
-                <li className="mt-3">
-                  <a className=" cursor-pointer">Careers</a>
-                </li>
-                <li className="mt-3">
-                  <a className=" cursor-pointer">Blog</a>
-                </li>
+                <ul>
+                  <li className="mt-3">Company</li>
+                  <li className="mt-3">Careers</li>
+                  <li className="mt-3">Blog</li>
+                </ul>
               </nav>
             </div>
             <div className="w-full px-4 lg:w-1/4 md:w-1/2">
@@ -56,15 +52,11 @@ export default function Footer() {
                 Support
               </h2>
               <nav className="mb-10 list-none">
-                <li className="mt-3">
-                  <a className=" cursor-pointer">Contact Support</a>
-                </li>
-                <li className="mt-3">
-                  <a className=" cursor-pointer">Help Resources</a>
-                </li>
-                <li className="mt-3">
-                  <a className=" cursor-pointer">Release Updates</a>
-                </li>
+                <ul>
+                  <li className="mt-3">Contact Support</li>
+                  <li className="mt-3">Help Resources</li>
+                  <li className="mt-3">Release Updates</li>
+                </ul>
               </nav>
             </div>
             <div className="w-full px-4 lg:w-1/4 md:w-1/2">
@@ -72,15 +64,11 @@ export default function Footer() {
                 Platform
               </h2>
               <nav className="mb-10 list-none">
-                <li className="mt-3">
-                  <a className=" cursor-pointer">Terms &amp; Privacy</a>
-                </li>
-                <li className="mt-3">
-                  <a className=" cursor-pointer">Pricing</a>
-                </li>
-                <li className="mt-3">
-                  <a className=" cursor-pointer">FAQ</a>
-                </li>
+                <ul>
+                  <li className="mt-3">Terms &amp; Privacy</li>
+                  <li className="mt-3">Pricing</li>
+                  <li className="mt-3">FAQ</li>
+                </ul>
               </nav>
             </div>
             <div className="w-full px-4 lg:w-1/4 md:w-1/2">
@@ -88,13 +76,10 @@ export default function Footer() {
                 Contact
               </h2>
               <nav className="mb-10 list-none">
-                <li className="mt-3">
-                  <a className=" cursor-pointer">hs541156@gmail.com</a>
-                </li>
-
-                <li className="mt-3">
-                  <a className=" cursor-pointer">+91 88261 41160</a>
-                </li>
+                <ul>
+                  <li className="mt-3">hs541156@gmail.com</li>
+                  <li className="mt-3">+91 88261 41160</li>
+                </ul>
               </nav>
             </div>
           </div>

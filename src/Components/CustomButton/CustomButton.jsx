@@ -1,10 +1,6 @@
-export default function CustomButton({ text, handleClick }) {
+export default function CustomButton({ text, handleClick, classes }) {
   return (
-    <button
-      className="border border-black/40 w-[100%] p-1.5 md:p-2 text-sm rounded-lg hover:bg-black hover:text-white
-            transition duration-300 ease-in-out"
-      onClick={handleClick}
-    >
+    <button className={classes} onClick={handleClick}>
       {text}
     </button>
   );

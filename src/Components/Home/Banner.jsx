@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useGetBannerDetailsQuery } from "../../Reduxtoolkit/apiSlice/apiSlice";
 import CompressedImage from "../CompressedImage";
+import CustomButton from "../CustomButton/CustomButton";
 
 export default function Banner({ data, handleProduct }) {
   const [bannerData, setBannerData] = useState([]);
@@ -50,20 +51,20 @@ export default function Banner({ data, handleProduct }) {
                   id="imageText"
                   className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-white p-6 md:p-12"
                 >
-                  <p className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 md:mb-4">
+                  <p className="text-xl md:text-2xl font-bold mb-2 md:mb-4">
                     {item.title}
                   </p>
                   <p className="font-semibold text-lg md:text-xl lg:text-2xl mb-4 md:mb-6">
                     Rs. {(item.price * 84).toLocaleString("en-IN")}
                   </p>
-                  <button
-                    className="border border-white bg-black hover:bg-white hover:text-black transition duration-300 ease-in-out px-6 py-3 md:px-8 md:py-3 rounded-lg font-bold"
-                    onClick={() =>
+
+                  <CustomButton
+                    text="Shop Now"
+                    classes="border border-white bg-black hover:bg-white hover:text-black transition duration-300 ease-in-out px-6 py-3 md:px-8 md:py-3 rounded-lg font-bold"
+                    handleClick={() =>
                       handleProduct(item.title, item.id, item.category)
                     }
-                  >
-                    Shop Now
-                  </button>
+                  />
                 </div>
               </div>
             );

@@ -128,10 +128,21 @@ export default function Cart() {
               <CustomButton
                 text="Proceed to Checkout"
                 handleClick={handleProceed}
+                classes="border border-black/40 w-[100%] p-1.5 md:p-2 text-sm rounded-lg hover:bg-black hover:text-white
+            transition duration-300 ease-in-out"
               />
-              <CustomButton text="Clear Cart" handleClick={handleClearCart} />
+              <CustomButton
+                text="Clear Cart"
+                classes="border border-black/40 w-[100%] p-1.5 md:p-2 text-sm rounded-lg hover:bg-black hover:text-white
+            transition duration-300 ease-in-out"
+                handleClick={handleClearCart}
+              />
               <NavLink to="/">
-                <CustomButton text="Continue Shopping" />
+                <CustomButton
+                  classes="border border-black/40 w-[100%] p-1.5 md:p-2 text-sm rounded-lg hover:bg-black hover:text-white
+            transition duration-300 ease-in-out"
+                  text="Continue Shopping"
+                />
               </NavLink>
             </div>
           </div>
