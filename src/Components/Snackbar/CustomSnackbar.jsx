@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
@@ -32,7 +33,7 @@ export default function CustomSnackbar({
         autoHideDuration={3000}
         onClose={handleClose}
       >
-        {auth ? (
+        {auth || window.location.pathname !== "/OrderSummary" ? (
           <Alert
             onClose={handleClose}
             severity="success"

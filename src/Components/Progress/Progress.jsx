@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import CircularProgress from "@mui/material/CircularProgress";
 import { green } from "@mui/material/colors";
 import { Icon } from "@iconify/react";
@@ -6,7 +7,7 @@ import { FaCheck } from "react-icons/fa";
 export default function Progress({ success, loading, handleOrder }) {
   return (
     <div
-      className="relative mt-4 border border-black/40 py-2 rounded-xl
+      className="relative mt-4 border border-black/40 py-2 rounded-lg
      flex justify-center items-center"
     >
       {success ? (
@@ -16,8 +17,10 @@ export default function Progress({ success, loading, handleOrder }) {
       )}
 
       <div
-        style={{ backgroundColor: success && "#50C878" }}
-        className="inline-block ms-2  border border-black rounded-full p-1 hover:bg-white hover:text-sky-700"
+        className={`inline-block ${
+          success && 'bg-["#50C878"]'
+        } ms-2 border border-black
+         rounded-full cursor-pointer p-1 hover:text-sky-700`}
       >
         {success ? (
           <div className="flex items-center">

@@ -1,4 +1,3 @@
-import { configureStore, createSlice } from "@reduxjs/toolkit";
 import beautyImg from "../utils/Images/Beauty.png";
 import fragranceImg from "../utils/Images/Fragrance.png";
 import furnitureImg from "../utils/Images/furniture.png";
@@ -60,7 +59,7 @@ export const bannerSlider = {
   autoplaySpeed: 4000,
   slidesToShow: 1,
   slidesToScroll: 1,
-  arrows: false,
+  arrows: true,
   autoplay: false,
   pauseOnHover: false,
 };
@@ -69,6 +68,7 @@ export const bannerSlider = {
 
 export let snackbarMessage = "Product is added to Cart!";
 export let snackbarMessage2 = "Product is added to Wishlist!";
+export let snackbarRemoveMessage = "Item removed Successfully!";
 
 export const ratingArr = [1, 2, 3, 4];
 

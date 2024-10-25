@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Ratings from "../Ratings/Ratings";
 import CustomButton from "../CustomButton/CustomButton";
 
@@ -36,11 +37,11 @@ export default function ProductCard({
         </p>
 
         {btnText2 === "Add to Wishlist" && (
-          <div className="flex items-center justify-center">
+          <div className="flex items-start justify-center">
             <span>
               <Ratings rating={data.rating} />
             </span>
-            <span>{data.rating}</span>
+            <span className="ml-1 font-bold">{data.rating}</span>
           </div>
         )}
 

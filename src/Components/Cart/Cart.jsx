@@ -7,43 +7,39 @@ import {
   getTotalQuantity,
   emptyCart,
 } from "../../Reduxtoolkit/cartSlice/cartSlice";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import CartTable from "./CartTable";
 import ProductCard from "../Card/ProductCard";
 import CustomButton from "../CustomButton/CustomButton";
+import { snackbarRemoveMessage } from "../../utils/constants";
 
 export default function Cart() {
   const { cartItems, totalCartAmount, totalCartQuantity } = useSelector(
     (state) => state.cart
   );
   const [open, setOpen] = useState(false);
-  const auth = useSelector((state) => state.auth.isAuthenticated);
 
   let dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getTotal());
-  }, []);
-
   const handleRemoveCartItem = (id) => {
-    auth && dispatch(removeCartItem(id));
-    auth && dispatch(getTotal());
-    auth && dispatch(getTotalQuantity());
+    dispatch(removeCartItem(id));
+    dispatch(getTotal());
+    dispatch(getTotalQuantity());
     setOpen(true);
   };
 
   const handleDecrementItem = (id) => {
-    auth && dispatch(decrementItemQty(id));
-    auth && dispatch(getTotal());
-    auth && dispatch(getTotalQuantity());
+    dispatch(decrementItemQty(id));
+    dispatch(getTotal());
+    dispatch(getTotalQuantity());
   };
 
   const handleIncrementItem = (id) => {
-    auth && dispatch(incrementItemQty(id));
-    auth && dispatch(getTotal());
-    auth && dispatch(getTotalQuantity());
+    dispatch(incrementItemQty(id));
+    dispatch(getTotal());
+    dispatch(getTotalQuantity());
   };
 
   let navigate = useNavigate();
@@ -54,14 +50,12 @@ export default function Cart() {
   };
 
   const handleClearCart = () => {
-    auth && dispatch(emptyCart());
+    dispatch(emptyCart());
   };
 
   const handleProceed = () => {
-    auth && navigate("/OrderSummary");
+    navigate("/OrderSummary");
   };
-
-  let snackbarMessage = "Item removed Successfully!";
 
   return (
     <div>
@@ -69,14 +63,12 @@ export default function Cart() {
         Shopping Cart
       </h1>
 
-      {!auth || cartItems.length === 0 ? (
+      {cartItems.length === 0 ? (
         <div
           className="h-screen w-screen flex flex-col items-center justify-center md:text-2xl
          bg-red-500 mt-0 md:mt-10 px-4"
         >
-          <p className="text-white text-center">
-            Either Your Cart is Empty🥲 or you are not logged In.
-          </p>
+          <p className="text-white text-center">Your Cart is Empty🥲.</p>
           <NavLink to="/">
             <button className="bg-sky-600 hover:bg-sky-700 rounded-xl p-2 text-white mt-4 text-base">
               GO SHOP😊
@@ -151,7 +143,7 @@ export default function Cart() {
       <CustomSnackbar
         open={open}
         setOpen={setOpen}
-        snackbarMessage={snackbarMessage}
+        snackbarMessage={snackbarRemoveMessage}
       />
     </div>
   );

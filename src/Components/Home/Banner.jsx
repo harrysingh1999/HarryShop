@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { bannerSlider } from "../../utils/constants";
@@ -7,15 +9,15 @@ import { useGetBannerDetailsQuery } from "../../Reduxtoolkit/apiSlice/apiSlice";
 import CompressedImage from "../CompressedImage";
 import CustomButton from "../CustomButton/CustomButton";
 
-export default function Banner({ data, handleProduct }) {
+export default function Banner({ heroImageData, handleProduct }) {
   const [bannerData, setBannerData] = useState([]);
-  const [propData, setPropData] = useState(data[0]);
+  const [propData, setPropData] = useState(heroImageData[0]);
 
   const { data: fetchedBannerData } = useGetBannerDetailsQuery(propData);
 
   useEffect(() => {
     if (fetchedBannerData && bannerData.length === 0) {
-      setPropData(data[1]);
+      setPropData(heroImageData[1]);
       setBannerData(fetchedBannerData.products.slice(0, 2));
     } else if (
       fetchedBannerData &&
@@ -36,17 +38,13 @@ export default function Banner({ data, handleProduct }) {
           bannerData.map((item) => {
             return (
               <div key={item.title} className="relative">
-                {/* <img
-                  src={item.images[0] || item.thumbnail}
-                  alt={item.title}
-                  className="w-screen h-screen object-cover"
-                /> */}
                 <CompressedImage
                   imageUrl={item.images[0] || item.thumbnail}
                   thumbnail={item.thumbnail}
                   alt={item.title}
                   classes="w-screen h-screen object-cover"
                 />
+
                 <div
                   id="imageText"
                   className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50 text-white p-6 md:p-12"

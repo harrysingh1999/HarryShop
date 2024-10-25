@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   addCartItem,
   addWishlistItem,
@@ -9,6 +9,7 @@ import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import ProductCard from "../Card/ProductCard";
 import Filters from "./Filters";
 import { useGetCategoryProductsQuery } from "../../Reduxtoolkit/apiSlice/apiSlice";
+import { snackbarMessage, snackbarMessage2 } from "../../utils/constants";
 
 export default function Products() {
   const [products, setProducts] = useState([]);
@@ -26,7 +27,7 @@ export default function Products() {
 
   const [open, setOpen] = useState(false);
   const [wishlistOpen, setWishlistOpen] = useState(false);
-  const auth = useSelector((state) => state.auth.isAuthenticated);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -64,7 +65,7 @@ export default function Products() {
     setMyFiltered(filtered);
   }, [selectedRatings, sortOption, products]);
 
-  const handleFilterChange = (e, rating) => {
+  const handleFilterChange = (e) => {
     const { value } = e.target;
     setSelectedRatings([parseInt(value)]);
   };
@@ -86,12 +87,12 @@ export default function Products() {
   };
 
   const handleAddtoCart = (product) => {
-    auth && dispatch(addCartItem(product));
+    dispatch(addCartItem(product));
     setOpen(true);
   };
 
   const handleAddtoWishlist = (product) => {
-    auth && dispatch(addWishlistItem(product));
+    dispatch(addWishlistItem(product));
     setWishlistOpen(true);
   };
 
@@ -149,8 +150,8 @@ export default function Products() {
           wishlistOpen={wishlistOpen}
           setOpen={setOpen}
           setWishlistOpen={setWishlistOpen}
-          snackbarMessage="Item added to cart!"
-          snackbarMessage2="Item added to wishlist!"
+          snackbarMessage={snackbarMessage}
+          snackbarMessage2={snackbarMessage2}
         />
       </div>
     </div>

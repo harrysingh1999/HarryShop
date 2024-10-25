@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -13,8 +13,10 @@ import {
   removeCartItem,
   getTotal,
 } from "../../Reduxtoolkit/cartSlice/cartSlice";
-import { useNavigate, NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Progress from "../Progress/Progress";
+import CustomSnackbar from "../Snackbar/CustomSnackbar";
+import { snackbarMessage } from "../../utils/constants";
 
 export default function OrderSummary() {
   const cart = useSelector((state) => state.cart);
@@ -22,6 +24,7 @@ export default function OrderSummary() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const timer = useRef();
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     return () => {
@@ -32,18 +35,18 @@ export default function OrderSummary() {
   let dispatch = useDispatch();
 
   const handleIncrementItem = (id) => {
-    auth && dispatch(incrementItemQty(id));
-    auth && dispatch(getTotal());
+    dispatch(incrementItemQty(id));
+    dispatch(getTotal());
   };
 
   const handleDecrementItem = (id) => {
-    auth && dispatch(decrementItemQty(id));
-    auth && dispatch(getTotal());
+    dispatch(decrementItemQty(id));
+    dispatch(getTotal());
   };
 
   const handleRemoveCartItem = (id) => {
-    auth && dispatch(removeCartItem(id));
-    auth && dispatch(getTotal());
+    dispatch(removeCartItem(id));
+    dispatch(getTotal());
   };
 
   let navigate = useNavigate();
@@ -61,11 +64,12 @@ export default function OrderSummary() {
   };
 
   const handleOrder = () => {
+    setOpen(true);
     let itemsArray = JSON.parse(localStorage.getItem("confirmedOrders")) || [];
     auth && itemsArray.push(order);
-    auth && localStorage.setItem("confirmedOrders", JSON.stringify(itemsArray));
+    localStorage.setItem("confirmedOrders", JSON.stringify(itemsArray));
     auth && handleProgress();
-    emptySummary();
+    auth && emptySummary();
   };
 
   const handleProgress = () => {
@@ -83,7 +87,7 @@ export default function OrderSummary() {
     setTimeout(() => {
       navigate("/Orders");
       auth && dispatch(emptyCart());
-    }, 4000);
+    }, 3000);
   };
 
   return (
@@ -91,14 +95,16 @@ export default function OrderSummary() {
       <h1 className="text-center text-2xl md:text-4xl mt-20 md:mt-28 font-semibold">
         Order Summary
       </h1>
-      {!auth || cart.cartItems.length === 0 ? (
-        <div className="h-screen w-screen flex flex-col items-center justify-center md:text-2xl bg-red-500 mt-0 md:mt-10 px-4">
-          <p className="text-white text-center">
-            Either, Your Cart is Empty🥲 or you are not logged In.
-          </p>
+
+      {cart.cartItems.length === 0 ? (
+        <div
+          className="h-screen w-screen flex flex-col items-center justify-center md:text-2xl
+         bg-red-500 mt-0 md:mt-10 px-4"
+        >
+          <p className="text-white text-center">Your Cart is Empty 🥲.</p>
           <NavLink to="/">
-            <button className="bg-sky-600 hover:bg-sky-700 rounded-xl p-2 text-white mt-4 text-base">
-              GO SHOP😊
+            <button className="bg-sky-600 hover:bg-sky-700 rounded-lg p-2 text-white mt-4 text-base">
+              GO SHOP 😊
             </button>
           </NavLink>
         </div>
@@ -211,6 +217,12 @@ export default function OrderSummary() {
               handleOrder={handleOrder}
             />
           </div>
+
+          <CustomSnackbar
+            open={open}
+            setOpen={setOpen}
+            snackbarMessage={snackbarMessage}
+          />
         </div>
       )}
     </>

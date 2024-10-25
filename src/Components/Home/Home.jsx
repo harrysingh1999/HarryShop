@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
@@ -6,7 +6,6 @@ import { categoryImages } from "../../utils/constants";
 import { Skeleton } from "@mui/material";
 import Banner from "./Banner";
 import { useGetAllCategoriesQuery } from "../../Reduxtoolkit/apiSlice/apiSlice";
-import CompressedImage from "../CompressedImage";
 
 export default function Home() {
   const [categories, setCategories] = useState(null);
@@ -34,7 +33,7 @@ export default function Home() {
 
   return (
     <div>
-      <Banner data={["laptops", "mens-shoes"]} handleProduct={handleProduct} />
+      <Banner heroImageData={["laptops", "mens-shoes"]} handleProduct={handleProduct} />
       <h2 className="text-2xl md:text-3xl text-center mt-10 mb-6 text-black font-semibold">
         Explore Categories
       </h2>
@@ -63,7 +62,7 @@ export default function Home() {
             <p className=" text-white text-2xl">
               {" "}
               API error: Please try after sometime.
-            </p>
+            </p> 
           </div>
         ) : (
           categories &&
@@ -85,12 +84,6 @@ export default function Home() {
                   className="h-40 w-44"
                   loading="lazy"
                 />
-                {/* <CompressedImage
-                  alt={category.name}
-                  imageUrl={categoryImages[category.name]}
-                  classes="h-40 w-44"
-                  loading="lazy"
-                /> */}
                 <p className="text-black">{category.name}</p>
               </div>
             );
