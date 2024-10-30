@@ -9,11 +9,9 @@ function SearchBar({ handleSearchClick }) {
   const [fetchedData, setFetchedData] = useState(null);
   const [showFetchedData, setShowFetchedData] = useState(false);
 
-  const {
-    data: fetchedSearchedData,
-    error,
-    isLoading,
-  } = useGetSearchDetailsQuery(delayedText);
+  const { data: fetchedSearchedData, error } = useGetSearchDetailsQuery(delayedText, {
+    skip: !delayedText,
+  });
 
   const handleSearch = (e) => {
     setUserSearch(e.target.value);
@@ -27,7 +25,6 @@ function SearchBar({ handleSearchClick }) {
 
   const handleShowFetchedData = (e) => {
     if (e.target.id !== "searchedItems" && e.target.id !== "input") {
-      console.log("eventListener added");
       setShowFetchedData(false);
     }
   };
@@ -77,7 +74,7 @@ function SearchBar({ handleSearchClick }) {
         mx-4 md:mx-0 bg-red-600 rounded-xl"
         >
           <p className="text-white text-base">
-            Oops, API error: {error.message}.
+            Oops, API error: {error.message || error.status}.
           </p>
           <p className="text-white text-base"> Please try after sometime.</p>
         </div>
