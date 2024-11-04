@@ -44,16 +44,7 @@ export default function ProductCarousel({ product, setImageFunc }) {
         className="relative focus:outline-none cursor-pointer"
       >
         {product.images.map((img, index) => (
-          <div key={crypto.randomUUID()}>
-            {/* <img
-                className="w-16 h-16 lg:w-28 lg:h-28 object-cover rounded-xl border border-black/30"
-                src={img}
-                alt={product.title}
-                loading="lazy"
-                decoding="async"
-                onClick={() => setImageFunc(index)}
-              /> */}
-
+          <div key={crypto.randomUUID()} className="focus:outline-none">
             <CompressedImage
               thumbnail={product.thumbnail}
               imageUrl={img}

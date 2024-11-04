@@ -1,4 +1,3 @@
-import  { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
@@ -8,19 +7,13 @@ import Banner from "./Banner";
 import { useGetAllCategoriesQuery } from "../../Reduxtoolkit/apiSlice/apiSlice";
 
 export default function Home() {
-  const [categories, setCategories] = useState(null);
   let navigate = useNavigate();
-  categoryImages;
 
   const {
     data: fetchedCategories,
     isLoading,
     error,
   } = useGetAllCategoriesQuery();
-
-  useEffect(() => {
-    setCategories(fetchedCategories);
-  }, [fetchedCategories]);
 
   const handleCategory = (product) => {
     navigate(`/${product}`, { state: product });
@@ -33,7 +26,10 @@ export default function Home() {
 
   return (
     <div>
-      <Banner heroImageData={["laptops", "mens-shoes"]} handleProduct={handleProduct} />
+      <Banner
+        heroImageData={["laptops", "mens-shoes"]}
+        handleProduct={handleProduct}
+      />
       <h2 className="text-2xl md:text-3xl text-center mt-10 mb-6 text-black font-semibold">
         Explore Categories
       </h2>
@@ -62,11 +58,10 @@ export default function Home() {
             <p className=" text-white text-2xl">
               {" "}
               API error: Please try after sometime.
-            </p> 
+            </p>
           </div>
         ) : (
-          categories &&
-          categories.map((category) => {
+          fetchedCategories?.map((category) => {
             return (
               <div
                 key={category.name}

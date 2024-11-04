@@ -12,8 +12,15 @@ import { useGetCategoryProductsQuery } from "../../Reduxtoolkit/apiSlice/apiSlic
 import { snackbarMessage, snackbarMessage2 } from "../../utils/constants";
 
 export default function Products() {
-  const [products, setProducts] = useState([]);
   const [myFiltered, setMyFiltered] = useState([]);
+  const location = useLocation();
+  const productCategory = location.state;
+
+  const {
+    data: fetchedCategoryProducts,
+    error,
+    isLoading,
+  } = useGetCategoryProductsQuery(productCategory);
 
   const [selectedRatings, setSelectedRatings] = useState(() => {
     const savedRatings = JSON.parse(localStorage.getItem("selectedRatings"));
@@ -30,21 +37,15 @@ export default function Products() {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-  const productCategory = location.state;
-  const {
-    data: fetchedCategoryProducts,
-    error,
-    isLoading,
-  } = useGetCategoryProductsQuery(productCategory);
 
   useEffect(() => {
-    fetchedCategoryProducts && setProducts(fetchedCategoryProducts.products);
-    fetchedCategoryProducts && setMyFiltered(fetchedCategoryProducts.products);
-  }, [fetchedCategoryProducts]);
+    fetchedCategoryProducts && setMyFiltered(fetchedCategoryProducts?.products);
+  }, []);
 
   useEffect(() => {
-    let filtered = [...products];
+    let filtered = fetchedCategoryProducts && [
+      ...fetchedCategoryProducts.products,
+    ];
     // Save filter states to local storage
     localStorage.setItem("selectedRatings", JSON.stringify(selectedRatings));
     localStorage.setItem("sortOption", sortOption);
@@ -63,7 +64,9 @@ export default function Products() {
     }
 
     setMyFiltered(filtered);
-  }, [selectedRatings, sortOption, products]);
+  }, [selectedRatings, sortOption, fetchedCategoryProducts]);
+
+  if (!fetchedCategoryProducts) return;
 
   const handleFilterChange = (e) => {
     const { value } = e.target;
@@ -126,7 +129,7 @@ export default function Products() {
                 API error: Please try again later.
               </p>
             </div>
-          ) : myFiltered.length > 0 ? (
+          ) : myFiltered?.length > 0 ? (
             myFiltered.map((product) => (
               <ProductCard
                 key={product.id}

@@ -17,38 +17,38 @@ import Ratings from "../Ratings/Ratings";
 export default function Product() {
   const [open, setOpen] = React.useState(false);
   const [wishlistOpen, setWishlistOpen] = useState(false);
-  const [product, setProduct] = useState(null);
+  const [imageIdx, setImageIdx] = useState(0);
 
   let location = useLocation();
   let productId = location.state;
 
+  const {
+    data: fetchedProductData,
+    error,
+    isLoading,
+  } = useGetProductDetailsQuery(productId);
+
   let dispatch = useDispatch();
-  const handleAddtoCart = (product) => {
-    dispatch(addCartItem(product));
+
+  const handleAddtoCart = (productdata) => {
+    dispatch(addCartItem(productdata));
     setOpen(true);
   };
 
-  const handleAddtoWishlist = (product) => {
-    dispatch(addWishlistItem(product));
+  const handleAddtoWishlist = (productdata) => {
+    dispatch(addWishlistItem(productdata));
     setWishlistOpen(true);
   };
 
-  const { data: fetchedProductData, error } =
-    useGetProductDetailsQuery(productId);
-
-  useEffect(() => {
-    fetchedProductData && setProduct(fetchedProductData);
-  }, [fetchedProductData]);
-
-  const [imageIdx, setImageIdx] = useState(0);
-
   return (
     <div className="mx-5 md:mx-16 xl:mx-24 mt-24 lg:mt-20">
-      {error ? (
+      {isLoading ? (
+        <p className="w-screen h-screen text-center mt-24 lg:mt-24"> Loading...</p>
+      ) : error ? (
         <div className="h-screen w-screen flex flex-col justify-center items-center mx-4 md:mx-0 bg-red-600">
           <p className=" text-white text-2xl">
             {" "}
-            {error.error ? error.error : error.message}{" "}
+            {error.error || error.message}{" "}
           </p>
           <p className=" text-white text-2xl">
             {" "}
@@ -56,21 +56,24 @@ export default function Product() {
           </p>
         </div>
       ) : (
-        product && (
+        fetchedProductData && (
           <div className="flex flex-col lg:grid grid-flow-col grid-cols-12 mb-6">
             <div className="col-span-12 md:col-span-7 flex gap-4 md:gap-30 mt-4 lg:mt-14">
               <div>
-                <ProductCarousel product={product} setImageFunc={setImageIdx} />
+                <ProductCarousel
+                  product={fetchedProductData}
+                  setImageFunc={setImageIdx}
+                />
               </div>
               <div className="flex items-baseline justify-center">
                 <CompressedImage
                   imageUrl={
-                    product.images.length > 0
-                      ? product.images[imageIdx]
-                      : product.thumbnail
+                    fetchedProductData.images?.length > 0
+                      ? fetchedProductData.images[imageIdx]
+                      : fetchedProductData.thumbnail
                   }
-                  thumbnail={product.thumbnail}
-                  alt={product.title}
+                  thumbnail={fetchedProductData.thumbnail}
+                  alt={fetchedProductData.title}
                   loading="lazy"
                   classes="rounded-3xl transition ease-in-out delay-25 hover:-translate-y-1 
                 hover:scale-105 duration-300 cursor-pointer"
@@ -80,48 +83,61 @@ export default function Product() {
 
             <div className="col-span-12 md:col-span-6 p-3 flex flex-col mt-2 lg:mt-6">
               <h1 className="text-xl md:text-2xl xl:text-3xl mb-2 text-black font-semibold">
-                {product.title}
+                {fetchedProductData.title}
               </h1>
               <div className="text-sm md:text-base">
-                {product.brand && <p>Brand: {product.brand} </p>}
-                {product.stock && (
+                {fetchedProductData.brand && (
+                  <p>Brand: {fetchedProductData.brand} </p>
+                )}
+                {fetchedProductData.stock && (
                   <p>
                     Units Left:{" "}
-                    {product.stock > 0 ? product.stock : "Out of Stock"}{" "}
+                    {fetchedProductData.stock > 0
+                      ? fetchedProductData.stock
+                      : "Out of Stock"}{" "}
                   </p>
                 )}
                 <div className="flex">
                   <span className="line-through mr-1">
                     Rs.{" "}
                     {(
-                      product.price * 84 +
-                      (product.price * 84 * product.discountPercentage) / 100
+                      fetchedProductData.price * 84 +
+                      (fetchedProductData.price *
+                        84 *
+                        fetchedProductData.discountPercentage) /
+                        100
                     ).toLocaleString("en-IN")}
                   </span>
                   <span className="font-bold">
                     {" "}
-                    ({product.discountPercentage}% off)
+                    ({fetchedProductData.discountPercentage}% off)
                   </span>
                 </div>
                 <div className="flex gap-2">
                   <span>Price: </span>
                   <span className="font-bold">
-                    Rs. {(product.price * 84).toLocaleString("en-IN")}{" "}
+                    Rs.{" "}
+                    {(fetchedProductData.price * 84).toLocaleString("en-IN")}{" "}
                   </span>
                 </div>
 
-                {product.minimumOrderQuantity > 1 && (
-                  <p>Miniumum Order Quantity: {product.minimumOrderQuantity}</p>
+                {fetchedProductData.minimumOrderQuantity > 1 && (
+                  <p>
+                    Miniumum Order Quantity:{" "}
+                    {fetchedProductData.minimumOrderQuantity}
+                  </p>
                 )}
                 <div className="flex items-start">
                   <span>
-                    <Ratings rating={product.rating} />
+                    <Ratings rating={fetchedProductData.rating} />
                   </span>
-                  <span className="ml-1 font-bold">{product.rating}</span>
+                  <span className="ml-1 font-bold">
+                    {fetchedProductData.rating}
+                  </span>
                 </div>
-                {product.description && (
+                {fetchedProductData.description && (
                   <p className="mb-4 mt-1">
-                    Description: {product.description}
+                    Description: {fetchedProductData.description}
                   </p>
                 )}
                 <div className="flex flex-col gap-2 md:flex-row font-semibold lg:font-bold">
@@ -129,13 +145,13 @@ export default function Product() {
                     text="Add to Cart"
                     classes="border border-black/40 w-[100%] p-1.5 md:p-2 text-sm rounded-lg hover:bg-black hover:text-white
             transition duration-300 ease-in-out"
-                    handleClick={() => handleAddtoCart(product)}
+                    handleClick={() => handleAddtoCart(fetchedProductData)}
                   />
                   <CustomButton
                     text="Add to Wishlist"
                     classes="border border-black/40 w-[100%] p-1.5 md:p-2 text-sm rounded-lg hover:bg-black hover:text-white
             transition duration-300 ease-in-out"
-                    handleClick={() => handleAddtoWishlist(product)}
+                    handleClick={() => handleAddtoWishlist(fetchedProductData)}
                   />
                 </div>
 
@@ -146,20 +162,20 @@ export default function Product() {
                   <div className="text-sm md:text-base">
                     <p>
                       Category:{" "}
-                      {product.category[0].toUpperCase() +
-                        product.category.slice(1)}
+                      {fetchedProductData.category[0].toUpperCase() +
+                        fetchedProductData.category.slice(1)}
                     </p>
                     <p>
-                      Dimensions: {product.dimensions.depth} depth,{" "}
-                      {product.dimensions.width} width,{" "}
-                      {product.dimensions.height} height{" "}
+                      Dimensions: {fetchedProductData.dimensions?.depth} depth,{" "}
+                      {fetchedProductData.dimensions?.width} width,{" "}
+                      {fetchedProductData.dimensions?.height} height{" "}
                     </p>
-                    <p>Return Policy: {product.returnPolicy} </p>
-                    <p>Shipment: {product.shippingInformation} </p>
-                    <p>Warranty: {product.warrantyInformation} </p>
+                    <p>Return Policy: {fetchedProductData.returnPolicy} </p>
+                    <p>Shipment: {fetchedProductData.shippingInformation} </p>
+                    <p>Warranty: {fetchedProductData.warrantyInformation} </p>
                   </div>
                   <img
-                    src={product.meta.qrCode}
+                    src={fetchedProductData.meta?.qrCode}
                     alt="product-qrCode"
                     className="w-24 md:w-36 object-contain"
                   />
@@ -178,7 +194,9 @@ export default function Product() {
         snackbarMessage2={snackbarMessage2}
       />
 
-      {product && <ProductReview reviews={product.reviews} />}
+      {fetchedProductData && (
+        <ProductReview reviews={fetchedProductData.reviews} />
+      )}
     </div>
   );
 }
