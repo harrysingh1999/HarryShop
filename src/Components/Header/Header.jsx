@@ -10,11 +10,13 @@ import { PiShoppingCartSimpleBold } from "react-icons/pi";
 import SearchBar from "./SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getTotal,
   getTotalQuantity,
   getWishlistQuantity,
 } from "../../Reduxtoolkit/cartSlice/cartSlice";
 import { userLogOut, userLogin } from "../../Reduxtoolkit/authSlice/authSlice";
 import { jwtDecode } from "jwt-decode";
+import { useOnlineStatus } from "../../utils/customHooks/useOnlineStatus";
 
 export default function Header() {
   const [menu, setMenu] = useState("hidden");
@@ -40,7 +42,11 @@ export default function Header() {
   useEffect(() => {
     dispatch(getTotalQuantity());
     dispatch(getWishlistQuantity());
+    dispatch(getTotal())
   }, [cart]);
+
+  useScroll(setScrolled);
+  const onlineStatus = useOnlineStatus();
 
   const handleSearchClick = useCallback(
     (
@@ -65,8 +71,6 @@ export default function Header() {
     dispatch(userLogOut());
   };
 
-  useScroll(setScrolled);
-
   return (
     <>
       <nav
@@ -74,7 +78,7 @@ export default function Header() {
           scrolled
             ? "bg-white text-black shadow-lg"
             : "bg-transparent text-white"
-        } fixed w-full top-0 left-0 z-10 flex items-center justify-evenly md:justify-around py-4 lg:py-1`}
+        } fixed w-[90%] top-0 left-0 z-10 flex items-center justify-evenly md:justify-around py-4 lg:py-1`}
       >
         <FaBars
           className="text-2xl ml-2 md:ms-0 mr-2 lg:hidden cursor-pointer"
@@ -109,12 +113,28 @@ export default function Header() {
             </div>
 
             <div
-              className={`flex flex-col justify-around h-[60%] lg:flex-row lg:justify-around ${
-                auth && user ? "lg:w-[390px]" : "lg:w-[300px]"
+              className={`flex flex-col justify-around  h-[60%] lg:flex-row lg:justify-around ${
+                auth && user ? "lg:w-[550px]" : "lg:w-[450px]"
               } cursor-pointer ${
                 scrolled || menu === "block" ? "text-black" : "text-white"
               } ${menu === "block" && "mx-6 mt-4"} `}
             >
+              <div
+                className={`${
+                  scrolled ? "border-black/40" : "border-white"
+                } px-2 py-1 rounded-lg border flex items-center gap-2`}
+              >
+                <span>Status:</span>
+                <span
+                  className={`${
+                    onlineStatus ? "text-green-500" : "text-red-500"
+                  } font-semibold`}
+                >
+                  {" "}
+                  {onlineStatus ? "Online" : "Offline"}
+                </span>
+              </div>
+
               <NavLink
                 to="/"
                 className="flex items-center lg:hidden border-b border-black/30 pb-2 lg:border-none lg:pb-0"

@@ -102,13 +102,13 @@ export default function Cart() {
           </div>
 
           <div
-            className="rounded-lg md:ms-4 py-6 pl-4 pr-2 lg:w-[480px] xl:w-[500px]"
+            className="rounded-lg px-6 md:ms-4 py-6 lg:w-[480px] xl:w-[500px]"
             style={{
               boxShadow: `rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px`,
             }}
           >
-            <p className="text-2xl mb-4"> Cart Calculation </p>
-            <p className="text-lg font-semibold border-t  border-b border-black py-3">
+            <p className="text-2xl text-center mb-4"> Cart Calculation </p>
+            <p className="text-lg font-semibold border-b border-black py-3">
               Subtotal: Rs. {totalCartAmount.toLocaleString("en-IN")}
             </p>
             <p className="mb-4 py-3 border-b border-black font-semibold text-lg">
@@ -120,18 +120,18 @@ export default function Cart() {
               <CustomButton
                 text="Proceed to Checkout"
                 handleClick={handleProceed}
-                classes="border border-black/40 w-[100%] p-1.5 md:p-2 text-sm rounded-lg hover:bg-black hover:text-white
+                classes="border border-black/40 w-[100%] p-1.5 md:py-3 md:px-2 text-sm rounded-lg hover:bg-black hover:text-white
             transition duration-300 ease-in-out"
               />
               <CustomButton
                 text="Clear Cart"
-                classes="border border-black/40 w-[100%] p-1.5 md:p-2 text-sm rounded-lg hover:bg-black hover:text-white
+                classes="border border-black/40 w-[100%] p-1.5 md:py-3 md:px-2 text-sm rounded-lg hover:bg-black hover:text-white
             transition duration-300 ease-in-out"
                 handleClick={handleClearCart}
               />
               <NavLink to="/">
                 <CustomButton
-                  classes="border border-black/40 w-[100%] p-1.5 md:p-2 text-sm rounded-lg hover:bg-black hover:text-white
+                  classes="border border-black/40 w-[100%] p-1.5 md:py-3 md:px-2 text-sm rounded-lg hover:bg-black hover:text-white
             transition duration-300 ease-in-out"
                   text="Continue Shopping"
                 />

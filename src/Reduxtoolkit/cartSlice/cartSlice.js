@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "react";
 
 const cartState = {
   cartItems: JSON.parse(localStorage.getItem("cartItems")) || [],
   wishlistItems: JSON.parse(localStorage.getItem("wishlistItems")) || [],
   totalCartQuantity: JSON.parse(localStorage.getItem("totalCartQuantity")) || 0,
-  totalwishlistQuantity: JSON.parse(localStorage.getItem("totalwishlistQuantity")) || 0,
+  totalwishlistQuantity:
+    JSON.parse(localStorage.getItem("totalwishlistQuantity")) || 0,
   totalCartAmount: JSON.parse(localStorage.getItem("totalCartAmount")) || 0,
 };
 
@@ -22,6 +24,25 @@ export const cartSlice = createSlice({
         const dispatchedItem = { ...action.payload, qty: 1 };
         state.cartItems.push(dispatchedItem);
       }
+
+      // state.cartItems.foreach((item) => {
+      //   if (item[qty]) {
+      //     console.log("sew");
+      //     item.qty += 1;
+      //   } else {
+      //     let iteme = { ...action.payload, qty: 1 };
+      //     state.cartItems.push(iteme);
+      //   }
+      // });
+
+      // if (state.cartItems.every((item) => item.hasOwnProperty("qty"))) {
+      //   console.log("increase qty");
+      //   state.cartItems.qty += 1
+      // } else {
+      //   let item = { ...action.payload, qty: 1 };
+      //   state.cartItems.push(item);
+      // }
+
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
 
@@ -73,24 +94,35 @@ export const cartSlice = createSlice({
       state.totalCartAmount = state.cartItems.reduce((acc, item) => {
         return acc + item.qty * item.price * 84;
       }, 0);
-      localStorage.setItem("totalCartAmount", JSON.stringify(state.totalCartAmount));
+      localStorage.setItem(
+        "totalCartAmount",
+        JSON.stringify(state.totalCartAmount)
+      );
     },
 
     getTotalQuantity: (state) => {
       state.totalCartQuantity = state.cartItems.reduce((acc, item) => {
         return acc + item.qty;
       }, 0);
-      localStorage.setItem("totalCartQuantity", JSON.stringify(state.totalCartQuantity));
+      localStorage.setItem(
+        "totalCartQuantity",
+        JSON.stringify(state.totalCartQuantity)
+      );
     },
 
     getWishlistQuantity: (state) => {
       let wishlistQuantity = state.wishlistItems.length;
       state.totalwishlistQuantity = wishlistQuantity;
-      localStorage.setItem("totalwishlistQuantity", JSON.stringify(state.totalwishlistQuantity));
+      localStorage.setItem(
+        "totalwishlistQuantity",
+        JSON.stringify(state.totalwishlistQuantity)
+      );
     },
 
     emptyCart: (state) => {
       state.cartItems = [];
+      state.totalCartAmount = 0;
+      state.totalCartQuantity = 0;
       localStorage.removeItem("cartItems");
     },
   },
