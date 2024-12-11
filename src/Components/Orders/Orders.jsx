@@ -52,7 +52,10 @@ export default function Orders() {
                             <div className="flex justify-between text-sm md:text-base font-medium text-gray-900">
                               <h3>{item.title}</h3>
                               <p className="ms-2 md:ms-4">
-                                Rs. {(item.price * 84).toLocaleString("en-IN")}
+                                Rs.{" "}
+                                {(item.price * 84 * item.qty).toLocaleString(
+                                  "en-IN"
+                                )}
                               </p>
                             </div>
                             <p className="mt-1 text-sm text-gray-500">
@@ -60,16 +63,15 @@ export default function Orders() {
                             </p>
                           </div>
                           <div className="flex flex-1 items-end justify-between text-sm">
-                            <div className="text-gray-500">
-                              <label
-                                htmlFor="quantity"
-                                className="inline mr-5 text-sm font-medium leading-6 text-gray-900"
-                              >
+                            <div className="text-gray-500 flex flex-col">
+                              <span className="mr-5 text-sm font-medium leading-6 text-gray-900">
+                                Unit Price:{" "}
+                                {(item.price * 84).toLocaleString("en-IN")}
+                              </span>
+                              <span className="mr-5 text-sm font-medium leading-6 text-gray-900">
                                 Qty: {item.qty}
-                              </label>
+                              </span>
                             </div>
-
-                            <div className="flex"></div>
                           </div>
                         </div>
                       </li>

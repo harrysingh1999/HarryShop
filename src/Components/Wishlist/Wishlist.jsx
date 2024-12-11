@@ -1,23 +1,20 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useDispatch, useSelector } from "react-redux";
-
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import {
-  removeWishlistItem,
   addCartItem,
 } from "../../Reduxtoolkit/cartSlice/cartSlice";
 import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import ProductCard from "../Card/ProductCard";
 import { snackbarMessage, snackbarRemoveMessage } from "../../utils/constants";
+import { removeWishlistItem } from "../../Reduxtoolkit/wishlistSlice/wishlistSlice";
 
 export default function Wishlist() {
   const [open, setOpen] = useState(false);
   const [wishlistOpen, setWishlistOpen] = useState(false);
-  const { wishlistItems } = useSelector((state) => state.cart);
+  const { wishlistItems } = useSelector((state) => state.wishlist);
 
   let dispatch = useDispatch();
-
   const handleRemoveCartItem = (id) => {
     dispatch(removeWishlistItem(id));
     setWishlistOpen(true);

@@ -3,14 +3,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
   addCartItem,
-  addWishlistItem,
-  getCartItemQuantity,
 } from "../../Reduxtoolkit/cartSlice/cartSlice";
 import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import ProductCard from "../Card/ProductCard";
 import Filters from "./Filters";
 import { useGetCategoryProductsQuery } from "../../Reduxtoolkit/apiSlice/apiSlice";
 import { snackbarMessage, snackbarMessage2 } from "../../utils/constants";
+import { addWishlistItem } from "../../Reduxtoolkit/wishlistSlice/wishlistSlice";
 
 export default function Products() {
   const [myFiltered, setMyFiltered] = useState([]);

@@ -11,7 +11,8 @@ import {
   emptyCart,
   incrementItemQty,
   removeCartItem,
-  getTotal,
+  getTotalCartAmount,
+  getTotalQuantity,
 } from "../../Reduxtoolkit/cartSlice/cartSlice";
 import { NavLink, useNavigate } from "react-router-dom";
 import Progress from "../Progress/Progress";
@@ -27,26 +28,25 @@ export default function OrderSummary() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    dispatch(getTotalCartAmount());
+    dispatch(getTotalQuantity());
     return () => {
       clearTimeout(timer.current);
     };
-  }, []);
+  }, [cart]);
 
   let dispatch = useDispatch();
 
   const handleIncrementItem = (id) => {
     dispatch(incrementItemQty(id));
-    dispatch(getTotal());
   };
 
   const handleDecrementItem = (id) => {
     dispatch(decrementItemQty(id));
-    dispatch(getTotal());
   };
 
   const handleRemoveCartItem = (id) => {
     dispatch(removeCartItem(id));
-    dispatch(getTotal());
   };
 
   let navigate = useNavigate();

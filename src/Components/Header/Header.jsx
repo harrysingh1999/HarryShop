@@ -11,11 +11,11 @@ import SearchBar from "./SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getCartItemQuantity,
-  getWishlistQuantity,
 } from "../../Reduxtoolkit/cartSlice/cartSlice";
 import { userLogOut, userLogin } from "../../Reduxtoolkit/authSlice/authSlice";
 import { jwtDecode } from "jwt-decode";
 import { useOnlineStatus } from "../../utils/customHooks/useOnlineStatus";
+import { getWishlistQuantity } from "../../Reduxtoolkit/wishlistSlice/wishlistSlice";
 
 export default function Header() {
   const [menu, setMenu] = useState("hidden");
@@ -29,6 +29,7 @@ export default function Header() {
   );
 
   const cart = useSelector((state) => state.cart);
+  const wishlist = useSelector((state) => state.wishlist);
   const auth = useSelector((state) => state.auth.isAuthenticated);
 
   const handleLogin = (userData) => {
@@ -41,7 +42,7 @@ export default function Header() {
   useEffect(() => {
     dispatch(getCartItemQuantity());
     dispatch(getWishlistQuantity());
-  }, [cart]);
+  }, [cart, wishlist]);
 
   useScroll(setScrolled);
   const onlineStatus = useOnlineStatus();
@@ -143,9 +144,9 @@ export default function Header() {
 
               <NavLink to="/Wishlist">
                 <div className="flex cursor-pointer relative flex-row items-center gap-4 border-b border-black/30 pb-2 lg:border-none lg:pb-0 lg:gap-0 lg:flex-col lg:justify-center lg:items-center">
-                  {cart.totalwishlistQuantity > 0 && (
+                  {wishlist.totalwishlistQuantity > 0 && (
                     <sup className="absolute top-0 right-0 text-red-600 font-bold text-[15px]">
-                      {cart.totalwishlistQuantity}
+                      {wishlist.totalwishlistQuantity}
                     </sup>
                   )}
                   <FaRegHeart className="text-xl" />

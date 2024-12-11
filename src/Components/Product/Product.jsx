@@ -3,7 +3,6 @@ import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
   addCartItem,
-  addWishlistItem,
 } from "../../Reduxtoolkit/cartSlice/cartSlice";
 import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import ProductCarousel from "./ProductCarousel";
@@ -13,6 +12,7 @@ import CustomButton from "../CustomButton/CustomButton";
 import { useGetProductDetailsQuery } from "../../Reduxtoolkit/apiSlice/apiSlice";
 import CompressedImage from "../CompressedImage";
 import Ratings from "../Ratings/Ratings";
+import { addWishlistItem } from "../../Reduxtoolkit/wishlistSlice/wishlistSlice";
 
 export default function Product() {
   const [open, setOpen] = React.useState(false);
