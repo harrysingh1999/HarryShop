@@ -3,11 +3,11 @@ import {
   decrementItemQty,
   incrementItemQty,
   removeCartItem,
-  getTotal,
   getTotalQuantity,
   emptyCart,
+  getTotalCartAmount,
 } from "../../Reduxtoolkit/cartSlice/cartSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import CartTable from "./CartTable";
@@ -23,22 +23,24 @@ export default function Cart() {
 
   let dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getTotalQuantity());
+    dispatch(getTotalCartAmount());
+  }, [totalCartQuantity, totalCartAmount]);
+
   const handleRemoveCartItem = (id) => {
     dispatch(removeCartItem(id));
-    dispatch(getTotal());
     dispatch(getTotalQuantity());
     setOpen(true);
   };
 
   const handleDecrementItem = (id) => {
     dispatch(decrementItemQty(id));
-    dispatch(getTotal());
     dispatch(getTotalQuantity());
   };
 
   const handleIncrementItem = (id) => {
     dispatch(incrementItemQty(id));
-    dispatch(getTotal());
     dispatch(getTotalQuantity());
   };
 

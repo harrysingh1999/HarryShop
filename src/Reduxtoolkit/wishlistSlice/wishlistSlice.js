@@ -74,7 +74,7 @@ export const cartSlice = createSlice({
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
 
-    getTotalCartAmount: (state) => {
+    getTotal: (state) => {
       state.totalCartAmount = state.cartItems.reduce((acc, item) => {
         return acc + item.qty * item.price * 84;
       }, 0);
@@ -119,7 +119,6 @@ export const cartSlice = createSlice({
       state.totalCartItem = 0;
       localStorage.removeItem("cartItems");
       localStorage.removeItem("totalCartItem");
-      localStorage.removeItem("totalCartQuantity");
       localStorage.removeItem("totalCartAmount");
     },
   },
@@ -130,7 +129,7 @@ export const {
   removeCartItem,
   incrementItemQty,
   decrementItemQty,
-  getTotalCartAmount,
+  getTotal,
   getTotalQuantity,
   emptyCart,
   getWishlistQuantity,

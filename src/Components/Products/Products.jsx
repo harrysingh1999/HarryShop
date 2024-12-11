@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import {
   addCartItem,
   addWishlistItem,
+  getCartItemQuantity,
 } from "../../Reduxtoolkit/cartSlice/cartSlice";
 import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import ProductCard from "../Card/ProductCard";

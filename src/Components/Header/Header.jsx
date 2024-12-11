@@ -10,8 +10,7 @@ import { PiShoppingCartSimpleBold } from "react-icons/pi";
 import SearchBar from "./SearchBar";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getTotal,
-  getTotalQuantity,
+  getCartItemQuantity,
   getWishlistQuantity,
 } from "../../Reduxtoolkit/cartSlice/cartSlice";
 import { userLogOut, userLogin } from "../../Reduxtoolkit/authSlice/authSlice";
@@ -40,9 +39,8 @@ export default function Header() {
   };
 
   useEffect(() => {
-    dispatch(getTotalQuantity());
+    dispatch(getCartItemQuantity());
     dispatch(getWishlistQuantity());
-    dispatch(getTotal())
   }, [cart]);
 
   useScroll(setScrolled);
@@ -78,7 +76,7 @@ export default function Header() {
           scrolled
             ? "bg-white text-black shadow-lg"
             : "bg-transparent text-white"
-        } fixed w-[90%] top-0 left-0 z-10 flex items-center justify-evenly md:justify-around py-4 lg:py-1`}
+        } fixed w-full top-0 left-0 z-10 flex items-center justify-evenly md:justify-around py-4 lg:py-1`}
       >
         <FaBars
           className="text-2xl ml-2 md:ms-0 mr-2 lg:hidden cursor-pointer"
@@ -157,9 +155,10 @@ export default function Header() {
 
               <NavLink to="/Cart">
                 <div className="flex relative cursor-pointer flex-row items-center gap-4 border-b border-black/30 pb-2 lg:border-none lg:pb-0 lg:gap-0 lg:flex-col lg:justify-center lg:items-center">
-                  {cart.totalCartQuantity > 0 && (
+                  {cart.totalCartItem > 0 && (
                     <sup className="absolute top-0 -right-2 text-red-600 font-bold text-[15px]">
-                      {cart.totalCartQuantity}
+                      {/* {cart.totalCartQuantity} */}
+                      {cart.totalCartItem}
                     </sup>
                   )}
                   <PiShoppingCartSimpleBold className="text-xl" />
