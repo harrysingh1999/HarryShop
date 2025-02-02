@@ -7,7 +7,6 @@ export const productsAPI = createApi({
     getAllCategories: builder.query({
       query: () => "products/categories",
       keepUnusedDataFor: 180,
-      
     }),
     getCategoryProducts: builder.query({
       query: (category) => `products/category/${category}`,

@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {
-  addCartItem,
-} from "../../Reduxtoolkit/cartSlice/cartSlice";
+import { addCartItem } from "../../Reduxtoolkit/cartSlice/cartSlice";
 import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import ProductCard from "../Card/ProductCard";
 import Filters from "./Filters";
@@ -16,11 +14,7 @@ export default function Products() {
   const location = useLocation();
   const productCategory = location.state;
 
-  const {
-    data: fetchedCategoryProducts,
-    error,
-    isLoading,
-  } = useGetCategoryProductsQuery(productCategory);
+  const { data: fetchedCategoryProducts, error, isLoading } = useGetCategoryProductsQuery(productCategory);
 
   const [selectedRatings, setSelectedRatings] = useState(() => {
     const savedRatings = JSON.parse(localStorage.getItem("selectedRatings"));
@@ -39,34 +33,54 @@ export default function Products() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchedCategoryProducts && setMyFiltered(fetchedCategoryProducts?.products);
-  }, []);
+    if (fetchedCategoryProducts) {
+      setMyFiltered(fetchedCategoryProducts.products);
+    }
+  }, [fetchedCategoryProducts]);
 
   useEffect(() => {
-    let filtered = fetchedCategoryProducts && [
-      ...fetchedCategoryProducts.products,
-    ];
-    // Save filter states to local storage
-    localStorage.setItem("selectedRatings", JSON.stringify(selectedRatings));
-    localStorage.setItem("sortOption", sortOption);
+    if (fetchedCategoryProducts) {
+      let filtered = [...fetchedCategoryProducts.products];
 
-    // Filter by selected ratings
-    if (selectedRatings.length > 0) {
-      filtered = filtered.filter((product) =>
-        selectedRatings.some((rating) => product.rating >= rating)
-      );
-    }
-    // Apply sorting logic
-    if (sortOption === "lowToHigh") {
-      filtered.sort((a, b) => a.price - b.price);
-    } else if (sortOption === "highToLow") {
-      filtered.sort((a, b) => b.price - a.price);
-    }
+      // Save filter states to local storage
+      localStorage.setItem("selectedRatings", JSON.stringify(selectedRatings));
+      localStorage.setItem("sortOption", sortOption);
 
-    setMyFiltered(filtered);
+      // Filter by selected ratings
+      if (selectedRatings.length > 0) {
+        filtered = filtered.filter((product) =>
+          selectedRatings.some((rating) => product.rating >= rating)
+        );
+      }
+
+      // Apply sorting logic
+      if (sortOption === "lowToHigh") {
+        filtered.sort((a, b) => a.price - b.price);
+      } else if (sortOption === "highToLow") {
+        filtered.sort((a, b) => b.price - a.price);
+      }
+
+      setMyFiltered(filtered);
+    }
   }, [selectedRatings, sortOption, fetchedCategoryProducts]);
 
-  if (!fetchedCategoryProducts) return;
+  console.log("isLoading:", isLoading);
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-xl ">Loading...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="h-screen w-screen flex flex-col justify-center items-center bg-red-600">
+        <p className="text-white md:text-2xl text-center">{error.message || "API error: Please try again later."}</p>
+      </div>
+    );
+  }
 
   const handleFilterChange = (e) => {
     const { value } = e.target;
@@ -111,6 +125,7 @@ export default function Products() {
           sortOption={sortOption}
         />
       </div>
+
       {/* Products Section */}
       <div className="md:col-span-9 xl:col-span-9 pl-2">
         <h1 className="text-2xl md:text-3xl mb-4 text-black text-center md:text-left font-semibold capitalize">
@@ -118,18 +133,7 @@ export default function Products() {
         </h1>
 
         <div className="grid md:grid-cols-2 xl:grid-cols-3 justify-items-center md:justify-items-start">
-          {isLoading ? (
-            <p>Loading...</p>
-          ) : error ? (
-            <div className="h-screen w-screen flex flex-col justify-center items-center bg-red-600">
-              <p className="text-white md:text-2xl text-center">
-                {error.error ? error.error : error.message}
-              </p>
-              <p className="text-white md:text-2xl text-center">
-                API error: Please try again later.
-              </p>
-            </div>
-          ) : myFiltered?.length > 0 ? (
+          {myFiltered?.length > 0 ? (
             myFiltered.map((product) => (
               <ProductCard
                 key={product.id}

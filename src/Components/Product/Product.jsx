@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {
-  addCartItem,
-} from "../../Reduxtoolkit/cartSlice/cartSlice";
+import { addCartItem } from "../../Reduxtoolkit/cartSlice/cartSlice";
 import CustomSnackbar from "../Snackbar/CustomSnackbar";
 import ProductCarousel from "./ProductCarousel";
 import { snackbarMessage, snackbarMessage2 } from "../../utils/constants";
@@ -40,10 +38,14 @@ export default function Product() {
     setWishlistOpen(true);
   };
 
+  console.log("isLoading:", isLoading);
+
   return (
     <div className="mx-5 md:mx-16 xl:mx-24 mt-24 lg:mt-20">
       {isLoading ? (
-        <p className="w-screen h-screen text-center mt-24 lg:mt-24"> Loading...</p>
+        <div className="w-full h-screen flex justify-center items-center">
+          <p className="text-xl"> Loading...</p>
+        </div>
       ) : error ? (
         <div className="h-screen w-screen flex flex-col justify-center items-center mx-4 md:mx-0 bg-red-600">
           <p className=" text-white text-2xl">
